@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>big data series - give me a spark | Jeffluppes.nl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="UniversityAssignmentProgrammingSparkKaggle" />
+  
+  
+  
+  
+  <meta name="description" content="Assignment 3 - Give me a sparkSo the third assignment is running Spark and playing around with it. The first part was basically messing about with the query-processing, the second part is playing with">
+<meta name="keywords" content="University,Assignment,Programming,Spark,Kaggle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Big Data Series - Give me a spark">
+<meta property="og:url" content="http://localhost:4000/2017/05/04/Give-me-a-spark/index.html">
+<meta property="og:site_name" content="Jeffluppes.nl">
+<meta property="og:description" content="Assignment 3 - Give me a sparkSo the third assignment is running Spark and playing around with it. The first part was basically messing about with the query-processing, the second part is playing with">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-09-02T21:49:24.101Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Big Data Series - Give me a spark">
+<meta name="twitter:description" content="Assignment 3 - Give me a sparkSo the third assignment is running Spark and playing around with it. The first part was basically messing about with the query-processing, the second part is playing with">
+  
+    <link rel="alternate" href="/atom.xml" title="Jeffluppes.nl" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories/Kayaking/">Kayaking</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Give-me-a-spark" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Big Data Series - Give me a spark
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/05/04/Give-me-a-spark/" class="article-date">
+	  <time datetime="2017-05-04T12:46:26.000Z" itemprop="datePublished">2017-05-04</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Assignment/">Assignment</a><a class="article-category-link" href="/categories/Assignment/Big-Data-Series/">Big Data Series</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Assignment-3-Give-me-a-spark"><a href="#Assignment-3-Give-me-a-spark" class="headerlink" title="Assignment 3 - Give me a spark"></a>Assignment 3 - Give me a spark</h1><p>So the third assignment is running Spark and playing around with it. The first part was basically messing about with the query-processing, the second part is playing with data and dataframes. As these do not actually seem to be part of the required stuff for the post, I have left them out completely.  </p>
+<p>The way I understand this is that I’m supposed to play with Spark, come up with something new, and write a short blog post detailing my experiences. </p>
+<blockquote>
+<p>Alternatively, you could decide to carry out a small analysis of a different open dataset, of your own choice; and present to your readers some basic properties of that data. You will notice that it is harder than following instructions, and you run the risk of getting stuck because the data does not parse well, etc.</p>
+</blockquote>
+<p>So without further ado, let’s explore some datas. </p>
+<h3 id="Part-1-Getting-data"><a href="#Part-1-Getting-data" class="headerlink" title="Part 1 - Getting data"></a>Part 1 - Getting data</h3><p>Kaggle is one of the top resources for Data Science competitions, where data scientists, analysts, and programmers of all flavors unite and compete for prizes. While IMO prize money mostly seems to go to people who already have top-tier knowledge (like people who work at Deepmind) or just a lot of time/resources behind them (I recall reading some people spend 5 hours a day on a competition, which would probably make the pay-off very poor for their time investment), it’s kind of a data geek playground. I have selected the <a href="https://www.kaggle.com/c/sberbank-russian-housing-market" target="_blank" rel="external">Sberbank competition</a> which was launched recently. </p>
+<p>The first step is simply downloading the accepting the conditions of the competition, and downloading a zip file for training and test data. Additional data about Russia’s economy is available in different files, and the file description hints that these may be joined together with the proper instructions. All the data is in comma-seperated values. The training data is 44 MB. Because one cay only download the data once authenticated and I’m using a virtual machine, I’ve hosted the dataset elsewhere before pulling it in with <code>wget</code> as this seems an easier solution than setting up a shared partition.<br><a id="more"></a></p>
+<h3 id="Part-2-Import"><a href="#Part-2-Import" class="headerlink" title="Part 2 - Import"></a>Part 2 - Import</h3><p>if you are interested in following along, use <code>wget https://www.dropbox.com/s/4dmsg68lc509q32/train.csv?dl=0</code>. I’ll make sure this file stays available for the next few weeks.</p>
+<p>Importing the data can be done with the same instructions as any other csv. </p>
+<pre><code>val rusdata = spark.read.format(&quot;csv&quot;).option(&quot;header&quot;, true).load(&quot;notebooks/BigData/data/train.csv?dl=0&quot;).cache()
+</code></pre><p>With <code>printSchema</code> I can take a look at the schema of the data set. This also allows for verification that everything got loaded in. </p>
+<pre><code>rusdata.printSchema
+</code></pre><p>Which outputs all the fields from the dataset as follows: </p>
+<pre><code>root
+ |-- id: string (nullable = true)
+ |-- timestamp: string (nullable = true)
+ |-- full_sq: string (nullable = true)
+ |-- life_sq: string (nullable = true)
+ |-- floor: string (nullable = true)
+ |-- max_floor: string (nullable = true)
+ |-- material: string (nullable = true)
+ |-- build_year: string (nullable = true)
+ |-- num_room: string (nullable = true)
+ |-- kitch_sq: string (nullable = true)
+ |-- state: string (nullable = true)
+ |-- product_type: string (nullable = true)
+ |-- sub_area: string (nullable = true)
+ |-- area_m: string (nullable = true)
+ |-- raion_popul: string (nullable = true)
+ |-- green_zone_part: string (nullable = true)
+ |-- indust_part: string (nullable = true)
+ |-- children_preschool: string (nullable = true)
+ |-- preschool_quota: string (nullable = true)
+ |-- preschool_education_centers_raion: string (nullable = true)
+ ....
+
+ rusdata: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [id: string, timestamp: string ... 290 more fields]
+</code></pre><p>292 fields. Not bad!</p>
+<h3 id="Part-3-Playing"><a href="#Part-3-Playing" class="headerlink" title="Part 3 - Playing"></a>Part 3 - Playing</h3><p>So now let’s explore the data! How does a property object look like, actually?</p>
+<pre><code>rusdata.show(1)
+</code></pre><p>So it’s just a single row in this massive csv. Each house has an ID and 290 other properties that go with it. Finally, the last property is the house price itself, which is used in the competition mainly. Something that catches my eye in both of these is the large amount of features that have a suffix of 500, 1000 or 2000. This could be how many of that particular feature are in a 500 or 1000 meter radius around the object. </p>
+<p>Something that is also peculiar is that there are no latitude or longtitude pairs (be it WGS or a Russian format, neither appear) instead the highest “resolution” is the area in which the property is located. E.g in the ‘Kremlin’ area. This makes data sort of anonymous, but I suspect it would not be hard to identify property objects based on the 292 features that we have if we chose to do this. </p>
+<p>So the first thought.. can we find data on the Kremlin itself? From wikipedia I find that the Grand Kremlin Palace was built between 1837 and 1849 and has a sqaura area of </p>
+<blockquote>
+<p>125 metres long, 47 metres high, and has a total area of about 25,000 square metres. It includes the earlier Terem Palace, nine churches from the 14th, 16th, and 17th centuries, the Holy Vestibule, and over 700 rooms</p>
+</blockquote>
+<p>Can we find that?</p>
+<pre><code>val potentialKremlin = rusdata.select(&quot;id&quot;,&quot;full_sq&quot;,&quot;life_sq&quot;,&quot;floor&quot;,&quot;build_year&quot;,&quot;num_room&quot;).where(&quot;build_year &lt;= 1849&quot;)
+potentialKremlin.count
+904
+</code></pre><p>Now let’s filter this again, as we know at that it has 700 rooms.. can we reduce the set of 904 objects to something we can count on our fingers? Let’s filter this by selecting objects with more than 10 rooms. </p>
+<pre><code>val potentialKremlin2 = potentialKremlin.select(&quot;id&quot;,&quot;full_sq&quot;,&quot;life_sq&quot;,&quot;floor&quot;,&quot;build_year&quot;,&quot;num_room&quot;).where(&quot;num_room &gt;= 10&quot;)
+
+potentialKremlin2.show()
+
++---+-------+-------+-----+----------+--------+
+| id|full_sq|life_sq|floor|build_year|num_room|
++---+-------+-------+-----+----------+--------+
++---+-------+-------+-----+----------+--------+
+</code></pre><p>So it seems that the Kremlin is not in the data set, despite being in the Kremlin district. Just to check - are there any properties with more than ten rooms in the data set at all?</p>
+<pre><code>rusdata.select(&quot;id&quot;,&quot;full_sq&quot;,&quot;life_sq&quot;,&quot;floor&quot;,&quot;build_year&quot;,&quot;num_room&quot;).where(&quot;num_room &gt;= 10&quot;).show()
+
++-----+-------+-------+-----+----------+--------+
+|   id|full_sq|life_sq|floor|build_year|num_room|
++-----+-------+-------+-----+----------+--------+
+|11624|     40|     19|   17|      2011|      19|
+|17767|     58|     34|    1|      1992|      10|
+|26716|     51|     30|   14|      1984|      17|
+|29175|     59|     33|   20|      2000|      10|
++-----+-------+-------+-----+----------+--------+
+</code></pre><p>It seems that having tons of rooms is simply a more modern fad.</p>
+<p>Now, let’s do some aggregation. Can we get a list of how many properties there are per region? This time we use SQL directly, but we need a dataframe first:</p>
+<pre><code>val rusdataDF = rusdata.select(&quot;id&quot;,&quot;full_sq&quot;,&quot;life_sq&quot;,&quot;floor&quot;,&quot;build_year&quot;,&quot;num_room&quot;, &quot;sub_area&quot;)
+rusdataDF.createOrReplaceTempView(&quot;props&quot;)
+spark.sql(&quot;SELECT sub_area, count(sub_area) AS sa FROM props GROUP BY sub_area ORDER BY sa DESC&quot;).show(15)
+
++--------------------+----+
+|            sub_area|  sa|
++--------------------+----+
+| Poselenie Sosenskoe|1776|
+|          Nekrasovka|1611|
+|Poselenie Vnukovskoe|1372|
+|Poselenie Moskovskij| 925|
+|Poselenie Voskres...| 713|
+|              Mitino| 679|
+|            Tverskoe| 678|
+|            Krjukovo| 518|
+|             Mar&apos;ino| 508|
+|Poselenie Filimon...| 496|
+|      Juzhnoe Butovo| 451|
+|Poselenie Shherbinka| 443|
+|            Solncevo| 421|
+|   Zapadnoe Degunino| 410|
+|Poselenie Desjono...| 362|
++--------------------+----+
+
+only showing top 15 rows
+</code></pre><p>Note: the sub_areas are supposed to be the 125 raions of Moscow. But are they, actually? </p>
+<pre><code>spark.sql(&quot;SELECT DISTINCT sub_area FROM props&quot;).count
+146
+</code></pre><p>So we have more areas than there are raions. This means we should be distrustful of the data: it could at the very least mean that we cannot expect all 125 areas to be present in the data set. </p>
+<p>One of the things we might expect to find is negative or zero entries in the build_year column. Can we find these with a simple SQL statement?</p>
+<pre><code>spark.sql(&quot;SELECT id, build_year FROM props ORDER BY build_year ASC&quot;).show
+
++-----+----------+
+|   id|build_year|
++-----+----------+
+|11010|         0|
+|12811|         0|
+|11186|         0|
+|10145|         0|
++-----+----------+
+</code></pre><p>uh oh..</p>
+<pre><code>spark.sql(&quot;SELECT id, build_year FROM props WHERE build_year == 0&quot;).count
+530
+
+spark.sql(&quot;SELECT id, build_year FROM props WHERE build_year &gt;= 2017&quot;).count
+157
+</code></pre><p>So at the very least there’s something funny going on with the building year data. But it could also mean that these building are still being built. <a href="https://www.kaggle.com/c/sberbank-russian-housing-market/discussion/32247" target="_blank" rel="external">A quick look at Kaggle’s forum gives the following answer</a>: </p>
+<blockquote>
+<p>What 0 and 1 mean in ‘build_year” column of the data?</p>
+<p>These are mistakes in the raw data, so we cannot fix it, unfortunately.</p>
+</blockquote>
+<p>And what about the houses that are being built or have been built after the data was collected (as the data is from 2015)</p>
+<blockquote>
+<p>it could be pre-investment (see product type).</p>
+</blockquote>
+<h3 id="Part-4-Findings"><a href="#Part-4-Findings" class="headerlink" title="Part 4 - Findings"></a>Part 4 - Findings</h3><p>I have added most of the queries I processed in the blog text above, but it would be really nice if I could host the spark notebook somewhere like I would with a ipython notebook. </p>
+<p>Overall I’m okay with looking at the data with Spark. For analysis though, I would use Python as it’s more established and I can get more support. Additionally, there are a lot of packages available that make development so much more doable. </p>
+<p>I did like working with Spark. The SQL-rich syntax makes it easy to learn, and the things that I found gave me plenty of ammunition to start work in node, R or Python. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+        
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'jeffluppes';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Assignment/">Assignment</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kaggle/">Kaggle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming/">Programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/University/">University</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/07/SurfSara-and-the-CommonCrawl/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Big Data Series - SurfSara and the Common Crawl
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/22/Hadoop-and-the-HDFS/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Big Data Series - Hadoop and the HDFS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Assignment-3-Give-me-a-spark"><span class="nav-number">1.</span> <span class="nav-text">Assignment 3 - Give me a spark</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-1-Getting-data"><span class="nav-number">1.0.1.</span> <span class="nav-text">Part 1 - Getting data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-2-Import"><span class="nav-number">1.0.2.</span> <span class="nav-text">Part 2 - Import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-3-Playing"><span class="nav-number">1.0.3.</span> <span class="nav-text">Part 3 - Playing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-4-Findings"><span class="nav-number">1.0.4.</span> <span class="nav-text">Part 4 - Findings</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2017 Jeffluppes.nl All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/categories/Kayaking/" class="mobile-nav-link">Kayaking</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Jeffluppes.nl
+          </div>
+          <div class="panel-body">
+            Copyright © 2017 Jeffrey Luppes All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

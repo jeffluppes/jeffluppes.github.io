@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>big data series - surfsara and the common crawl | Jeffluppes.nl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="SparkScalaHDFSHadoopSurfSaraCommon Crawl" />
+  
+  
+  
+  
+  <meta name="description" content="Part 1  - The Big Data Final ProjectThis post will have a slightly different angle than the previous posts in the Big Data Course series. The goal for this post is just to detail my progress on a sel">
+<meta name="keywords" content="Spark,Scala,HDFS,Hadoop,SurfSara,Common Crawl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Big Data Series - SurfSara and the Common Crawl">
+<meta property="og:url" content="http://localhost:4000/2017/07/07/SurfSara-and-the-CommonCrawl/index.html">
+<meta property="og:site_name" content="Jeffluppes.nl">
+<meta property="og:description" content="Part 1  - The Big Data Final ProjectThis post will have a slightly different angle than the previous posts in the Big Data Course series. The goal for this post is just to detail my progress on a sel">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://s-media-cache-ak0.pinimg.com/236x/b0/e3/cb/b0e3cb28debd0cc08f2bb5482c638b51--geek-humour-caption-contest.jpg">
+<meta property="og:image" content="http://puu.sh/wE9DP/fa748088bf.png">
+<meta property="og:image" content="http://puu.sh/wIZAR/429e39200c.png">
+<meta property="og:image" content="http://puu.sh/wMZhb/48eb418bc5.png">
+<meta property="og:image" content="http://puu.sh/wN9Kn/cab4b34482.png">
+<meta property="og:image" content="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ak0AAOSwyQtVtpHb/$_86.JPG">
+<meta property="og:image" content="http://puu.sh/wNddt/17384de36a.png">
+<meta property="og:image" content="https://i.redd.it/sz1qjbc4luaz.png">
+<meta property="og:updated_time" content="2017-09-03T00:10:59.276Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Big Data Series - SurfSara and the Common Crawl">
+<meta name="twitter:description" content="Part 1  - The Big Data Final ProjectThis post will have a slightly different angle than the previous posts in the Big Data Course series. The goal for this post is just to detail my progress on a sel">
+<meta name="twitter:image" content="https://s-media-cache-ak0.pinimg.com/236x/b0/e3/cb/b0e3cb28debd0cc08f2bb5482c638b51--geek-humour-caption-contest.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Jeffluppes.nl" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories/Kayaking/">Kayaking</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-SurfSara-and-the-CommonCrawl" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Big Data Series - SurfSara and the Common Crawl
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/07/07/SurfSara-and-the-CommonCrawl/" class="article-date">
+	  <time datetime="2017-07-07T21:03:48.000Z" itemprop="datePublished">2017-07-07</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Assignment/">Assignment</a><a class="article-category-link" href="/categories/Assignment/Big-Data-Series/">Big Data Series</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://s-media-cache-ak0.pinimg.com/236x/b0/e3/cb/b0e3cb28debd0cc08f2bb5482c638b51--geek-humour-caption-contest.jpg" alt=""></p>
+<h1 id="Part-1-The-Big-Data-Final-Project"><a href="#Part-1-The-Big-Data-Final-Project" class="headerlink" title="Part 1  - The Big Data Final Project"></a>Part 1  - The Big Data Final Project</h1><p>This post will have a slightly different angle than the previous posts in the Big Data Course series. The goal for this post is just to detail my progress on a self-chosen, free format project which utilizes the <a href="https://userinfo.surfsara.nl/systems/hadoop/hathi" target="_blank" rel="external">Surfsara Hadoop cluster</a> and the goal is not to solve a problem but rather give an overview of the problems I encountered and the little things I came up with. I intend to post these both on the mini-site for the course and a personal blog, my apologies if my tone is a bit bland as a result. Here we go!</p>
+<h2 id="Hathi-and-Surfsara"><a href="#Hathi-and-Surfsara" class="headerlink" title="Hathi and Surfsara"></a>Hathi and Surfsara</h2><p><a href="https://www.surf.nl/en/about-surf/subsidiaries/surfsara/" target="_blank" rel="external">SurfSara</a> is a Dutch institute that provides web and data services to universities and schools. Students may know SURF from the cheap software or the internet they provide to high schools. <a href="https://nl.wikipedia.org/wiki/SURFsara_Nationaal_HPC_Centrum" target="_blank" rel="external">Sara, though</a> is the high performance computing department, and used to be the academic center for computing prior to merging into SURF. They do a lot of cool things with big data which over time has come to include a Hadoop cluster named Hathi. </p>
+<h2 id="The-Common-Crawl"><a href="#The-Common-Crawl" class="headerlink" title="The Common Crawl"></a>The Common Crawl</h2><p>The Hathi cluster hosts a February 2016 collection from the Common Crawl. The Common Crawl is a collection of crawled web pages which comes pretty close to crawling the entirety of the web. The data hosted is in the petabyte range, however we only have access to a single snapshot.. which still takes up a good amount of terabytes and contains 1.73 billion urls. You don’t want to download this on your mobile phone’s data cap. </p>
+<p>The Common Crawl Data is stored in WARC files (Web Archive), an open-source format. </p>
+<p>So with all this data, there should be a lot of things to do!<br><a id="more"></a><br>Some ideas I had at this point:</p>
+<ul>
+<li>Count the length of all payloads across all pages on the internet and get some statistics.</li>
+<li>See how popular certain HTML tags are.</li>
+<li>Perform some semantic analysis on pages referring to presidents or politics.</li>
+<li>Look at how extreme right communities differ from extreme left communities in terms of vocabularies and word frequencies.</li>
+<li>Similarly, compare places like <strong>4chan</strong> and <strong>Reddit</strong> with each other. Who’s more vile? There’s some easy libraries for sentiment analysis..</li>
+</ul>
+<p>And so on.. but what I also played with is something closer to home. I kayak a lot and the kayaking community in the Netherlands is slowly dying: young people are turning away from adventurous sports in general, and kayaking is seen as boring when compared to other, fast-paced water sports (Not necessarily true, but still). Could I try to find places where it’s worthwhile to advertise about kayaking perhaps? Or identify communities of people who also kayak, e.g. mountain bikers, sailers, bikers etc? Or perhaps from another perspective, can I try to do some dynamic filtering based on brands or parts of the sport to see what people associate it with?</p>
+<p>Plenty of ideas, so let’s get started. </p>
+<h2 id="Part-2-Setting-up"><a href="#Part-2-Setting-up" class="headerlink" title="Part 2 - Setting up"></a>Part 2 - Setting up</h2><p>I’m using my Windows laptop running a (Ubuntu) virtual machine which will be used to connect to SurfSara and develop the code. Similarly to the previous assignment in this series this works with a docker image and lots of command line work. Nothing to be scared of. </p>
+<p>Running an example program worked fine on the cluster. But I wanted something more than (redirectable) output in my terminal. </p>
+<p>In order to track the jobs given to Hathi a web interface is available. This is not really supported on Windows, but still doable. Using the <a href="http://www.secure-endpoints.com/heimdal/" target="_blank" rel="external">Heimdall implementation</a> of Kerberos and the <a href="https://www.secure-endpoints.com/netidmgr/v2//" target="_blank" rel="external">Identity Manager</a> I can set up my credentials. I found that I needed to stray from the <a href="http://computing.help.inf.ed.ac.uk/kerberos-windows" target="_blank" rel="external">sort-of specific instructions courtesy of the Uni of Edinbourgh here</a> and actually ended up installing the Heimdall tools fully. I then had to tweak a couple of configurations inside my firefox browser in order to work with Kerberos, but I finally could inspect the progress of my submissions. This seems easy, but in the end was a non-trivial part that took hours to do and even then Firefox was prone to memory leaks.  </p>
+<p><img src="http://puu.sh/wE9DP/fa748088bf.png" alt="A snapshot of the web interface to report on the progress of a submission"></p>
+<h2 id="Part-3-A-local-test"><a href="#Part-3-A-local-test" class="headerlink" title="Part 3 - A local test"></a>Part 3 - A local test</h2><p>I started working with the spark notebook that was provided and after some tweaking around I could run code on a local WARC file containing the course website. This was an iterative process: I started with the grand idea of what I could do but after a few hours I found that I still had made no progress. Following Arjen’s suggestion of settling for a simpler challenge when stuck I tried to implement the most basic word count. This was OK-ish, and could be expanded to the full crawl albeit a bit sluggish (slow), which would be decent towards meeting the assignment criteria but I’ll let you be the judge of that. </p>
+<p>I also avoided SQL this time, as I recall reading that there are some issues when running SQL-queries on something of the order of 100TB. This could complicate things considering our ‘stack’ already consists of so many applications and tools. Additionally, having worked with MySQL as a teenager I’m still pretty sure that straight up SQL queries on non-indexed text fields is a baaaad idea.  </p>
+<p>I felt like I still really wanted to do more with the kayaking thing. After some pondering I settled on the following order of battle:</p>
+<ol>
+<li>Convert the crawl to text and look for the string <code>kayaking</code></li>
+<li>For the full crawl: figure out how to filter for a specific brand (e.g. <code>bever</code>)</li>
+<li>Construct a word count list upon the pages that get returned</li>
+<li>Output these to a file so I can work with it</li>
+<li>Visualize a word cloud, e.g. using the <code>d3.js</code> method already readily available, or something in python (This is outside the scope of this assignment, and I’ll add it later)</li>
+</ol>
+<p>So I started with filtering for the text string <code>kayaking</code> after calling Arjen’s HTML2Text method (step 1).</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">map</span><span class="params">(wr =&gt; HTML2Txt(getContent(wr._2)</span></span>)).</div><div class="line"><span class="function"><span class="title">map</span><span class="params">(w =&gt; w.toLowerCase()</span></span>).</div><div class="line"><span class="function"><span class="title">filter</span><span class="params">(w =&gt; w.contains(<span class="string">"kayaking"</span>)</span></span>).</div></pre></td></tr></table></figure>
+<p>Now on the basic corpus this returns my own page obviously, as I overshared my love for kayaking a fair bit. </p>
+<p>As per <a href="https://spark.apache.org/examples.html" target="_blank" rel="external">Apache Spark’s example a word count</a> is implemented with just a few lines of code (step 2):</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">textFile.flatMap(<span class="built_in">line</span> =&gt; <span class="built_in">line</span>.split(<span class="string">" "</span>))</div><div class="line">                 .<span class="built_in">map</span>(<span class="keyword">word</span> =&gt; (<span class="keyword">word</span>, <span class="number">1</span>))</div><div class="line">                 .reduceByKey(_ + _)</div></pre></td></tr></table></figure>
+<p>This is a bit crude, as the “words” will include code snippets like the one found on this blog, and random gibberish like solitary punctuation marks. For a full pass over the crawl though I don’t think it’ll matter, as full words will drown out the noise. </p>
+<p>So now I’ve got a big old list of words with counts. Can I save this? Locally, I can use:</p>
+<p><code>warcl.saveAsTextFile(&quot;testje.txt&quot;)</code></p>
+<p>I’m guessing this will be different for the full crawl but one problem at a time. This creates a folder (!) with several files: output can be found in one file here. It’s interesting that everything to save into a text file was done below the hood without a warning being thrown at my face for not saving to a hdfs!</p>
+<p><img src="http://puu.sh/wIZAR/429e39200c.png" alt="Much surprise when testje.txt turned out to be the folder and not the file!"></p>
+<p>There are some caveats with this:</p>
+<ul>
+<li>In the presentations some people noticed an integer overflow when using word counts, can I figure out something for this?</li>
+<li>I need to filter out common words such as “a”, “the” and so on. I can do this at a high level or when making the visualisation later on. Will save the problem for now..</li>
+<li>Between the docker container and my Ubuntu host I found that I can copy files using docker cp. What if my files are big, though? And what happens on the full crawl. Write to standard output and just do everything on the cluster? </li>
+<li>May I need to purge tags and code from my result file?</li>
+<li>How can I easily scale this up to.. say looking at 20 brands at once?</li>
+</ul>
+<p>As was shown in the terminal above, it doesn’t make sense yet to construct a word cloud from a single page, I suppose though that the same steps go for the full cluster. Let’s move on and see if we can export the code to the full crawl!</p>
+<h2 id="Part-4-From-Concept-to-Cluster"><a href="#Part-4-From-Concept-to-Cluster" class="headerlink" title="Part 4 - From Concept to Cluster"></a>Part 4 - From Concept to Cluster</h2><p>The following section will detail the process I went through when exporting the app to the cluster. </p>
+<h3 id="Attempt-1-Top-300-words-over-all-sites-containing-“Kayaking”"><a href="#Attempt-1-Top-300-words-over-all-sites-containing-“Kayaking”" class="headerlink" title="Attempt 1 - Top 300 words over all sites containing “Kayaking”"></a>Attempt 1 - Top 300 words over all sites containing “Kayaking”</h3><p>The first attempt is going to go over the entire crawl and look for the term ‘kayaking’ amongst the payload of all sites. I see some potential issues with this.. mainly because I’m asking for the entire crawl to be parsed through html2text - I reckon that is going to be an immense bottleneck. </p>
+<p>The core idea is explained in the following two code snippets..</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">val warcc = warcf.</div><div class="line">    <span class="built_in">filter</span>&#123; <span class="number">_._2</span>.header.warcTypeIdx == <span class="number">2</span> <span class="comment">/* response */</span> &#125;.</div><div class="line">    <span class="built_in">filter</span>&#123; <span class="number">_._2</span>.getHttpHeader().statusCode == <span class="number">200</span> &#125;.</div><div class="line">    <span class="built_in">filter</span>&#123; <span class="number">_._2</span>.getHttpHeader().contentType != null &#125;.</div><div class="line">    <span class="built_in">filter</span>&#123; <span class="number">_._2</span>.getHttpHeader().contentType.<span class="built_in">startsWith</span>(<span class="string">"text/html"</span>) &#125;</div><div class="line">    .<span class="built_in">map</span>(wr =&gt; <span class="type">HTML2Txt</span>(getContent(wr.<span class="number">_2</span>)))</div><div class="line">    .<span class="built_in">map</span>(w =&gt; w.replaceAll(<span class="string">"[?!,.\"-()]"</span>, <span class="string">""</span>))</div><div class="line">    .<span class="built_in">map</span>(w =&gt; w.toLowerCase())</div><div class="line">    .<span class="built_in">filter</span>(<span class="number">_</span> != <span class="string">""</span>)</div><div class="line">    .<span class="built_in">filter</span>(w =&gt; w.<span class="built_in">contains</span>(<span class="string">"kayaking"</span>))</div><div class="line">    .cache()</div></pre></td></tr></table></figure>
+<p>The above snippet checks for non-empty input and skips it. It should be refactored, but I’m still working on more ideas so I felt it should not be a big priority right now.</p>
+<p>It also checks for odd characters, e.g. ?! et cetera- we don’t want any of that sillyness. </p>
+<p>Finally, this big pile of text needs to get filtered for the phrase <code>kayaking</code> - I expect this line just after HTML2Txt to be a huge bottleneck. </p>
+<p>The next snippet does the standard MR word count. I’ve added a sort and top-300 selection. </p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//now <span class="built_in">to</span> construct <span class="keyword">a</span> list <span class="keyword">with</span> anything <span class="keyword">in</span> <span class="keyword">the</span> pages we have found per spark <span class="built_in">word</span> count example <span class="keyword">https</span>://spark.apache.org/examples.html</div><div class="line">val warcl = warcc.flatMap(_.<span class="built_in">split</span>(<span class="string">" "</span>))</div><div class="line">     .<span class="built_in">filter</span>(_ != <span class="string">""</span>)</div><div class="line">     .map(<span class="built_in">word</span> =&gt; (<span class="built_in">word</span>, <span class="number">1</span>))</div><div class="line">     .reduceByKey(_ + _)</div><div class="line">     .<span class="built_in">filter</span>( w =&gt; !(commonWords.<span class="keyword">contains</span>(w.<span class="title">_1</span>)))</div><div class="line">     .sortBy(w =&gt; -w.<span class="title">_2</span>)</div><div class="line">     .take(<span class="number">300</span>)</div></pre></td></tr></table></figure>
+<p>Lastly, this gets printed to the output. </p>
+<h4 id="Filtering-for-Common-words"><a href="#Filtering-for-Common-words" class="headerlink" title="Filtering for Common words"></a>Filtering for Common words</h4><p>I browsed around for a solution to the common word problem, as I didn’t feel like editing my top 300 list every time. So I found <a href="https://stackoverflow.com/questions/41618474/filter-stop-words-in-spark" target="_blank" rel="external">this stackoverflow question</a> about filtering words out of my input, by means of a sequence. </p>
+<p>So I still needed a sequence at that point, and I found <a href="http://xpo6.com/list-of-english-stop-words/" target="_blank" rel="external">this list of English stop words..</a> which brings me to wonder if I’m going to see other languages pop to the top of the list. One problem at a time though. For clarity, here’s the complete list. </p>
+<figure class="highlight smalltalk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">val commonWords = <span class="type">Set</span>(<span class="comment">"a"</span>, <span class="comment">"about"</span>, <span class="comment">"above"</span>, <span class="comment">"above"</span>, <span class="comment">"across"</span>, <span class="comment">"after"</span>, <span class="comment">"afterwards"</span>, <span class="comment">"again"</span>, <span class="comment">"against"</span>, <span class="comment">"all"</span>, <span class="comment">"almost"</span>, <span class="comment">"alone"</span>, <span class="comment">"along"</span>, <span class="comment">"already"</span>, <span class="comment">"also"</span>,<span class="comment">"although"</span>,<span class="comment">"always"</span>,<span class="comment">"am"</span>,<span class="comment">"among"</span>, <span class="comment">"amongst"</span>, <span class="comment">"amoungst"</span>, <span class="comment">"amount"</span>,  <span class="comment">"an"</span>, <span class="comment">"and"</span>, <span class="comment">"another"</span>, <span class="comment">"any"</span>,<span class="comment">"anyhow"</span>,<span class="comment">"anyone"</span>,<span class="comment">"anything"</span>,<span class="comment">"anyway"</span>, <span class="comment">"anywhere"</span>, <span class="comment">"are"</span>, <span class="comment">"around"</span>, <span class="comment">"as"</span>,  <span class="comment">"at"</span>, <span class="comment">"back"</span>,<span class="comment">"be"</span>,<span class="comment">"became"</span>, <span class="comment">"because"</span>,<span class="comment">"become"</span>,<span class="comment">"becomes"</span>, <span class="comment">"becoming"</span>, <span class="comment">"been"</span>, <span class="comment">"before"</span>, <span class="comment">"beforehand"</span>, <span class="comment">"behind"</span>, <span class="comment">"being"</span>, <span class="comment">"below"</span>, <span class="comment">"beside"</span>, <span class="comment">"besides"</span>, <span class="comment">"between"</span>, <span class="comment">"beyond"</span>, <span class="comment">"bill"</span>, <span class="comment">"both"</span>, <span class="comment">"bottom"</span>,<span class="comment">"but"</span>, <span class="comment">"by"</span>, <span class="comment">"call"</span>, <span class="comment">"can"</span>, <span class="comment">"cannot"</span>, <span class="comment">"cant"</span>, <span class="comment">"co"</span>, <span class="comment">"con"</span>, <span class="comment">"could"</span>, <span class="comment">"couldnt"</span>, <span class="comment">"de"</span>, <span class="comment">"describe"</span>, <span class="comment">"detail"</span>, <span class="comment">"do"</span>, <span class="comment">"done"</span>, <span class="comment">"down"</span>, <span class="comment">"due"</span>, <span class="comment">"during"</span>, <span class="comment">"each"</span>, <span class="comment">"eg"</span>, <span class="comment">"eight"</span>, <span class="comment">"either"</span>, <span class="comment">"eleven"</span>,<span class="comment">"else"</span>, <span class="comment">"elsewhere"</span>, <span class="comment">"empty"</span>, <span class="comment">"enough"</span>, <span class="comment">"etc"</span>, <span class="comment">"even"</span>, <span class="comment">"ever"</span>, <span class="comment">"every"</span>, <span class="comment">"everyone"</span>, <span class="comment">"everything"</span>, <span class="comment">"everywhere"</span>, <span class="comment">"except"</span>, <span class="comment">"few"</span>, <span class="comment">"fifteen"</span>, <span class="comment">"fify"</span>, <span class="comment">"fill"</span>, <span class="comment">"find"</span>, <span class="comment">"five"</span>, <span class="comment">"for"</span>, <span class="comment">"former"</span>, <span class="comment">"formerly"</span>, <span class="comment">"forty"</span>, <span class="comment">"found"</span>, <span class="comment">"four"</span>, <span class="comment">"from"</span>, <span class="comment">"front"</span>, <span class="comment">"full"</span>, <span class="comment">"further"</span>, <span class="comment">"get"</span>, <span class="comment">"give"</span>, <span class="comment">"go"</span>, <span class="comment">"had"</span>, <span class="comment">"has"</span>, <span class="comment">"hasnt"</span>, <span class="comment">"have"</span>, <span class="comment">"he"</span>, <span class="comment">"hence"</span>, <span class="comment">"her"</span>, <span class="comment">"here"</span>, <span class="comment">"hereafter"</span>, <span class="comment">"hereby"</span>, <span class="comment">"herein"</span>, <span class="comment">"hereupon"</span>, <span class="comment">"hers"</span>, <span class="comment">"herself"</span>, <span class="comment">"him"</span>, <span class="comment">"himself"</span>, <span class="comment">"his"</span>, <span class="comment">"how"</span>, <span class="comment">"however"</span>, <span class="comment">"hundred"</span>, <span class="comment">"ie"</span>, <span class="comment">"if"</span>, <span class="comment">"in"</span>, <span class="comment">"inc"</span>, <span class="comment">"indeed"</span>, <span class="comment">"into"</span>, <span class="comment">"is"</span>, <span class="comment">"it"</span>, <span class="comment">"its"</span>, <span class="comment">"itself"</span>, <span class="comment">"keep"</span>, <span class="comment">"last"</span>, <span class="comment">"latter"</span>, <span class="comment">"latterly"</span>, <span class="comment">"least"</span>, <span class="comment">"less"</span>, <span class="comment">"ltd"</span>, <span class="comment">"made"</span>, <span class="comment">"many"</span>, <span class="comment">"may"</span>, <span class="comment">"me"</span>, <span class="comment">"meanwhile"</span>, <span class="comment">"might"</span>, <span class="comment">"mill"</span>, <span class="comment">"mine"</span>, <span class="comment">"more"</span>, <span class="comment">"moreover"</span>, <span class="comment">"most"</span>, <span class="comment">"mostly"</span>, <span class="comment">"move"</span>, <span class="comment">"much"</span>, <span class="comment">"must"</span>, <span class="comment">"my"</span>, <span class="comment">"myself"</span>, <span class="comment">"name"</span>, <span class="comment">"namely"</span>, <span class="comment">"neither"</span>, <span class="comment">"never"</span>, <span class="comment">"nevertheless"</span>, <span class="comment">"next"</span>, <span class="comment">"nine"</span>, <span class="comment">"no"</span>, <span class="comment">"nobody"</span>, <span class="comment">"none"</span>, <span class="comment">"noone"</span>, <span class="comment">"nor"</span>, <span class="comment">"not"</span>, <span class="comment">"nothing"</span>, <span class="comment">"now"</span>, <span class="comment">"nowhere"</span>, <span class="comment">"of"</span>, <span class="comment">"off"</span>, <span class="comment">"often"</span>, <span class="comment">"on"</span>, <span class="comment">"once"</span>, <span class="comment">"one"</span>, <span class="comment">"only"</span>, <span class="comment">"onto"</span>, <span class="comment">"or"</span>, <span class="comment">"other"</span>, <span class="comment">"others"</span>, <span class="comment">"otherwise"</span>, <span class="comment">"our"</span>, <span class="comment">"ours"</span>, <span class="comment">"ourselves"</span>, <span class="comment">"out"</span>, <span class="comment">"over"</span>, <span class="comment">"own"</span>,<span class="comment">"part"</span>, <span class="comment">"per"</span>, <span class="comment">"perhaps"</span>, <span class="comment">"please"</span>, <span class="comment">"put"</span>, <span class="comment">"rather"</span>, <span class="comment">"re"</span>, <span class="comment">"same"</span>, <span class="comment">"see"</span>, <span class="comment">"seem"</span>, <span class="comment">"seemed"</span>, <span class="comment">"seeming"</span>, <span class="comment">"seems"</span>, <span class="comment">"serious"</span>, <span class="comment">"several"</span>, <span class="comment">"she"</span>, <span class="comment">"should"</span>, <span class="comment">"show"</span>, <span class="comment">"side"</span>, <span class="comment">"since"</span>, <span class="comment">"sincere"</span>, <span class="comment">"six"</span>, <span class="comment">"sixty"</span>, <span class="comment">"so"</span>, <span class="comment">"some"</span>, <span class="comment">"somehow"</span>, <span class="comment">"someone"</span>, <span class="comment">"something"</span>, <span class="comment">"sometime"</span>, <span class="comment">"sometimes"</span>, <span class="comment">"somewhere"</span>, <span class="comment">"still"</span>, <span class="comment">"such"</span>, <span class="comment">"system"</span>, <span class="comment">"take"</span>, <span class="comment">"ten"</span>, <span class="comment">"than"</span>, <span class="comment">"that"</span>, <span class="comment">"the"</span>, <span class="comment">"their"</span>, <span class="comment">"them"</span>, <span class="comment">"themselves"</span>, <span class="comment">"then"</span>, <span class="comment">"thence"</span>, <span class="comment">"there"</span>, <span class="comment">"thereafter"</span>, <span class="comment">"thereby"</span>, <span class="comment">"therefore"</span>, <span class="comment">"therein"</span>, <span class="comment">"thereupon"</span>, <span class="comment">"these"</span>, <span class="comment">"they"</span>, <span class="comment">"third"</span>, <span class="comment">"this"</span>, <span class="comment">"those"</span>, <span class="comment">"though"</span>, <span class="comment">"three"</span>, <span class="comment">"through"</span>, <span class="comment">"throughout"</span>, <span class="comment">"thru"</span>, <span class="comment">"thus"</span>, <span class="comment">"to"</span>, <span class="comment">"together"</span>, <span class="comment">"too"</span>, <span class="comment">"top"</span>, <span class="comment">"toward"</span>, <span class="comment">"towards"</span>, <span class="comment">"twelve"</span>, <span class="comment">"twenty"</span>, <span class="comment">"two"</span>, <span class="comment">"un"</span>, <span class="comment">"under"</span>, <span class="comment">"until"</span>, <span class="comment">"up"</span>, <span class="comment">"upon"</span>, <span class="comment">"us"</span>, <span class="comment">"very"</span>, <span class="comment">"via"</span>, <span class="comment">"was"</span>, <span class="comment">"we"</span>, <span class="comment">"well"</span>, <span class="comment">"were"</span>, <span class="comment">"what"</span>, <span class="comment">"whatever"</span>, <span class="comment">"when"</span>, <span class="comment">"whence"</span>, <span class="comment">"whenever"</span>, <span class="comment">"where"</span>, <span class="comment">"whereafter"</span>, <span class="comment">"whereas"</span>, <span class="comment">"whereby"</span>, <span class="comment">"wherein"</span>, <span class="comment">"whereupon"</span>, <span class="comment">"wherever"</span>, <span class="comment">"whether"</span>, <span class="comment">"which"</span>, <span class="comment">"while"</span>, <span class="comment">"who"</span>, <span class="comment">"whoever"</span>, <span class="comment">"whole"</span>, <span class="comment">"whom"</span>, <span class="comment">"whose"</span>, <span class="comment">"why"</span>, <span class="comment">"will"</span>, <span class="comment">"with"</span>, <span class="comment">"within"</span>, <span class="comment">"without"</span>, <span class="comment">"would"</span>, <span class="comment">"yet"</span>, <span class="comment">"you"</span>, <span class="comment">"your"</span>, <span class="comment">"yours"</span>, <span class="comment">"yourself"</span>, <span class="comment">"yourselves"</span>, <span class="comment">"the"</span>)</div></pre></td></tr></table></figure>
+<h4 id="Getting-the-code-to-Hathi"><a href="#Getting-the-code-to-Hathi" class="headerlink" title="Getting the code to Hathi"></a>Getting the code to Hathi</h4><p>So right now I have a very basic and simple example Scala app which is confined to the notebook. I still need to do some house keeping in order to get it on the cluster.</p>
+<p>The first step is exporting it to scala. This opens the file in my browser. <strong>I stored the file in a public location on the web (so I could get it via wget from the docker and pushed my updates to it</strong> - this allowed me to edit the file using the tools on my own machine and pull it when I want to run it on the cluster. This greatly reduced my effort by reducing my dependency on tools like <code>vim</code> - which, while excellent, do not have the range of capabilities like atom or VS Code do. Again, personal preference. </p>
+<p>I then used the skeleton from the example app on the hathi-surfsara image, replacing the original file and deleting the <code>/target/</code> folder. I made sure to follow the steps needed <a href="http://spark.apache.org/docs/2.1.1/quick-start.html#self-contained-applications" target="_blank" rel="external">in the creating a self-contained app tutorial</a>: which meant stripping some code and defining a main method. Additionally, I added <code>jsoup</code> to the <code>libraryDependencies</code>. </p>
+<p>Using <code>sbt assembly</code> I then created a fat jar (stored in <code>/target/</code>) and submitted it via </p>
+<p><code>spark-submit --master yarn --deploy-mode cluster --num-executors 300 --class</code><br><code>org.rubigdata.RUBigDataApp /hathi-client/spark/rubigdata/target/scala-2.11/RUBigDataApp-assembly-1.0.jar</code></p>
+<p>So for the next 1 minute 40 seconds I was thrilled! Hathi picked up my submission and seemed happy to do it. Then I got a nullPointerException.. turned out I was checking for the <code>contentType</code> before even checking if this wasn’t <code>null</code> instead of the other way around.. eager beaver. I had the bright idea to implement a check for it, but did so in the wrong order.</p>
+<p>The next big error was regarding my use of <code>saveAsTextFile</code>. Because this would be called many times (once per warc file?) I would get the error that the folder already existed. I took the saveAsTextFile out, and redirected output about the top 300 to the stdout instead. </p>
+<p>After this small fix the code was submitted and I went to bed..</p>
+<p>After <strong>8 hours, 36 minutes and 45 seconds</strong> my code apparently hit an error: potentially having to do with a block being unavailable on the cluster. Just as I was rolling over hugging my pillow, the little cluster named Hathi was in tears. Had it failed the user, or had the user failed it?</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">User class threw exception: org<span class="selector-class">.apache</span><span class="selector-class">.spark</span><span class="selector-class">.SparkException</span>: Job aborted due to stage failure: Task <span class="number">1263</span> <span class="keyword">in</span> stage <span class="number">0.0</span> failed <span class="number">4</span> times, most recent failure: Lost task <span class="number">1263.3</span> <span class="keyword">in</span> stage <span class="number">0.0</span> (TID <span class="number">3214</span>, worker168<span class="selector-class">.hathi</span><span class="selector-class">.surfsara</span><span class="selector-class">.nl</span>, executor <span class="number">256</span>): org<span class="selector-class">.apache</span><span class="selector-class">.hadoop</span><span class="selector-class">.hdfs</span><span class="selector-class">.BlockMissingException</span>: Could not obtain block: BP-<span class="number">16922093</span>-<span class="number">145.100</span>.<span class="number">41.3</span>-<span class="number">1392681459262</span>:blk_1262268700_188594112 file=/data/public/common-crawl/crawl-data/CC-MAIN-<span class="number">2016</span>-<span class="number">07</span>/segments/<span class="number">1454701146196.88</span>/warc/CC-MAIN-<span class="number">20160205193906</span>-<span class="number">00216</span>-ip-<span class="number">10</span>-<span class="number">236</span>-<span class="number">182</span>-<span class="number">209</span><span class="selector-class">.ec2</span><span class="selector-class">.internal</span><span class="selector-class">.warc</span><span class="selector-class">.gz</span></div><div class="line">at org<span class="selector-class">.apache</span><span class="selector-class">.hadoop</span><span class="selector-class">.hdfs</span><span class="selector-class">.DFSInputStream</span><span class="selector-class">.chooseDataNode</span>(DFSInputStream<span class="selector-class">.java</span>:<span class="number">945</span>) </div><div class="line">at org<span class="selector-class">.apache</span><span class="selector-class">.hadoop</span><span class="selector-class">.hdfs</span><span class="selector-class">.DFSInputStream</span><span class="selector-class">.blockSeekTo</span>(DFSInputStream<span class="selector-class">.java</span>:<span class="number">604</span>) </div><div class="line">at org<span class="selector-class">.apache</span><span class="selector-class">.hadoop</span><span class="selector-class">.hdfs</span><span class="selector-class">.DFSInputStream</span><span class="selector-class">.readWithStrategy</span>(DFSInputStream<span class="selector-class">.java</span>:<span class="number">844</span>) </div><div class="line">at org<span class="selector-class">.apache</span><span class="selector-class">.hadoop</span><span class="selector-class">.hdfs</span><span class="selector-class">.DFSInputStream</span><span class="selector-class">.read</span>(DFSInputStream<span class="selector-class">.java</span>:<span class="number">896</span>)</div><div class="line">at java<span class="selector-class">.io</span><span class="selector-class">.DataInputStream</span><span class="selector-class">.read</span>(DataInputStream<span class="selector-class">.java</span>:<span class="number">149</span>)</div></pre></td></tr></table></figure>
+<p>I tried to google the error, but found nothing that I could do as a normal user of the cluster. Most of these had to do with missing privs (might be possible) or corruption. </p>
+<p><a href="http://head05.hathi.surfsara.nl:8088/cluster/app/application_1486393309284_17724" target="_blank" rel="external">Link to the application details</a></p>
+<p>I’ve posted an issue, meanwhile I’m going to run it on a single warc segment. </p>
+<h3 id="Attempt-2-One-segment"><a href="#Attempt-2-One-segment" class="headerlink" title="Attempt 2 - One segment"></a>Attempt 2 - One segment</h3><p>Using the index I’ve looked for <code>https://www.ukriversguidebook.co.uk/</code> - a large internet community of kayakers. This gives me a neat <a href="http://index.commoncrawl.org/CC-MAIN-2016-07-index?url=https%3A%2F%2Fwww.ukriversguidebook.co.uk%2F&amp;output=json" target="_blank" rel="external">JSON output</a> containing the locations of all hits. I just picked one- and added it to my code as <code>&quot;/data/public/common-crawl/crawl-data/CC-MAIN-2016-07/segments/1454701148402.62/*&quot;</code>. The rest of the code remained unchanged for the reproducibility of errors. I submitted it with 300 executors and went to get a shave. </p>
+<p>15 minutes and 15 seconds later the submission was done, much to my surprise. I had covered 698 tasks. Bear in mind this submission was 1% of the entire crawl, and I stomped through with 300 executors. No error was given, and my glorious output was waiting for me. </p>
+<p>The following screenshot shows the inside of the Applicationmanager just after starting. Honestly, glancing over this felt like being inside mission control at NASA.<br><img src="http://puu.sh/wMZhb/48eb418bc5.png" alt="Spark Jobs Overview (click for larger version)"></p>
+<p>Now the curious reader will want to know.. what did we get from this? </p>
+<p>Earlier I redirected output to stdout: this is where my little frequency list ended up. </p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">womens<span class="comment">;849513;</span></div><div class="line">ski<span class="comment">;774168;</span></div><div class="line">jackets<span class="comment">;738558;</span></div><div class="line">-<span class="comment">;703664;</span></div><div class="line"> <span class="comment">;673135;</span></div><div class="line">clothing<span class="comment">;614007;</span></div><div class="line">snowboard<span class="comment">;581317;</span></div><div class="line">accessories<span class="comment">;492069;</span></div><div class="line">pants<span class="comment">;475875;</span></div><div class="line">bike<span class="comment">;467037;</span></div><div class="line">bikes<span class="comment">;463572;</span></div><div class="line">mens<span class="comment">;460966;</span></div><div class="line">bags<span class="comment">;456382;</span></div><div class="line">shop<span class="comment">;430335;</span></div><div class="line">sunglasses<span class="comment">;426637;</span></div><div class="line">shoes<span class="comment">;423502;</span></div></pre></td></tr></table></figure>
+<p>There’s still some noise. Apparently I missed a white space and ‘-‘… oh well.  </p>
+<p>This list seems to indicate that most websites referring to kayaking sell clothing and gear for outdoor activities. That makes sense, given that this is a huge industry with many competitors. Perhaps it would be a good idea to create a second list with words common in retail. It’s interesting that words like <code>sea</code> and <code>nature</code> don’t appear at all. The word <code>safety</code> - which is at the heart of the sport is ranked #273. Perhaps this is just a batch with a lot of retail sites, but it seems like a decent idea to mine retail terms in order to filter them out for the next iteration. </p>
+<p>So I started to work and added another 150 words to the list with all those retail phrases. I refined the method and submitted the jar once more. Nothing was really different apart from a little retouching. Again, the code worked fine and I got a new list! </p>
+<p>I then wrote a little bit of javascript to convert the frequency list I had to a payload that could be used for a word cloud (credits: <a href="https://github.com/wvengen/d3-wordcloud" target="_blank" rel="external">https://github.com/wvengen/d3-wordcloud</a>) and generated the visualization. </p>
+<p><img src="http://puu.sh/wN9Kn/cab4b34482.png" alt="Now finally, we can use this!"></p>
+<p>The word cloud is pretty cool. Most of the junk has been filtered and we see a lot of sports and outdoor-related terms. I guess that the market for kayaking is the same as the market for bikes and wakeboarding. As a mountain biker myself this is amusing. It also shows Wisconsin. This might be random, but the American state also borders lake Michigan and other large lakes and rivers. </p>
+<h3 id="Attempt-3-Selective-filtering-and-finding-brands"><a href="#Attempt-3-Selective-filtering-and-finding-brands" class="headerlink" title="Attempt 3 - Selective filtering, and finding brands!"></a>Attempt 3 - Selective filtering, and finding brands!</h3><p>Lastly I wanted to filter this subsection for specific brands. While I could easily create a list of 50 or so brands of varying popularity I chose Rockpool. Rockpool is a manufacturer of sea kayaks with several models being extremely popular in the expedition kayaking scene. In a year or so, when I graduate.. you can pretty much guess where my pay check is going to. Look at this boat!</p>
+<p><img src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ak0AAOSwyQtVtpHb/$_86.JPG" alt="A Rockpool kayak model: The Taran (source: ebay)"></p>
+<p>Jokes aside, let’s find the same word list as for kayaking. I added a brands set at first, but that didn’t work out quite well. While I could iterate through it with the following code..</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">val brands = <span class="built_in">Set</span>(<span class="string">"p&amp;h"</span>, <span class="string">"valley"</span>, <span class="string">"rockpool"</span>, <span class="string">"peakuk"</span>)</div><div class="line"><span class="keyword">for</span> (brand &lt;- brands) &#123;</div><div class="line">    println(brand+<span class="string">"\n"</span>)</div><div class="line">        val warcd = warcc <span class="comment">/*temp*/</span></div><div class="line">        warcd.cache()     <span class="comment">/*lazy evaluation*/</span></div><div class="line">        val warcl = warcd.filter(<span class="function"><span class="params">w</span> =&gt;</span> w.contains(brand))</div><div class="line">            .flatMap(_.split(<span class="string">" "</span>))</div><div class="line">            .filter(_ != <span class="string">""</span>)</div><div class="line">            .map(<span class="function"><span class="params">word</span> =&gt;</span> (word, <span class="number">1</span>))</div><div class="line">            .reduceByKey(_ + _)</div><div class="line">            .filter( <span class="function"><span class="params">w</span> =&gt;</span> !(commonWords.contains(w._1)))</div><div class="line">            .sortBy(<span class="function"><span class="params">w</span> =&gt;</span> -w._2)</div><div class="line">            .take(<span class="number">300</span>)</div></pre></td></tr></table></figure>
+<p>I would continously narrow down my collection. E.g. the first brand would go fine, but the second brand would be filtered from the subsection of the first brand and so on. This is due to Spark’s Lazy Evaluation^tm where nothing is actually executed until a reduce operation- and in my code I only used <code>reduceByKey</code> until the end of each brand-specific execution. Regardless, being my favourite kayak manufacturer I chose Rockpool and got the following list: </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'nov'</span>, size: <span class="number">439</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'mar'</span>, size: <span class="number">407</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'jan'</span>, size: <span class="number">382</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'dec'</span>, size: <span class="number">379</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'apr'</span>, size: <span class="number">369</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'feb'</span>, size: <span class="number">363</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'oct'</span>, size: <span class="number">362</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'jul'</span>, size: <span class="number">355</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'jun'</span>, size: <span class="number">352</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'sep'</span>, size: <span class="number">338</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'2006'</span>, size: <span class="number">282</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'aug'</span>, size: <span class="number">265</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'ago'</span>, size: <span class="number">216</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'stay'</span>, size: <span class="number">214</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'cottage'</span>, size: <span class="number">214</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'13'</span>, size: <span class="number">202</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'loch'</span>, size: <span class="number">201</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'12'</span>, size: <span class="number">199</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'16'</span>, size: <span class="number">194</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'holiday'</span>, size: <span class="number">194</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'house'</span>, size: <span class="number">193</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'21'</span>, size: <span class="number">189</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'11'</span>, size: <span class="number">188</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'17'</span>, size: <span class="number">188</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'20'</span>, size: <span class="number">186</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'22'</span>, size: <span class="number">185</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'15'</span>, size: <span class="number">181</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'14'</span>, size: <span class="number">179</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'27'</span>, size: <span class="number">176</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'19'</span>, size: <span class="number">174</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'night'</span>, size: <span class="number">174</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'28'</span>, size: <span class="number">169</span>&#125;,</div></pre></td></tr></table></figure>
+<p>While some words are close (e.g. <code>loch</code>) it seems we picked up a lot of calendar or blog contents. After some manual (I’m not going to run this on the cluster and wait another 20 minutes) removal of the nonsense I got the following list: </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'ago'</span>, size: <span class="number">216</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'stay'</span>, size: <span class="number">214</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'cottage'</span>, size: <span class="number">214</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'loch'</span>, size: <span class="number">201</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'16'</span>, size: <span class="number">194</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'holiday'</span>, size: <span class="number">194</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'house'</span>, size: <span class="number">193</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'night'</span>, size: <span class="number">174</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'home'</span>, size: <span class="number">167</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'details'</span>, size: <span class="number">165</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'18'</span>, size: <span class="number">157</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'view'</span>, size: <span class="number">156</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'min'</span>, size: <span class="number">155</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'book'</span>, size: <span class="number">155</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'great'</span>, size: <span class="number">137</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'views'</span>, size: <span class="number">137</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'away'</span>, size: <span class="number">127</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'sea'</span>, size: <span class="number">126</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'reviews'</span>, size: <span class="number">125</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'close'</span>, size: <span class="number">118</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'years'</span>, size: <span class="number">117</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'sleeps'</span>, size: <span class="number">114</span>&#125;,</div><div class="line">&#123;<span class="attribute">text</span>: <span class="string">'5/5'</span>, size: <span class="number">110</span>&#125;,</div></pre></td></tr></table></figure>
+<p>This is more like it. I kept the 16 and 18 as they are both kayak models. Overall, I pruned about 50 words- I might add a regular expression on my next run on the cluster. However, something like <code>5/5</code> (a rating, included in the list above) might get lost unintentionally. The word cloud on ‘Rockpool’ is as follows:</p>
+<p><img src="http://puu.sh/wNddt/17384de36a.png" alt="The word cloud for filtering `kayaking` along with the brand `rockpool`"></p>
+<p>The only downside to this is the small corpus I get. Even though I used 1% of the common crawl, most of the words appear about 200 times. I wish I could run it again to get more data, but I do not want to drain up the entire cluster for a entire day. </p>
+<h3 id="EDIT-Full-crawl"><a href="#EDIT-Full-crawl" class="headerlink" title="EDIT: Full crawl!"></a>EDIT: Full crawl!</h3><p>I re-submitted the first job that went over the entire crawl. This time I used the retailWords list, as well as filtering for pages that also contained the word <code>sea</code>. I opted to get the top 1000 words instead. The submission was succesful and ended after 10hrs, 47mins, 12sec. In total 69800 jobs were queued. The top 20 words on the entire crawl are:</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">'snowboard</span>' <span class="number">58172829</span></div><div class="line"><span class="symbol">'accessories</span>' <span class="number">47357717</span></div><div class="line"><span class="symbol">'bike</span>' <span class="number">46462542</span></div><div class="line"><span class="symbol">'bikes</span>' <span class="number">45888592</span></div><div class="line"><span class="symbol">'shop</span>' <span class="number">40646038</span></div><div class="line"><span class="symbol">'country</span>' <span class="number">28916820</span></div><div class="line"><span class="symbol">'water</span>' <span class="number">27793604</span></div><div class="line"><span class="symbol">'cross</span>' <span class="number">26669810</span></div><div class="line"><span class="symbol">'casual</span>' <span class="number">26185575</span></div><div class="line"><span class="symbol">'gear</span>' <span class="number">22752323</span></div><div class="line"><span class="symbol">'wisconsin</span>' <span class="number">21410085</span></div><div class="line"><span class="symbol">'wakeboard</span>' <span class="number">21104545</span></div><div class="line"><span class="symbol">'travel</span>' <span class="number">19564475</span></div><div class="line"><span class="symbol">'packages</span>' <span class="number">18880893</span></div><div class="line"><span class="symbol">'hiking</span>' <span class="number">18660510</span></div><div class="line"><span class="symbol">'forum</span>' <span class="number">17253484</span></div><div class="line"><span class="symbol">'helmets</span>' <span class="number">16881583</span></div><div class="line"><span class="symbol">'royal</span>' <span class="number">16747143</span></div><div class="line"><span class="symbol">'bindings</span>' <span class="number">16617302</span></div><div class="line"><span class="symbol">'house</span>' <span class="number">15067835</span></div></pre></td></tr></table></figure>
+<p>And the resulting word cloud is as follows:</p>
+<p><img src="https://i.redd.it/sz1qjbc4luaz.png" alt="A full pass over the crawl resulted in the top 1000 words related to Kayaking. Click on the image for a larger version."></p>
+<p>That concludes this blog post!</p>
+<h2 id="Part-5-Evaluation"><a href="#Part-5-Evaluation" class="headerlink" title="Part 5 - Evaluation"></a>Part 5 - Evaluation</h2><p>In the above post I walked you through my adventures with the Common Crawl and the Dutch National Hathi Hadoop Cluster. I started off with basic examples and tried to solve my own problems as I went. Eventually I formed the idea of generating a word cloud based on the term <code>kayaking</code>. When it apparently was not possible to make a pass over the entire crawl I grabbed a 900 GB partition and worked with 1% of the data. My idea was still to look for how individual brands are viewed: e.g. what words are asociated with brands like Rockpool?  Finally, I used javascript and the <code>d3.js</code> library to generate word clouds of my findings. </p>
+<p>Though I feel like I had to water down my challenges I feel like there’s a lot of things that I can still do with all this data. I’m still in unfamiliar territory and I learnt more each time. I’m still working on this project and I’d like to continue building a few interesting vizualisations. I’m glad I didn’t do the standard project, and it just feels better to try out many different things and get something of yourself out of a project like this.</p>
+<p>Overal I spent about 40 hours or so on this project. </p>
+<p>Dear reader, I thank you for your interest in this blog. </p>
+<h2 id="Part-6-Course-Evaluation"><a href="#Part-6-Course-Evaluation" class="headerlink" title="Part 6 - Course Evaluation"></a>Part 6 - Course Evaluation</h2><p>Though I already submitted the course evaluation I felt like it would be nice to include a few words on the process I went through for this course. I feel that using git, github and in particular the github pages tool - were enriching and powerful. I’m planning on including this repo with my own website, although I havent updated the latter in over two years. If I was a 2nd or 3rd-year student however, this would have instantly given me a portfolio of sorts which is incredibly useful to have. </p>
+<p>The way we went about it, trying to document our struggles with the various tools as we go is much closer to reality than just handing in a polished report that gets written after the product is already done. I would have liked more structure up front to combat the hours of troubleshooting I suppose, but in the end it turned out fine with just the support I found in the issue tracker and google. </p>
+<p>Speaking of the issue tracker, I think this was a great addition to the course and I hope it gets included for the students next year. It certainly helped a lot, and it breaks down the hurdles for students to step out and ask for help. I would advise to keep using it!  </p>
+<p>// Jeffrey</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+        
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'jeffluppes';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Common-Crawl/">Common Crawl</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HDFS/">HDFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SurfSara/">SurfSara</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/02/Big-Data-Series/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Big Data Series
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/04/Give-me-a-spark/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Big Data Series - Give me a spark</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Part-1-The-Big-Data-Final-Project"><span class="nav-number">1.</span> <span class="nav-text">Part 1  - The Big Data Final Project</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hathi-and-Surfsara"><span class="nav-number">1.1.</span> <span class="nav-text">Hathi and Surfsara</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Common-Crawl"><span class="nav-number">1.2.</span> <span class="nav-text">The Common Crawl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-2-Setting-up"><span class="nav-number">1.3.</span> <span class="nav-text">Part 2 - Setting up</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-3-A-local-test"><span class="nav-number">1.4.</span> <span class="nav-text">Part 3 - A local test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-4-From-Concept-to-Cluster"><span class="nav-number">1.5.</span> <span class="nav-text">Part 4 - From Concept to Cluster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Attempt-1-Top-300-words-over-all-sites-containing-“Kayaking”"><span class="nav-number">1.5.1.</span> <span class="nav-text">Attempt 1 - Top 300 words over all sites containing “Kayaking”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Filtering-for-Common-words"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">Filtering for Common words</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Getting-the-code-to-Hathi"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">Getting the code to Hathi</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Attempt-2-One-segment"><span class="nav-number">1.5.2.</span> <span class="nav-text">Attempt 2 - One segment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Attempt-3-Selective-filtering-and-finding-brands"><span class="nav-number">1.5.3.</span> <span class="nav-text">Attempt 3 - Selective filtering, and finding brands!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EDIT-Full-crawl"><span class="nav-number">1.5.4.</span> <span class="nav-text">EDIT: Full crawl!</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-5-Evaluation"><span class="nav-number">1.6.</span> <span class="nav-text">Part 5 - Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-6-Course-Evaluation"><span class="nav-number">1.7.</span> <span class="nav-text">Part 6 - Course Evaluation</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2017 Jeffluppes.nl All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/categories/Kayaking/" class="mobile-nav-link">Kayaking</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Jeffluppes.nl
+          </div>
+          <div class="panel-body">
+            Copyright © 2017 Jeffrey Luppes All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
