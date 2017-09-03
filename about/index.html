@@ -169,7 +169,7 @@
               
                 <div class="item active" style="max-height:600px; overflow: hidden;">
               
-                <img id="carousel-img0" src="https://raw.githubusercontent.com/jeffluppes/jeffluppes.github.io/master/css/images/0-min.jpg">
+                <img id="carousel-img0" src="http://jeffluppes.github.io/css/images/0-min.jpg">
               </div>
 
               <!-- 自适应大图 -->
@@ -184,6 +184,28 @@
                     } else {
                       imageTag0.style.height = h + "px";
                       imageTag0.style.marginLeft = -(h * img0.width / img0.height - document.body.clientWidth) / 2 + "px";
+                    }
+                  };
+              </script>
+            
+              
+                <div class="item" style="max-height:600px; overflow: hidden;">
+              
+                <img id="carousel-img1" src="http://jeffluppes.github.io/css/images/3_e-min.jpg">
+              </div>
+
+              <!-- 自适应大图 -->
+              <script>
+                  var h = 600;
+                  var img1 = new Image();
+                  var imageTag1 = document.getElementById("carousel-img1");
+                  img1.src = imageTag1.src;
+                  img1.onload=function(){
+                    if (img1.width / img1.height <= document.body.clientWidth / h) {
+                      imageTag1.style.width = document.body.clientWidth + "px";
+                    } else {
+                      imageTag1.style.height = h + "px";
+                      imageTag1.style.marginLeft = -(h * img1.width / img1.height - document.body.clientWidth) / 2 + "px";
                     }
                   };
               </script>
