@@ -210,6 +210,28 @@
                   };
               </script>
             
+              
+                <div class="item" style="max-height:600px; overflow: hidden;">
+              
+                <img id="carousel-img2" src="http://jeffluppes.github.io/css/images/20e-min.JPG">
+              </div>
+
+              <!-- 自适应大图 -->
+              <script>
+                  var h = 600;
+                  var img2 = new Image();
+                  var imageTag2 = document.getElementById("carousel-img2");
+                  img2.src = imageTag2.src;
+                  img2.onload=function(){
+                    if (img2.width / img2.height <= document.body.clientWidth / h) {
+                      imageTag2.style.width = document.body.clientWidth + "px";
+                    } else {
+                      imageTag2.style.height = h + "px";
+                      imageTag2.style.marginLeft = -(h * img2.width / img2.height - document.body.clientWidth) / 2 + "px";
+                    }
+                  };
+              </script>
+            
         </div>
 
         <!-- Controls -->
