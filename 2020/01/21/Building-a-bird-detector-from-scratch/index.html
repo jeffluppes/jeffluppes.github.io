@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>building a bird detector from scratch with web scraping and deep learning (part 1) | Jeffluppes.nl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="birdsscrapingdeep learningraspberry pimachine learningpython" />
+  
+  
+  
+  
+  <meta name="description" content="This is part 1 in a series on this project, more posts will be written as the project progresses I’m  a bit of an lousy birder. While I’ve always been interested in birds I’m almost completely deaf to">
+<meta name="keywords" content="birds,scraping,deep learning,raspberry pi,machine learning,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Building a bird detector from scratch with web scraping and deep learning (part 1)">
+<meta property="og:url" content="http://www.jeffluppes.nl/2020/01/21/Building-a-bird-detector-from-scratch/index.html">
+<meta property="og:site_name" content="Jeffluppes.nl">
+<meta property="og:description" content="This is part 1 in a series on this project, more posts will be written as the project progresses I’m  a bit of an lousy birder. While I’ve always been interested in birds I’m almost completely deaf to">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://www.jeffluppes.nl/images/vogels0.png">
+<meta property="og:image" content="http://www.jeffluppes.nl/images/vogels1.PNG">
+<meta property="og:image" content="http://www.jeffluppes.nl/images/vogels2.PNG">
+<meta property="og:image" content="http://www.jeffluppes.nl/images/vogels3.PNG">
+<meta property="og:image" content="http://www.jeffluppes.nl/images/vogels4.PNG">
+<meta property="og:image" content="http://www.jeffluppes.nl/images/vogels5.PNG">
+<meta property="og:image" content="http://www.jeffluppes.nl/images/vogels6.PNG">
+<meta property="og:updated_time" content="2020-02-01T23:08:19.419Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Building a bird detector from scratch with web scraping and deep learning (part 1)">
+<meta name="twitter:description" content="This is part 1 in a series on this project, more posts will be written as the project progresses I’m  a bit of an lousy birder. While I’ve always been interested in birds I’m almost completely deaf to">
+<meta name="twitter:image" content="http://www.jeffluppes.nl/images/vogels0.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Jeffluppes.nl" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags/">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Building-a-bird-detector-from-scratch" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Building a bird detector from scratch with web scraping and deep learning (part 1)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/01/21/Building-a-bird-detector-from-scratch/" class="article-date">
+	  <time datetime="2020-01-21T18:46:47.000Z" itemprop="datePublished">2020-01-21</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/bird-detector/">bird detector</a><a class="article-category-link" href="/categories/bird-detector/web-scraping/">web scraping</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/vogels0.png" alt=""><br><em>This is part 1 in a series on this project, more posts will be written as the project progresses</em></p>
+<p>I’m  a bit of an lousy birder. While I’ve always been interested in birds I’m almost completely deaf to identifying them by their calls. I never started memorizing them and my ability to recognize them on the basis of visual cues is poor. It was only when I started kayaking (about five years ago) that I was exposed to more bird-watching, and during a trip to Schotland last year a couple of friends took me on my first bird watching trip. </p>
+<p>So given that my human-based detection is obviously lacking I figured that with the plethora of bird data online, would it perhaps not be possible to scrape these and create a bird classifier using CNNs and general Python shenanigans?<br><a id="more"></a></p>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>I also wanted to make a funny trinket out of this and deploy it to a Pi. I’m lucky to have family that live on a farm in a rural area and have multiple feeding stations for the birds. Apart from the 30-or so bird species that they’ve actively tracked over the past year, there are also chickens, hedgehogs, mice, rats, and various predators like hawks and foxes that drop by. Some of the feeding stations are viewable from indoors, while others are between trees and bush. This will be the testing ground.  </p>
+<p>This is actually a very active research topic in the past couple of years, as ecologists, population biologists and researchers are using deep learning to automate detection. Consider that according to a May 2018 paper, roughly one third of papers on this subject was published in 2017 and 2018 [1]. Focus is particular on video and audio (e.g. bird calls).</p>
+<p>As for approaches, it seems that my idea of CNNs and Pis is spot on. [2] Shows a CNN model with skip connections traind on 27 bird species in Taiwan can approach 99% accuracy. There is also another source that shows it is possible to use a Raspberry Pi for classification amongst three species [3]. And that’s just scraping the surface: more advanced models are being developed. Further inspiration comes from Ben Hamm and his cat Metric [4]. </p>
+<p>One particular website that’s a huge hub for biologists and bird-watchers is the Dutch site www.waarneming.nl. It’s worth mentioning waarneming employs their own suite of models and automatically classifies uploaded photos. In 2019, they received around eight million photos. With this data they’ve also put out their own deep learning-powered app: <a href="https://play.google.com/store/apps/details?id=org.observation.obsidentify&amp;hl=en" target="_blank" rel="external">Obsidentify</a>. </p>
+<p>But why would anyone do this if there’s already apps (and with that probably APIs) that do this? For starters, I like the idea and challenge of bringing this end to end. It’s a learning experience for me. Secondly, I like to gift this set up to my in-laws at some point so to have some kind of automated tracking when there’s something going on in the garden. Scientifically this is a valid topic: bird classification scales poorly as does droning over photos or video streams is a labour-intensive task. </p>
+<h2 id="Why-is-this-a-hard-problem"><a href="#Why-is-this-a-hard-problem" class="headerlink" title="Why is this a hard problem?"></a>Why is this a hard problem?</h2><p>While the training data mostly contains photo’s of birds zoomed up and resting on a branch, the real-life data is much more messier. Consider this:</p>
+<ul>
+<li>Birds do, in general, not sit still long enough</li>
+<li>There might be multiple birds and multiple species in a single shot</li>
+<li>The size of a birds vary </li>
+<li>Many bird species are dimorphic: males and females look different</li>
+<li>Every bird species has different feeding strategies which result in different images, with some more inclined to frequent a station than others.</li>
+<li>They might be in an odd point of view (e.g. viewing a bird from the rear)</li>
+<li>Training data of the same species from different areas might be too different</li>
+<li>The background (branches, fields) is very different from the feeding stations. Consider the “wolf vs background” problem where an AI system trained to distinguish wolves was actually picking up on the presence of snow in the training image to determine whether the photo was of a wolf or dog instead of the actual subject. This is a valid problem in this context</li>
+<li>There might be a number of branches and foilage in the way of the birds (consider, for instance the header image of this post)</li>
+</ul>
+<p><strong>As for actually doing it:</strong></p>
+<ul>
+<li>Training a neural network simply requires a ton of labelled data.</li>
+<li>There is a huge difference between photos shot with a telescopic lens of say 250mm+ and a wide-angle over the counter camera such as a the pi camera</li>
+<li>The quality of these webcams, action cams and the pi-camera might simply be too bad to do this</li>
+<li>Some excellent training data might explictely forbid usage (licence)</li>
+<li>Some of the images available are simply cell-phone camera shots through a telescope or of a DSLR-display.</li>
+<li>In order to adequately classify birds, I have to recognize (a) an image contains a bird (a binary problem), (b) find where in the image the bird is and predict a bounding box around it and (c) classify the bird.</li>
+</ul>
+<p>In all, there’s a large potential for a miss-match between the training data and the real-world case I’m trying to work on. </p>
+<h2 id="Act-1-Identifying-training-data"><a href="#Act-1-Identifying-training-data" class="headerlink" title="Act 1: Identifying training data"></a>Act 1: Identifying training data</h2><p><a href="www.waarneming.nl">Waarneming.nl</a> has photo’s publicly available and the data is relatively easy to access. Since the goal environment (a farm in the Netherlands) and the training data environment (most uploads are from Belgium and the Netherlands) are the same, this was my first choice for training data.</p>
+<p>There’s also <a href="https://www.flickr.com/services/api/" target="_blank" rel="external">Flickr</a> which even publicly exposes an API for these goals. This might be the best / easiest option if you’re not looking for data from Europe. <a href="https://ebird.org/home" target="_blank" rel="external">eBird</a> seems to be scrape-able the same way. While searching for ‘Staartmees’ on Flickr yields only about 2000 hits, checking for ‘Long-tailed tit’ gives around 62.000 photos. </p>
+<p>Lastly, there are two datasets that might be of use. First there’s the <a href="http://www.vision.caltech.edu/visipedia/CUB-200-2011.html" target="_blank" rel="external">Caltech-UCSD Birds-200-2011
+</a> data set of almost 12000 photos and 200 species. This information may be useful later on for detecting a bounding box (a square to identify <em>where</em> in an image a bird is located) around a bird. Similarly, there is the <a href="http://bird.nae-lab.org/dataset/" target="_blank" rel="external">Japanese Wild Birds in a Wind Farm: Image Dataset for Bird Detection</a> data set for detection, although this is again only useful for detection and not classification - an important distinction.</p>
+<h2 id="Act-2-Scraping-training-data"><a href="#Act-2-Scraping-training-data" class="headerlink" title="Act 2: Scraping training data"></a>Act 2: Scraping training data</h2><p>I set out to scrape the data from waarneming.nl as this is the absolute closest to my real-life use case and the image quality is insanely high, being mostly from birders with professional gear. Futhermore, as the data is community-sourced and often verified, I can directly treat the image labels as based in truth (something that would not be possible with say Flickr). I turned to the gallery:</p>
+<p><img src="/images/vogels1.PNG" alt=""></p>
+<p>Waarneming has a gallery function that lists 24 bird photos each time. Despite there being more images on the site than the gallery, only the gallery has the <code>app-ratio-box-image</code> class, so this allows us to collect only these links. </p>
+<p><img src="/images/vogels2.PNG" alt=""></p>
+<p>Also note that the html includes links to the image (ending in <code>.jpg</code>) as a page describing an image (ending with <code>photos/&lt;image_id&gt;/</code>. This leads to a page that has meta data on the image - more on that in a bit.</p>
+<p>Based on the species list (below) I looked at querying for each specific bird. However, there are many possible species and a simple search might return multiple possible hits (subspecies might be returned). Since I’d have to make a list of each species’ latin name anyway, I just searched for an individual species and collected the species’ id. I stored these in a dict like below:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">'species_name'</span>: <span class="string">'species_x'</span>,</div><div class="line">    <span class="string">'id'</span>: <span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>For each species in the list I crawled the site. I could not find a robots.txt that disallowed web scraping and the license found on <a href="https://waarneming.nl/tos/" target="_blank" rel="external">https://waarneming.nl/tos/</a> explictely permits non-commercial use by individuls. However, because the strain on a website can be considerable it is a good practise to build in a pause of 1 second between requests. I did not initially do this as I had honestly had not considered the strain on their servers. </p>
+<p>The below script accomplishes the main scraping goals. I made use of the <code>beautifulsoup</code> and <code>requests</code> libraries to collect the html from the pages and parse them. I also included a call to check which images I already have downloaded, so I don’t waste resources fetching the same image twice.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,int(MAXIMAGES/IMAGESPERPAGE)+<span class="number">1</span>):</div><div class="line">    <span class="comment"># construct the url</span></div><div class="line">    URL = <span class="string">'https://waarneming.nl/species/'</span>+identifier+<span class="string">'/photos/'</span></div><div class="line">        <span class="string">'?after_date=2018-01-01&amp;before_date=2020-01-19&amp;page='</span>+str(i)</div><div class="line">    </div><div class="line">    <span class="comment"># fetch the url and content</span></div><div class="line">    page = requests.get(URL)</div><div class="line">    soup = BeautifulSoup(page.content, <span class="string">'html.parser'</span>)</div><div class="line">    </div><div class="line">    <span class="comment">#find the images</span></div><div class="line">    tags=soup.findAll(<span class="string">'img'</span>,&#123;<span class="string">"class"</span>:<span class="string">"app-ratio-box-image"</span>&#125;)</div><div class="line">    photolinks += tags</div><div class="line">    </div><div class="line">    <span class="comment">#pause for one second out of courtesy</span></div><div class="line">    time.sleep(<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="comment"># get the photoids we already have scraped from before</span></div><div class="line">photoids = get_photoid_list(species)</div><div class="line"></div><div class="line">metadata = []</div><div class="line"><span class="comment"># download photos and store them in their new home</span></div><div class="line"><span class="keyword">for</span> link <span class="keyword">in</span> photolinks:</div><div class="line">    <span class="comment">#url without arguments</span></div><div class="line">    url = link[<span class="string">'src'</span>].split(<span class="string">'?w'</span>)[<span class="number">0</span>]</div><div class="line">    <span class="comment">#obtain filename from url</span></div><div class="line">    filename = url.split(<span class="string">'/'</span>)[<span class="number">5</span>]</div><div class="line">    </div><div class="line">    <span class="comment">#check if we have encountered this photo before - will be substantially slower with large n</span></div><div class="line">    <span class="keyword">if</span> filename.split(<span class="string">'.'</span>)[<span class="number">0</span>] <span class="keyword">not</span> <span class="keyword">in</span> photoids: </div><div class="line">        </div><div class="line">        <span class="comment"># we have a new photo, so lets check the metadata first</span></div><div class="line">        meta = get_metadata(filename.split(<span class="string">'.'</span>)[<span class="number">0</span>])</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> meta:</div><div class="line">            meta[<span class="string">'photoid'</span>] = filename</div><div class="line">            metadata.append(meta)</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> meta[<span class="string">'Licentie'</span>] <span class="keyword">in</span> ALLOWED_LICENSES:</div><div class="line">                path = RAWFOLDER+<span class="string">'/'</span>+species+<span class="string">'/'</span>+filename</div><div class="line">                get_and_store_image(url, path)</div><div class="line"></div><div class="line">                <span class="comment">#also resize the image and store them seperately</span></div><div class="line">                outputpath = PROCESSEDFOLDER+<span class="string">'/'</span>+species+<span class="string">'/'</span>+filename.split(<span class="string">'.'</span>)[<span class="number">0</span>]+<span class="string">'.png'</span></div><div class="line"></div><div class="line">                convert_and_store_img(path, outputpath)</div><div class="line">                new_photos += <span class="number">1</span></div><div class="line">                </div><div class="line">                <span class="comment">#pause for one second out of courtesy</span></div><div class="line">                time.sleep(<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
+<p>The above code includes calls to the following methods and variables:<br><code>get_photoid_list</code> searches the <code>species</code> directory for any existing photos (because there’s no point in downloading the same photo twice if we re-run the script)<br><code>ALLOWED_LICENSES</code> contains a list of licences that allow us to scrape.<br><code>get_and_store_image</code> requests the image from an url and stores it to local disk<br><code>get_metadata</code> requests the page that holds info on a particular <code>photoid</code> and outputs the photo details to a <code>meta</code> object. This way, we can trace which photo’s we crawl and who made them, but also the license for an individual photo.<br><code>convert_and_store_img</code> changes the photo to a set <code>x</code> by <code>y</code> size and also appends each image so all the training data has the same dimensions.<br><code>time.sleep(1)</code> tells the scrape script to pause for one second.<br><code>metadata</code> is a list of <code>meta</code> objects I store to disk afterwards.</p>
+<p>The attentive reader might notice we’re also collecting metadata on images we don’t scrape. This is mainly because I want to trace the different licences and other metadata associated with them and to verify that everything works correctly. The metadata is stored to a flat file. Below is the <code>get_metadata</code> call:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_metadata</span><span class="params">(photoid=<span class="number">24691898</span>)</span> -&gt; dict:</span></div><div class="line">    <span class="string">'''Given a photo-id, return metadata in a dict'''</span></div><div class="line">    </div><div class="line">    url = <span class="string">'https://waarneming.nl/photos/'</span>+str(photoid)</div><div class="line">    page = requests.get(url)</div><div class="line">    soup = BeautifulSoup(page.content, <span class="string">'html.parser'</span>)</div><div class="line">    tags=soup.find(<span class="string">'table'</span>,&#123;<span class="string">"class"</span>:<span class="string">"table app-content-section"</span>&#125;)</div><div class="line">    meta =  &#123;&#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> tags:</div><div class="line">        <span class="comment"># find all table rows</span></div><div class="line">        rows = tags.find_all(<span class="string">'tr'</span>)</div><div class="line">        values = []</div><div class="line">        keys = []</div><div class="line">        <span class="comment"># get the table content and return as two lists</span></div><div class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> rows:</div><div class="line">            <span class="comment"># actual content is listed in the &lt;td&gt;, while &lt;th&gt; holds the keys. </span></div><div class="line">            descriptions = row.find_all(<span class="string">'th'</span>)</div><div class="line">            cols = row.find_all(<span class="string">'td'</span>)</div><div class="line">            <span class="keyword">for</span> idx, ele <span class="keyword">in</span> enumerate(descriptions):</div><div class="line">                keys.append(ele.text.strip())</div><div class="line">                values.append(cols[idx].text.strip())</div><div class="line"></div><div class="line">        <span class="comment">#create a dict out of the data we fetched</span></div><div class="line">        meta = dict(zip(keys, values))  </div><div class="line"></div><div class="line">    <span class="keyword">return</span> meta</div></pre></td></tr></table></figure>
+<p>…which returns the following:<br><img src="/images/vogels3.PNG" alt=""></p>
+<p>The data is contained in a table, and each row only contains a <code>&lt;th&gt;</code> (header) and <code>&lt;tr&gt;</code> (row). Thus, we obtain the keys from the <code>&lt;th&gt;</code> and the values from information enclosed by the <code>&lt;tr&gt;</code> tags. Note that we fail elegantly: if there’s nothing in the table (or the table is not there) we return an empty meta. And if we do not have the meta object explictely stating what kind of value we have for a license, we don’t download the photo. </p>
+<p>With that, we’re all set to start scraping. Let’s define what birds we want to look for. </p>
+<h3 id="Species-list"><a href="#Species-list" class="headerlink" title="Species list"></a>Species list</h3><p>The below lists the species I collected data about.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Latin NamE</th>
+<th>English Name</th>
+<th>Dutch Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Cyanistes caeruleus</td>
+<td>Eurasian blue tit</td>
+<td>Pimpelmees</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Parus major</td>
+<td>Great tit</td>
+<td>Koolmees</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Aegithalos caudatus</td>
+<td>Long-tailed tit</td>
+<td>Staartmees</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Lophophanes cristatus</td>
+<td>European crested tit</td>
+<td>Kuifmees</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Fringilla coelebs</td>
+<td>Common chaffinch</td>
+<td>Vink</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Turdus merula</td>
+<td>Common blackbird</td>
+<td>Merel</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Sturnus vulgaris</td>
+<td>Common starling</td>
+<td>Spreeuw</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Passer montanus</td>
+<td>Eurasian tree sparrow</td>
+<td>Ringmus</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Passer domesticus</td>
+<td>House sparrow</td>
+<td>Huismus</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Emberiza citrinella</td>
+<td>Yellowhammer</td>
+<td>Geelgors</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Prunella modularis</td>
+<td>Dunnock</td>
+<td>Heggenmus</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Certhia brachydactyla</td>
+<td>Short-toed treecreeper</td>
+<td>Boomkruiper</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Chloris chloris</td>
+<td>European greenfinch</td>
+<td>Groenling</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Sitta europaea</td>
+<td>Eurasian nuthatch</td>
+<td>Boomklever</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Erithacus rubecula</td>
+<td>Robin</td>
+<td>Roodborstje</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Dendrocopos major</td>
+<td>Great spotted woodpecker</td>
+<td>Grote Bonte Specht</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Pica Pica</td>
+<td>Magpie</td>
+<td>Ekster</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Carduelis carduelis</td>
+<td>European goldfinch</td>
+<td>Putter</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Troglodytes troglodytes</td>
+<td>Eurasian wren</td>
+<td>Winterkoning</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Turdus philomelos</td>
+<td>Song thrush</td>
+<td>Zanglijster</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Columba palumbus</td>
+<td>Common wood pigeon</td>
+<td>Houtduif</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Streptopelia decaocto</td>
+<td>Eurasian collared dove</td>
+<td>Turkse Tortel</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Columba Oenas</td>
+<td>Stock dove</td>
+<td>Holenduif</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Motacilla Alba</td>
+<td>White wagtail</td>
+<td>Witte Kwikstaart</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Picus Viridis</td>
+<td>European green woodpecker</td>
+<td>Groene Specht</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Garrulus glandarius</td>
+<td>Eurasian jay</td>
+<td>Gaai</td>
+</tr>
+<tr>
+<td>27</td>
+<td>Fringilla Montifringilla</td>
+<td>Brambling</td>
+<td>Keep</td>
+</tr>
+<tr>
+<td>28</td>
+<td>Turdus Iliacus</td>
+<td>Redwing</td>
+<td>Koperwiek</td>
+</tr>
+<tr>
+<td>29</td>
+<td>Turdus Pilaris</td>
+<td>Fieldfare</td>
+<td>Kramsvogel</td>
+</tr>
+<tr>
+<td>30</td>
+<td>Oriolus Oriolus</td>
+<td>Eurasian golden oriole</td>
+<td>Wielewaal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Pre-processing-data"><a href="#Pre-processing-data" class="headerlink" title="Pre-processing data"></a>Pre-processing data</h3><p>In order to re-shape the data into a format that a ML model can interpret I performed the following steps. </p>
+<p>1) I Resized the image to have a max dimension of 256 by 256<br>2) Centered the image and padded the sides wherever it was less than 256<br>3) Cut a 224 x224 section from the middle of the image</p>
+<p>This builds heavily on the python version of the opencv library as well as numpy. The result is a 224 by 224 photo from any input photo. </p>
+<p>The resizing of images might not be needed for every possible network, but it might be important to some convolutional architectures. I chose 224 by 224 because these are the dimensions that some of the pre-trained networks available in Keras - such as vgg16 [5] - work with. While it would be massively better for training time to pick a smaller size (say 32x32), the bird is generally only a small portion of the pixels in the image. I fear that if I was to limit the size too aggresively I’d limit the usefulness of my training data too much. </p>
+<p>The below code snippet shows how the resizing and centering is done.  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">center_image</span><span class="params">(img)</span>:</span></div><div class="line">    <span class="string">'''Convenience function to return a centered image'''</span></div><div class="line">    size = [<span class="number">256</span>,<span class="number">256</span>]</div><div class="line">    </div><div class="line">    img_size = img.shape[:<span class="number">2</span>]</div><div class="line">    </div><div class="line">    <span class="comment"># centering</span></div><div class="line">    row = (size[<span class="number">1</span>] - img_size[<span class="number">0</span>]) // <span class="number">2</span></div><div class="line">    col = (size[<span class="number">0</span>] - img_size[<span class="number">1</span>]) // <span class="number">2</span></div><div class="line">    resized = np.zeros(list(size) + [img.shape[<span class="number">2</span>]], dtype=np.uint8)</div><div class="line">    resized[row:(row + img.shape[<span class="number">0</span>]), col:(col + img.shape[<span class="number">1</span>])] = img</div><div class="line"></div><div class="line">    <span class="keyword">return</span> resized</div></pre></td></tr></table></figure>
+<p>I am actually trimming the edges a little as I figured that the bird in any given photo from this data set is likely in the middle of the photo.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#resize </span></div><div class="line"><span class="keyword">if</span>(img.shape[<span class="number">0</span>] &gt; img.shape[<span class="number">1</span>]):</div><div class="line">    tile_size = (int(img.shape[<span class="number">1</span>]*<span class="number">256</span>/img.shape[<span class="number">0</span>]),<span class="number">256</span>)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    tile_size = (<span class="number">256</span>, int(img.shape[<span class="number">0</span>]*<span class="number">256</span>/img.shape[<span class="number">1</span>]))</div><div class="line"></div><div class="line"><span class="comment">#centering</span></div><div class="line">img = center_image(cv2.resize(img, dsize=tile_size))</div><div class="line"></div><div class="line"><span class="comment">#output should be 224*224px for a quick vggnet16</span></div><div class="line">img = img[<span class="number">16</span>:<span class="number">240</span>, <span class="number">16</span>:<span class="number">240</span>]</div></pre></td></tr></table></figure></p>
+<h3 id="The-actual-scraping"><a href="#The-actual-scraping" class="headerlink" title="The actual scraping"></a>The actual scraping</h3><p>So now I have methods defined for going through the gallery, collecting the links along the way. For each link I store the metadata and look up whether the licence is in my <code>ALLOWED?LICENCES</code> list. Roughly 60% of all photo’s are blocked by a licence. If there´s a match I download the image.</p>
+<p>With the 30 bird species I defined earlier it´s just a simple list of dicts to go through for scraping. Here <code>bird_scraper</code> takes a bird name (used for constructing a folder) and an id to query with:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> s <span class="keyword">in</span> species:</div><div class="line">    bird_scraper(s[<span class="string">'name'</span>], s[<span class="string">'id'</span>])</div><div class="line">    </div><div class="line">    <span class="comment"># show a random photo to brighten the day</span></div><div class="line">    print(str(s[<span class="string">'name'</span>])+<span class="string">':'</span>)</div><div class="line">    show_random_img_from_folder(RAWFOLDER+<span class="string">'/'</span>+s[<span class="string">'name'</span>])</div></pre></td></tr></table></figure>
+<p><img src="/images/vogels4.PNG" alt=""></p>
+<p>In the end I show a random image from the samples I collected. I figured that this would be a nice screenshot to include because it demonstrates three problems:</p>
+<ul>
+<li>The bird versus background problem (when we are training, are we actually modelling the birds or are we overfitting on their habitat?)</li>
+<li>The odd angle </li>
+<li>The bird itself might only be a very small portion of the photo</li>
+</ul>
+<p>Now, let’s see how many photos we captured..</p>
+<h2 id="Act-3-Results"><a href="#Act-3-Results" class="headerlink" title="Act 3: Results"></a>Act 3: Results</h2><p><img src="/images/vogels5.PNG" alt=""></p>
+<p>The total number of bird photos I scraped are shown in the graph below. Apparently the common birds are all a bit even, while I could not query for more than 90 <em>Groenling</em> photos. This might be a bug or some kind of anti-scraping measure, as I always thought these birds were fairly common.<br><img src="/images/vogels6.PNG" alt=""></p>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><p>After starting out I decided to limit the scraping to a max of 4000 samples per bird species, which I further brought down by <em>instead of scraping until I had 4000 images</em> going for 4000 images and just using how many images were allowed as training data. That meant that I scraped roughly half of that number. My goal is not to build the best possible system, but only 2000 samples per bird will mean its likely difficult to train a model. </p>
+<p>While most data scientists and like will argue that scraping is perfectly legal, the legality of web scraping licenced material is much more a grey area. Roughly 60% of the data is licensed with a ‘no derivative’ variant or ‘all rights reserved’. </p>
+<p>In total, my scraping netted in <code>60.149</code> usable images across 30 species. While some classes have a ton of samples (also because I started off with requesting more than I needed), others have much less samples available. This skew in the data should <em>probably</em> be addressed while constructing a model in the next post in this series.</p>
+<p>Disclaimer: this blog post details a project that’s still very much underway. I intend to retrain the models before I deploy the ‘final’ models and further refine the technique, and then also update this blog post. The header image is one of my own photos and I will strive to include many as my own photos as test data. </p>
+<p><strong>This blog post benefited from ongoing discussion with experts from a variety of backgrounds.</strong> I would like to thank a number of people: Linde Koeweiden, Jobien Veninga, Johan van den Burg and Nick Moesker. I would also like to thank the people behind <a href="waarneming.nl">Waarneming</a> for their interest in my project and pointing out issues with my approach.</p>
+<p>Papers referenced in this post:<br>[1]: Christin, S., Hervet, E., &amp; Lecomte, N. (2019). Applications for deep learning in ecology. Methods in Ecology and Evolution, 10(10), 1632-1644.<br>[2]: Huang, Y. P., &amp; Basanta, H. (2019). Bird image retrieval and recognition using a deep learning platform. IEEE Access, 7, 66980-66989.<br>[3]: Ferreira, A. C., Silva, L. R., Renna, F., Brandl, H. B., Renoult, J. P., Farine, D. R. &amp; Doutrelant, C. (2019). Deep learning-based methods for individual recognition in small birds. bioRxiv, 862557.<br>[4]: Cats, Rats, A.I., Oh My! - Ben Hamm: <a href="https://www.youtube.com/watch?v=1A-Nf3QIJjM" target="_blank" rel="external">https://www.youtube.com/watch?v=1A-Nf3QIJjM</a><br>[5]: Simonyan, K., &amp; Zisserman, A. (2014). Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+        
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'jeffluppes';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/birds/">birds</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/machine-learning/">machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/22/GCP-Data-engineer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Google Cloud Platform Certified Data Engineer</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro"><span class="nav-number">1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-is-this-a-hard-problem"><span class="nav-number">2.</span> <span class="nav-text">Why is this a hard problem?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Act-1-Identifying-training-data"><span class="nav-number">3.</span> <span class="nav-text">Act 1: Identifying training data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Act-2-Scraping-training-data"><span class="nav-number">4.</span> <span class="nav-text">Act 2: Scraping training data</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Species-list"><span class="nav-number">4.1.</span> <span class="nav-text">Species list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pre-processing-data"><span class="nav-number">4.2.</span> <span class="nav-text">Pre-processing data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-actual-scraping"><span class="nav-number">4.3.</span> <span class="nav-text">The actual scraping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Act-3-Results"><span class="nav-number">5.</span> <span class="nav-text">Act 3: Results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Discussion"><span class="nav-number">6.</span> <span class="nav-text">Discussion</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2020 Jeffluppes.nl All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags/" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">Options</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              Set text size
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            Text size is now slightly larger. If that does not cut it, press and ctrl and + on your keyboard. 
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              View this page in night mode (black background)
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            Night mode is active.
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Jeffluppes.nl
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 Jeffrey Luppes All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
