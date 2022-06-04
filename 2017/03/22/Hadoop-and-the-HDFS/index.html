@@ -1,207 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
-  
-  <title>big data series - hadoop and the hdfs | Jeffluppes.nl</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="keywords" content="HDFSHadoopMapReduce">
-  
-  
-  
-  
-  <meta name="description" content="HDFS and Map-ReduceThe general idea of this post is to work out a short hello-world type of tutorial. For convenience I’ll assume that you have some basic understanding of the idea behind Map-Reduce a">
-<meta name="keywords" content="HDFS,Hadoop,MapReduce">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Big Data Series - Hadoop and the HDFS">
-<meta property="og:url" content="http://www.jeffluppes.nl/2017/03/22/Hadoop-and-the-HDFS/index.html">
-<meta property="og:site_name" content="Jeffluppes.nl">
-<meta property="og:description" content="HDFS and Map-ReduceThe general idea of this post is to work out a short hello-world type of tutorial. For convenience I’ll assume that you have some basic understanding of the idea behind Map-Reduce a">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-02T21:04:38.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Big Data Series - Hadoop and the HDFS">
-<meta name="twitter:description" content="HDFS and Map-ReduceThe general idea of this post is to work out a short hello-world type of tutorial. For convenience I’ll assume that you have some basic understanding of the idea behind Map-Reduce a">
-  
-    <link rel="alternate" href="/atom.xml" title="Jeffluppes.nl" type="application/atom+xml">
-  
+    <meta charset="utf-8">
+<title>Big Data Series - Hadoop and the HDFS - Jeffluppes.nl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
-  <link rel="stylesheet" href="/css/style.css">
 
-  <script src="/js/jquery-3.1.1.min.js"></script>
-  <script src="/js/bootstrap.js"></script>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css">
 
-  
-    <link rel="stylesheet" href="/css/dialog.css">
-  
+<meta name="description" content="Data scientist and ML Engineer based in The Netherlands">
 
-  
 
-  
-    <link rel="stylesheet" href="/css/header-post.css">
-  
 
-  
-  
-  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
 
 </head>
-</html>
-
-
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
-
-
-  
-  <div id="container">
-    <div id="wrap">
-      
-        <header>
-
-    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="navbar-inner">
-          
-          <div class="container"> 
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            
-              <a class="brand" style="
-                 margin-top: 0px;"  
-                href="#" data-toggle="modal" data-target="#myModal" >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
-              </a>
-            
-            
-            <div class="navbar-collapse collapse">
-              <ul class="hnav navbar-nav">
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
                 
-                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                <img src="/images/logo.png" alt height="28">
                 
-                  <li> <a class="main-nav-link" href="/categories/Kayaking/">Kayaking</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/tags/">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
-                
-                  <li><div id="search-form-wrap">
-
-    <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="" />
-        <button type="submit" class="search-form-submit"></button>
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." />
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: 'Posts',
-            PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
-            UNTITLED: '(Untitled)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
-
-</div></li>
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-          </div>
-                
-      </div>
-    </div>
-
-</header>
-
-
-
-      
+        </div>
+        
+        <div class="navbar-menu navbar-end">
             
-      <div id="content" class="outer">
-        
-          <section id="main" style="float:none;"><article id="post-Hadoop-and-the-HDFS" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" class="article-title" itemprop="name">
-      Big Data Series - Hadoop and the HDFS
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/03/22/Hadoop-and-the-HDFS/" class="article-date">
-	  <time datetime="2017-03-22T19:40:27.000Z" itemprop="datePublished">2017-03-22</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/Assignment/">Assignment</a><a class="article-category-link" href="/categories/Assignment/Big-Data-Series/">Big Data Series</a>
-
-      
-	<a class="article-views">
-	<span id="busuanzi_container_page_pv">
-		PV:<span id="busuanzi_value_page_pv"></span>
-	</span>
-	</a>
-
+            
+            
+        </div>
     </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="HDFS-and-Map-Reduce"><a href="#HDFS-and-Map-Reduce" class="headerlink" title="HDFS and Map-Reduce"></a>HDFS and Map-Reduce</h2><p>The general idea of this post is to work out a short hello-world type of tutorial. For convenience I’ll assume that you have some basic understanding of the idea behind Map-Reduce and why you’d ought to use it. For this post though, I’m not going to go with a very complicated use case, instead sticking to the most basic solution (also I had other deadlines to meet).</p>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Big Data Series - Hadoop and the HDFS
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2017-03-22T19:40:27.000Z" itemprop="datePublished">Mar 22 2017</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Assignment/">Assignment</a><span>></span><a class="article-category-link" href="/categories/Assignment/Big-Data-Series/">Big Data Series</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 minutes read (About 902 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h2 id="HDFS-and-Map-Reduce"><a href="#HDFS-and-Map-Reduce" class="headerlink" title="HDFS and Map-Reduce"></a>HDFS and Map-Reduce</h2><p>The general idea of this post is to work out a short hello-world type of tutorial. For convenience I&#x2019;ll assume that you have some basic understanding of the idea behind Map-Reduce and why you&#x2019;d ought to use it. For this post though, I&#x2019;m not going to go with a very complicated use case, instead sticking to the most basic solution (also I had other deadlines to meet).</p>
 <p>Keep in mind that what goes for Shakespeare should also go for <a href="https://en.wikipedia.org/wiki/Corpus_of_Contemporary_American_English" target="_blank" rel="noopener">the 450-million in words COCA</a>. Maybe something for next week, Arjen? :)</p>
-<h3 id="Setting-up-the-environment"><a href="#Setting-up-the-environment" class="headerlink" title="Setting up the environment"></a>Setting up the environment</h3><p>Since I’m a stubborn old goat I’m running vagrant to run a virtual Ubuntu distribution. Inside of which I’m running a docker container as was requested per assignment. On my laptop, which runs Windows 8. </p>
+<h3 id="Setting-up-the-environment"><a href="#Setting-up-the-environment" class="headerlink" title="Setting up the environment"></a>Setting up the environment</h3><p>Since I&#x2019;m a stubborn old goat I&#x2019;m running vagrant to run a virtual Ubuntu distribution. Inside of which I&#x2019;m running a docker container as was requested per assignment. On my laptop, which runs Windows 8. </p>
 <p>Following the <a href="https://rubigdata.github.io/course/background/hadoop.html" target="_blank" rel="noopener">instructions</a> I install hadoop version 2.7.3 and set up a hdfs cluster. There is some non-trivial path setting up involved here, but it goes beyond the scope of this assignment. </p>
-<h3 id="Getting-data"><a href="#Getting-data" class="headerlink" title="Getting data"></a>Getting data</h3><p>The <a href="http://www.gutenberg.org/ebooks/100" target="_blank" rel="noopener">Complete Shakespeare</a> corpus hosted by Project Gutenberg is only 5.3 MB. Not exactly big data. But for our little tutorial it’ll do just fine. For convenience I download it using <code>wget</code>…<br><a id="more"></a></p>
-<h3 id="The-Hello-World-Example"><a href="#The-Hello-World-Example" class="headerlink" title="The Hello World Example"></a>The Hello World Example</h3><p>Considering everyone in the class had to do the same assignment I’m not going to take you by the hand to lead you through the entire  <a href="https://hadoop.apache.org/docs/r2.7.3/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Example:_WordCount_v1.0" target="_blank" rel="noopener">Hello World Example on Hadoop</a> again. However, a short summary is in place: </p>
-<p>The first steps are setting up the cluster. For the standalone version you don’t actually have to do much more. However, we can get Hadoop to run on a single node in a pseudo distributed manner. To first do this, we have to edit the xml config files found under etc/hadoop:</p>
+<h3 id="Getting-data"><a href="#Getting-data" class="headerlink" title="Getting data"></a>Getting data</h3><p>The <a href="http://www.gutenberg.org/ebooks/100" target="_blank" rel="noopener">Complete Shakespeare</a> corpus hosted by Project Gutenberg is only 5.3 MB. Not exactly big data. But for our little tutorial it&#x2019;ll do just fine. For convenience I download it using <code>wget</code>&#x2026;  </p>
+<a id="more"></a>
+<h3 id="The-Hello-World-Example"><a href="#The-Hello-World-Example" class="headerlink" title="The Hello World Example"></a>The Hello World Example</h3><p>Considering everyone in the class had to do the same assignment I&#x2019;m not going to take you by the hand to lead you through the entire  <a href="https://hadoop.apache.org/docs/r2.7.3/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Example:_WordCount_v1.0" target="_blank" rel="noopener">Hello World Example on Hadoop</a> again. However, a short summary is in place: </p>
+<p>The first steps are setting up the cluster. For the standalone version you don&#x2019;t actually have to do much more. However, we can get Hadoop to run on a single node in a pseudo distributed manner. To first do this, we have to edit the xml config files found under etc/hadoop:</p>
 <p>etc/hadoop/core-site.xml:</p>
 <pre><code>&lt;configuration&gt;
     &lt;property&gt;
@@ -209,294 +108,129 @@
         &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;
     &lt;/property&gt;
 &lt;/configuration&gt;
-</code></pre><p>etc/hadoop/hdfs-site.xml:</p>
+</code></pre>
+<p>etc/hadoop/hdfs-site.xml:</p>
 <pre><code>&lt;configuration&gt;
     &lt;property&gt;
         &lt;name&gt;dfs.replication&lt;/name&gt;
         &lt;value&gt;1&lt;/value&gt;
     &lt;/property&gt;
 &lt;/configuration&gt;
-</code></pre><p>After that, we need to get hadoop to format a new HDFS:</p>
+</code></pre>
+<p>After that, we need to get hadoop to format a new HDFS:</p>
 <pre><code>bin/hdfs namenode -format
 sbin/start-dfs.sh
 bin/hdfs dfs -mkdir -p /user/root
-</code></pre><p>Now, we pull the corpus and the java file:</p>
+</code></pre>
+<p>Now, we pull the corpus and the java file:</p>
 <pre><code>wget http://www.gutenberg.org/ebooks/100.txt.utf-8
 wget https://gist.githubusercontent.com/WKuipers/87a1439b09d5477d21119abefdb84db0/raw/c327b9f74d30684b1ad2a0087a6de805503379d3/WordCount.java
-</code></pre><p>And make the directories we need plus the jar we’re going to run:</p>
+</code></pre>
+<p>And make the directories we need plus the jar we&#x2019;re going to run:</p>
 <pre><code>bin/hdfs dfs -mkdir input
 bin/hdfs dfs -put 100.txt.utf-8 input
 bin/hadoop com.sun.tools.javac.Main WordCount.java
 jar cf wc.jar WordCount*.class
-</code></pre><p>Finally, we run the jar on the corpus: </p>
+</code></pre>
+<p>Finally, we run the jar on the corpus: </p>
 <pre><code>bin/hadoop jar wc.jar WordCount input output
 bin/hdfs dfs -get output/part-r-00000
 bin/hdfs dfs -rm -r output
-</code></pre><p>We can inspect the results with Nano. This is a bit archaic, but what in computer science isn’t?</p>
+</code></pre>
+<p>We can inspect the results with Nano. This is a bit archaic, but what in computer science isn&#x2019;t?</p>
 <pre><code>nano part-r-00000
-</code></pre><p>In the resulting file we have tuples of each token with the cumulative count of their occurence. Don’t be alarmed if it looks off: the script does not actually know that “Juliet.” and “Juliet?” refer to the same token. </p>
+</code></pre>
+<p>In the resulting file we have tuples of each token with the cumulative count of their occurence. Don&#x2019;t be alarmed if it looks off: the script does not actually know that &#x201C;Juliet.&#x201D; and &#x201C;Juliet?&#x201D; refer to the same token. </p>
 <p><strong>So how does Mapreduce really count these words?</strong><br>The <code>WordCount</code> java code contains a simpel flow consisting of a map-step that emits words (including special characters such as !?,.:) that are deliited by whitespace along with a count of how many times they were encountered. This processing is done one line at a time.</p>
 <p>In the reduce step each map is combined so that we get a nice hash map that sums up the values.</p>
 <h3 id="Food-for-thought-or-other-questions"><a href="#Food-for-thought-or-other-questions" class="headerlink" title="Food for thought (or other questions..)"></a>Food for thought (or other questions..)</h3><p><strong>So what happens when you just do the standalone part of the tutorial?</strong><br>A standalone operation just builds a single node. This is probably very handy for programming and debugging. In this mode the commands are handled by just a single node which is kind of defeating the purpose of hadoop!</p>
-<p><strong>So what’s different in the pseudo-dist case?</strong><br>In the pseudo-distributed case we build a simulated cluster with multiple nodes. This would allow big tasks to be done in an asynchronous way. In the pseudo-distributed case I had to do more set-up and much more debugging. </p>
-<p>Really, the standalone variant and the simulated clusters just look like debugging settings for when you can’t or will not work on a real cluster. </p>
-<p><strong>So who’s the most popular kid in town?</strong><br>So there are more ways to determine who’s more popular. If we count purely the amount of times Romeo or Juliet spoke, we just have to look for the lines starting with their name. For Romeo this is “Rom.” and he has 167 lines. Our tragic Juliet “Jul.” only has 117. </p>
-<p>But who gets the most mentions? “Juliet” is mentioned 68 times, while “Romeo” in all its forms gets mentioned 152 times. </p>
-<p><em>Things aren’t always fair on fourteen year-olds.  </em></p>
-<p>Sometimes our brains are able to repress bad memories. However, it all came back to me when I saw the Java code… those long days in a hot and sweaty computer lab, trying to understand OO did however make me into the man I am. </p>
+<p><strong>So what&#x2019;s different in the pseudo-dist case?</strong><br>In the pseudo-distributed case we build a simulated cluster with multiple nodes. This would allow big tasks to be done in an asynchronous way. In the pseudo-distributed case I had to do more set-up and much more debugging. </p>
+<p>Really, the standalone variant and the simulated clusters just look like debugging settings for when you can&#x2019;t or will not work on a real cluster. </p>
+<p><strong>So who&#x2019;s the most popular kid in town?</strong><br>So there are more ways to determine who&#x2019;s more popular. If we count purely the amount of times Romeo or Juliet spoke, we just have to look for the lines starting with their name. For Romeo this is &#x201C;Rom.&#x201D; and he has 167 lines. Our tragic Juliet &#x201C;Jul.&#x201D; only has 117. </p>
+<p>But who gets the most mentions? &#x201C;Juliet&#x201D; is mentioned 68 times, while &#x201C;Romeo&#x201D; in all its forms gets mentioned 152 times. </p>
+<p>*Things aren&#x2019;t always fair on fourteen year-olds.  *</p>
+<p>Sometimes our brains are able to repress bad memories. However, it all came back to me when I saw the Java code&#x2026; those long days in a hot and sweaty computer lab, trying to understand OO did however make me into the man I am. </p>
 
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-        
-	<section id="comments" class="comment">
-	  <div id="disqus_thread">
-	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	  </div>
-	</section>
-
-	<script type="text/javascript">
-	var disqus_shortname = 'jeffluppes';
-	(function(){
-	  var dsq = document.createElement('script');
-	  dsq.type = 'text/javascript';
-	  dsq.async = true;
-	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	}());
-	(function(){
-	  var dsq = document.createElement('script');
-	  dsq.type = 'text/javascript';
-	  dsq.async = true;
-	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
-	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	}());
-	</script>
-
-
-
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HDFS/">HDFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MapReduce/">MapReduce</a></li></ul>
-
-    </footer>
-  </div>
-  
     
-<nav id="article-nav">
-  
-    <a href="/2017/05/04/Give-me-a-spark/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Big Data Series - Give me a spark
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/01/16/Mapping-Gritters/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Mapping Gritters</div>
-    </a>
-  
-</nav>
-
-  
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/HDFS/">#HDFS</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Hadoop/">#Hadoop</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/MapReduce/">#MapReduce</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2017/05/04/Give-me-a-spark/">Big Data Series - Give me a spark</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2016/01/16/Mapping-Gritters/">Mapping Gritters</a>
+            
+        </span>
+    </div>
+    
 </article>
 
-<!-- Table of Contents -->
 
-  <aside id="toc-sidebar">
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
-    
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HDFS-and-Map-Reduce"><span class="nav-number">1.</span> <span class="nav-text">HDFS and Map-Reduce</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Setting-up-the-environment"><span class="nav-number">1.1.</span> <span class="nav-text">Setting up the environment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Getting-data"><span class="nav-number">1.2.</span> <span class="nav-text">Getting data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Hello-World-Example"><span class="nav-number">1.3.</span> <span class="nav-text">The Hello World Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Food-for-thought-or-other-questions"><span class="nav-number">1.4.</span> <span class="nav-text">Food for thought (or other questions..)</span></a></li></ol></li></ol>
-    
+
+
     </div>
-  </aside>
 </section>
-        
-      </div>
-      
-      <footer id="footer">
-  
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Jeffrey Luppes&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
 
-  <div class="container">
-      	<div class="row">
-	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2013 - 2022 Jeffluppes.nl All Rights Reserved.</p>
-	      
-	      
-    		<p class="busuanzi_uv">
-				UV : <span id="busuanzi_value_site_uv"></span> |  
-				PV : <span id="busuanzi_value_site_pv"></span>
-		    </p>
-  		   
-		</div>
-
-		
-  </div>
+            
+            
+        </div>
+    </div>
 </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 
-
-<!-- min height -->
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
 
 <script>
-    var wrapdiv = document.getElementById("wrap");
-    var contentdiv = document.getElementById("content");
-    var allheader = document.getElementById("allheader");
-
-    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
-    if (allheader != null) {
-      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
-    } else {
-      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
     }
+    moment.locale("en-AU");
 </script>
-    </div>
-    <!-- <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/categories/Kayaking/" class="mobile-nav-link">Kayaking</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/categories" class="mobile-nav-link">Categories</a>
-  
-    <a href="/tags/" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav> -->
+
+
+
+<script src="/js/script.js"></script>
+
     
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/scripts.js"></script>
-
-
-
-
-  <script src="/js/dialog.js"></script>
-
-
-
-
-
-
-
-
-
-	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-	</script>
-
-
-
-
-
-
-  </div>
-
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" id="myModalLabel">Options</h2>
-      </div>
-      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
-      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
-
-
-      <div class="modal-body">
-          <div style="margin:6px;">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
-              Set text size
-            </a>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-          <div class="panel-body">
-            Text size is now slightly larger. If that does not cut it, press and ctrl and + on your keyboard. 
-          </div>
-        </div>
-      
-
-
-          <div style="margin:6px;">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
-              View this page in night mode (black background)
-            </a>
-        </div>
-          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-          <div class="panel-body">
-            Night mode is active.
-          </div>
-        </div>
-
-        <div>
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-        </div>
-         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-          <div class="panel-body">
-            Jeffluppes.nl
-          </div>
-          <div class="panel-body">
-            Copyright © 2022 Jeffrey Luppes All Rights Reserved.
-          </div>
-        </div>
-      </div>
-
-
-      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
-      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
-      <div class="modal-footer">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-      </div>
-    </div>
-  </div>
-</div>
-  
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-  
-    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
-  
 </body>
 </html>

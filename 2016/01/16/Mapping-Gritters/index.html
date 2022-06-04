@@ -1,482 +1,203 @@
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
-  
-  <title>mapping gritters | Jeffluppes.nl</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="keywords" content="Common SenseData">
-  
-  
-  
-  
-  <meta name="description" content="Last year, the Dutch Rijkswaterstaat (a part of the Dutch Ministry of Infrastructure and the Environment) released a website where you could track where salt scattering trucks - also known as gritter">
-<meta name="keywords" content="Common Sense,Data">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Mapping Gritters">
-<meta property="og:url" content="http://www.jeffluppes.nl/2016/01/16/Mapping-Gritters/index.html">
-<meta property="og:site_name" content="Jeffluppes.nl">
-<meta property="og:description" content="Last year, the Dutch Rijkswaterstaat (a part of the Dutch Ministry of Infrastructure and the Environment) released a website where you could track where salt scattering trucks - also known as gritter">
-<meta property="og:locale" content="en">
-<meta property="og:image" content="http://www.rtlnieuws.nl/sites/default/files/styles/landscape_2/public/content/images/2014/12/25/ANP-strooiwagen_0.jpg?itok=o3xMA_4s">
-<meta property="og:image" content="http://i.imgur.com/HIgVab1.png">
-<meta property="og:image" content="http://i.imgur.com/GlfrABw.png">
-<meta property="og:image" content="http://i.imgur.com/h29xLYp.png">
-<meta property="og:image" content="http://i.imgur.com/60EEFBm.png">
-<meta property="og:updated_time" content="2017-09-02T19:34:30.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mapping Gritters">
-<meta name="twitter:description" content="Last year, the Dutch Rijkswaterstaat (a part of the Dutch Ministry of Infrastructure and the Environment) released a website where you could track where salt scattering trucks - also known as gritter">
-<meta name="twitter:image" content="http://www.rtlnieuws.nl/sites/default/files/styles/landscape_2/public/content/images/2014/12/25/ANP-strooiwagen_0.jpg?itok=o3xMA_4s">
-  
-    <link rel="alternate" href="/atom.xml" title="Jeffluppes.nl" type="application/atom+xml">
-  
+    <meta charset="utf-8">
+<title>Mapping Gritters - Jeffluppes.nl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
-  <link rel="icon" href="/css/images/mylogo.jpg">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
-  <link rel="stylesheet" href="/css/style.css">
 
-  <script src="/js/jquery-3.1.1.min.js"></script>
-  <script src="/js/bootstrap.js"></script>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css">
 
-  
-    <link rel="stylesheet" href="/css/dialog.css">
-  
+<meta name="description" content="Data scientist and ML Engineer based in The Netherlands">
 
-  
 
-  
-    <link rel="stylesheet" href="/css/header-post.css">
-  
 
-  
-  
-  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
 
 </head>
-</html>
-
-
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
-
-
-  
-  <div id="container">
-    <div id="wrap">
-      
-        <header>
-
-    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="navbar-inner">
-          
-          <div class="container"> 
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            
-              <a class="brand" style="
-                 margin-top: 0px;"  
-                href="#" data-toggle="modal" data-target="#myModal" >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
-              </a>
-            
-            
-            <div class="navbar-collapse collapse">
-              <ul class="hnav navbar-nav">
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
                 
-                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                <img src="/images/logo.png" alt height="28">
                 
-                  <li> <a class="main-nav-link" href="/categories/Kayaking/">Kayaking</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/tags/">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
-                
-                  <li><div id="search-form-wrap">
-
-    <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="" />
-        <button type="submit" class="search-form-submit"></button>
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." />
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: 'Posts',
-            PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
-            UNTITLED: '(Untitled)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
-
-</div></li>
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-          </div>
-                
-      </div>
-    </div>
-
-</header>
-
-
-
-      
+        </div>
+        
+        <div class="navbar-menu navbar-end">
             
-      <div id="content" class="outer">
-        
-          <section id="main" style="float:none;"><article id="post-Mapping-Gritters" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" class="article-title" itemprop="name">
-      Mapping Gritters
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2016/01/16/Mapping-Gritters/" class="article-date">
-	  <time datetime="2016-01-16T10:11:20.000Z" itemprop="datePublished">2016-01-16</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/Programming/">Programming</a>
-
-      
-	<a class="article-views">
-	<span id="busuanzi_container_page_pv">
-		PV:<span id="busuanzi_value_page_pv"></span>
-	</span>
-	</a>
-
+            
+            
+        </div>
     </div>
-    <div class="article-entry" itemprop="articleBody">
-      
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Mapping Gritters
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2016-01-16T10:11:20.000Z" itemprop="datePublished">Jan 16 2016</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Programming/">Programming</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            4 minutes read (About 602 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
         <img src="http://www.rtlnieuws.nl/sites/default/files/styles/landscape_2/public/content/images/2014/12/25/ANP-strooiwagen_0.jpg?itok=o3xMA_4s" class="img-topic">
-<p>Last year, the Dutch Rijkswaterstaat (a part of the Dutch Ministry of Infrastructure and the Environment) released a website where you could track where salt scattering trucks - also known as gritters - moved in real-time. This is particularly useful as Dutch infrastructure always seems to shut down completely during the first days of mild snow and you need to know if there’s a chance you might make it to work today.</p>
+
+<p>Last year, the Dutch Rijkswaterstaat (a part of the Dutch Ministry of Infrastructure and the Environment) released a website where you could track where salt scattering trucks - also known as gritters - moved in real-time. This is particularly useful as Dutch infrastructure always seems to shut down completely during the first days of mild snow and you need to know if there&#x2019;s a chance you might make it to work today.</p>
 <p>The Rijkswaterstaat website features a Google Maps widget that shows which trucks are active and moving and which are not.</p>
 <p><img src="http://i.imgur.com/HIgVab1.png" alt="The Rijkswaterstaat website"></p>
 <h1 id="Getting-the-data"><a href="#Getting-the-data" class="headerlink" title="Getting the data"></a>Getting the data</h1><p>The website features an API, which while not publicly advertised can be found by opening dev tools in any modern browser and looking at the requests made by the page. This url can then be approached via the URL.</p>
-<p>Snooping around I found a nice stream of JSON data:<br><a id="more"></a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"id"</span>:<span class="string">"108191021"</span>,<span class="string">"workcode_id"</span>:<span class="string">"34"</span>,<span class="string">"latitude"</span>:<span class="string">"52.053938"</span>,<span class="string">"longitude"</span>:<span class="string">"5.115533"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>Snooping around I found a nice stream of JSON data:</p>
+<a id="more"></a>
+
+<p><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">{<span class="hljs-string">&quot;id&quot;</span>:<span class="hljs-string">&quot;108191021&quot;</span>,<span class="hljs-string">&quot;workcode_id&quot;</span>:<span class="hljs-string">&quot;34&quot;</span>,<span class="hljs-string">&quot;latitude&quot;</span>:<span class="hljs-string">&quot;52.053938&quot;</span>,<span class="hljs-string">&quot;longitude&quot;</span>:<span class="hljs-string">&quot;5.115533&quot;</span>}</span><br></pre></td></tr></table></figure></p>
 <p>The response includes:</p>
 <ul>
 <li>coordinate pairs in latitude and longitude (in WGS84!)</li>
 <li>a truck identifier (id)</li>
 <li>a code whether the truck is active or not. (workcode_id)</li>
 </ul>
-<h1 id="Visualizing-the-data"><a href="#Visualizing-the-data" class="headerlink" title="Visualizing the data"></a>Visualizing the data</h1><p>I quickly wrote a small script to download this JSON from their site - every sixty seconds or so - and started to build my own real-time overview of the gritter truck by converting the data to GeoJSON and plotting it in <a href="https://github.com/TNOCS/csWeb" target="_blank" rel="noopener">TNO’s Common Sense</a>. This yielded the following image.</p>
+<h1 id="Visualizing-the-data"><a href="#Visualizing-the-data" class="headerlink" title="Visualizing the data"></a>Visualizing the data</h1><p>I quickly wrote a small script to download this JSON from their site - every sixty seconds or so - and started to build my own real-time overview of the gritter truck by converting the data to GeoJSON and plotting it in <a href="https://github.com/TNOCS/csWeb" target="_blank" rel="noopener">TNO&#x2019;s Common Sense</a>. This yielded the following image.</p>
 <p><img src="http://i.imgur.com/GlfrABw.png" alt="A map of the Netherlands. Each point represents a truck. White circles indicate the truck is currently operating, while orange stands for being on standby."></p>
-<p>At this point I could only see where they were located. If I wanted to get new data I would have to refresh my map, and I’d still be working with point data. I had to find a way to collect historical data of the trucks.</p>
-<p>A second version of the script used an array of past values to collect historical data. Every time the script requested the JSON file, I would add the new values to an array I’d connect to each truck, and save it on my local file system. With a little bit of extra code I converted these to GeoJSON <a href="http://geojson.org/geojson-spec.html#linestring" target="_blank" rel="noopener">LineStrings</a>, which are essentially lines between each coordinate pair I received. Now I had a way to show where trucks had been moving. The following image is aggregated from a day worth of data:</p>
-<p><img src="http://i.imgur.com/h29xLYp.png" alt="An overview of a day&#39;s worth of movements"></p>
-<p>Not surprisingly, it only showed which roads were part of the Rijkswaterstaat’s responsibility: main high ways et cetera. What was kind of cool though was that you could see exactly where they were, including ramps.</p>
+<p>At this point I could only see where they were located. If I wanted to get new data I would have to refresh my map, and I&#x2019;d still be working with point data. I had to find a way to collect historical data of the trucks.</p>
+<p>A second version of the script used an array of past values to collect historical data. Every time the script requested the JSON file, I would add the new values to an array I&#x2019;d connect to each truck, and save it on my local file system. With a little bit of extra code I converted these to GeoJSON <a href="http://geojson.org/geojson-spec.html#linestring" target="_blank" rel="noopener">LineStrings</a>, which are essentially lines between each coordinate pair I received. Now I had a way to show where trucks had been moving. The following image is aggregated from a day worth of data:</p>
+<p><img src="http://i.imgur.com/h29xLYp.png" alt="An overview of a day&apos;s worth of movements"></p>
+<p>Not surprisingly, it only showed which roads were part of the Rijkswaterstaat&#x2019;s responsibility: main high ways et cetera. What was kind of cool though was that you could see exactly where they were, including ramps.</p>
 <p><img src="http://i.imgur.com/60EEFBm.png" alt="Highway crossing"></p>
-<h1 id="Wrapping-up"><a href="#Wrapping-up" class="headerlink" title="Wrapping up"></a>Wrapping up</h1><p>That’s about it. I found the data, transformed it, and made a pretty image of it. Very little code had to be written thanks to the tools available.  </p>
+<h1 id="Wrapping-up"><a href="#Wrapping-up" class="headerlink" title="Wrapping up"></a>Wrapping up</h1><p>That&#x2019;s about it. I found the data, transformed it, and made a pretty image of it. Very little code had to be written thanks to the tools available.  </p>
 <p>The code can be found on <a href="https://github.com/jeffluppes/strooiwagens" target="_blank" rel="noopener">Github</a> for anyone who wants to mess with it.</p>
-<p><em>Update: The Rijkswaterstaat website has been updated and the API path has been changed. You can find the new JSON file <a href="http://rijkswaterstaatstrooit.nl/wagensvol.json" target="_blank" rel="noopener">here</a> They also added a nice historical viewing option, which shows you where trucks have been in the past six hours. </em></p>
+<p>*Update: The Rijkswaterstaat website has been updated and the API path has been changed. You can find the new JSON file <a href="http://rijkswaterstaatstrooit.nl/wagensvol.json" target="_blank" rel="noopener">here</a> They also added a nice historical viewing option, which shows you where trucks have been in the past six hours. *</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-        
-	<section id="comments" class="comment">
-	  <div id="disqus_thread">
-	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	  </div>
-	</section>
-
-	<script type="text/javascript">
-	var disqus_shortname = 'jeffluppes';
-	(function(){
-	  var dsq = document.createElement('script');
-	  dsq.type = 'text/javascript';
-	  dsq.async = true;
-	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	}());
-	(function(){
-	  var dsq = document.createElement('script');
-	  dsq.type = 'text/javascript';
-	  dsq.async = true;
-	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
-	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	}());
-	</script>
-
-
-
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Common-Sense/">Common Sense</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data/">Data</a></li></ul>
-
-    </footer>
-  </div>
-  
     
-<nav id="article-nav">
-  
-    <a href="/2017/03/22/Hadoop-and-the-HDFS/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Big Data Series - Hadoop and the HDFS
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/10/27/Kayaking-Appingedam-in-the-fog-19km/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Kayaking: Appingedam in the fog (19km)</div>
-    </a>
-  
-</nav>
-
-  
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Common-Sense/">#Common Sense</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Data/">#Data</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2017/03/22/Hadoop-and-the-HDFS/">Big Data Series - Hadoop and the HDFS</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2015/10/27/Kayaking-Appingedam-in-the-fog-19km/">Kayaking: Appingedam in the fog (19km)</a>
+            
+        </span>
+    </div>
+    
 </article>
 
-<!-- Table of Contents -->
 
-  <aside id="toc-sidebar">
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
-    
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Getting-the-data"><span class="nav-number">1.</span> <span class="nav-text">Getting the data</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visualizing-the-data"><span class="nav-number">2.</span> <span class="nav-text">Visualizing the data</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Wrapping-up"><span class="nav-number">3.</span> <span class="nav-text">Wrapping up</span></a></li></ol>
-    
+
+
     </div>
-  </aside>
 </section>
-        
-      </div>
-      
-      <footer id="footer">
-  
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Jeffrey Luppes&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
 
-  <div class="container">
-      	<div class="row">
-	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2013 - 2022 Jeffluppes.nl All Rights Reserved.</p>
-	      
-	      
-    		<p class="busuanzi_uv">
-				UV : <span id="busuanzi_value_site_uv"></span> |  
-				PV : <span id="busuanzi_value_site_pv"></span>
-		    </p>
-  		   
-		</div>
-
-		
-  </div>
+            
+            
+        </div>
+    </div>
 </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 
-
-<!-- min height -->
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
 
 <script>
-    var wrapdiv = document.getElementById("wrap");
-    var contentdiv = document.getElementById("content");
-    var allheader = document.getElementById("allheader");
-
-    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
-    if (allheader != null) {
-      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
-    } else {
-      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
     }
+    moment.locale("en-AU");
 </script>
-    </div>
-    <!-- <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/categories/Kayaking/" class="mobile-nav-link">Kayaking</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/categories" class="mobile-nav-link">Categories</a>
-  
-    <a href="/tags/" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav> -->
+
+
+
+<script src="/js/script.js"></script>
+
     
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/scripts.js"></script>
-
-
-
-
-  <script src="/js/dialog.js"></script>
-
-
-
-
-
-
-
-
-
-	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-	</script>
-
-
-
-
-
-
-  </div>
-
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" id="myModalLabel">Options</h2>
-      </div>
-      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
-      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
-
-
-      <div class="modal-body">
-          <div style="margin:6px;">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
-              Set text size
-            </a>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-          <div class="panel-body">
-            Text size is now slightly larger. If that does not cut it, press and ctrl and + on your keyboard. 
-          </div>
-        </div>
-      
-
-
-          <div style="margin:6px;">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
-              View this page in night mode (black background)
-            </a>
-        </div>
-          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-          <div class="panel-body">
-            Night mode is active.
-          </div>
-        </div>
-
-        <div>
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-        </div>
-         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-          <div class="panel-body">
-            Jeffluppes.nl
-          </div>
-          <div class="panel-body">
-            Copyright © 2022 Jeffrey Luppes All Rights Reserved.
-          </div>
-        </div>
-      </div>
-
-
-      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
-      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
-      <div class="modal-footer">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-      </div>
-    </div>
-  </div>
-</div>
-  
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-  
-    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
-  
 </body>
 </html>
