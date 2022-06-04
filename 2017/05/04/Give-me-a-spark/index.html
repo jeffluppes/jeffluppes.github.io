@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>big data series - give me a spark | Jeffluppes.nl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="UniversityAssignmentProgrammingSparkKaggle" />
+  <meta name="keywords" content="UniversityAssignmentProgrammingSparkKaggle">
   
   
   
@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="Jeffluppes.nl">
 <meta property="og:description" content="Assignment 3 - Give me a sparkSo the third assignment is running Spark and playing around with it. The first part was basically messing about with the query-processing, the second part is playing with">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-02T21:49:24.101Z">
+<meta property="og:updated_time" content="2017-09-02T20:49:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Big Data Series - Give me a spark">
 <meta name="twitter:description" content="Assignment 3 - Give me a sparkSo the third assignment is running Spark and playing around with it. The first part was basically messing about with the query-processing, the second part is playing with">
@@ -48,7 +48,7 @@
   <script src="/js/bootstrap.js"></script>
 
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/bootstrap.css">
 
   
     <link rel="stylesheet" href="/css/dialog.css">
@@ -57,7 +57,7 @@
   
 
   
-    <link rel="stylesheet" href="/css/header-post.css" >
+    <link rel="stylesheet" href="/css/header-post.css">
   
 
   
@@ -65,7 +65,7 @@
   
 
 </head>
-
+</html>
 
 
   <body data-spy="scroll" data-target="#toc" data-offset="50">
@@ -107,7 +107,7 @@
                 
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                  <li> <a class="main-nav-link" href="/tags/">Tags</a> </li>
                 
                   <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
@@ -201,7 +201,7 @@
 <p>Alternatively, you could decide to carry out a small analysis of a different open dataset, of your own choice; and present to your readers some basic properties of that data. You will notice that it is harder than following instructions, and you run the risk of getting stuck because the data does not parse well, etc.</p>
 </blockquote>
 <p>So without further ado, let’s explore some datas. </p>
-<h3 id="Part-1-Getting-data"><a href="#Part-1-Getting-data" class="headerlink" title="Part 1 - Getting data"></a>Part 1 - Getting data</h3><p>Kaggle is one of the top resources for Data Science competitions, where data scientists, analysts, and programmers of all flavors unite and compete for prizes. While IMO prize money mostly seems to go to people who already have top-tier knowledge (like people who work at Deepmind) or just a lot of time/resources behind them (I recall reading some people spend 5 hours a day on a competition, which would probably make the pay-off very poor for their time investment), it’s kind of a data geek playground. I have selected the <a href="https://www.kaggle.com/c/sberbank-russian-housing-market" target="_blank" rel="external">Sberbank competition</a> which was launched recently. </p>
+<h3 id="Part-1-Getting-data"><a href="#Part-1-Getting-data" class="headerlink" title="Part 1 - Getting data"></a>Part 1 - Getting data</h3><p>Kaggle is one of the top resources for Data Science competitions, where data scientists, analysts, and programmers of all flavors unite and compete for prizes. While IMO prize money mostly seems to go to people who already have top-tier knowledge (like people who work at Deepmind) or just a lot of time/resources behind them (I recall reading some people spend 5 hours a day on a competition, which would probably make the pay-off very poor for their time investment), it’s kind of a data geek playground. I have selected the <a href="https://www.kaggle.com/c/sberbank-russian-housing-market" target="_blank" rel="noopener">Sberbank competition</a> which was launched recently. </p>
 <p>The first step is simply downloading the accepting the conditions of the competition, and downloading a zip file for training and test data. Additional data about Russia’s economy is available in different files, and the file description hints that these may be joined together with the proper instructions. All the data is in comma-seperated values. The training data is 44 MB. Because one cay only download the data once authenticated and I’m using a virtual machine, I’ve hosted the dataset elsewhere before pulling it in with <code>wget</code> as this seems an easier solution than setting up a shared partition.<br><a id="more"></a></p>
 <h3 id="Part-2-Import"><a href="#Part-2-Import" class="headerlink" title="Part 2 - Import"></a>Part 2 - Import</h3><p>if you are interested in following along, use <code>wget https://www.dropbox.com/s/4dmsg68lc509q32/train.csv?dl=0</code>. I’ll make sure this file stays available for the next few weeks.</p>
 <p>Importing the data can be done with the same instructions as any other csv. </p>
@@ -314,7 +314,7 @@ only showing top 15 rows
 
 spark.sql(&quot;SELECT id, build_year FROM props WHERE build_year &gt;= 2017&quot;).count
 157
-</code></pre><p>So at the very least there’s something funny going on with the building year data. But it could also mean that these building are still being built. <a href="https://www.kaggle.com/c/sberbank-russian-housing-market/discussion/32247" target="_blank" rel="external">A quick look at Kaggle’s forum gives the following answer</a>: </p>
+</code></pre><p>So at the very least there’s something funny going on with the building year data. But it could also mean that these building are still being built. <a href="https://www.kaggle.com/c/sberbank-russian-housing-market/discussion/32247" target="_blank" rel="noopener">A quick look at Kaggle’s forum gives the following answer</a>: </p>
 <blockquote>
 <p>What 0 and 1 mean in ‘build_year” column of the data?</p>
 <p>These are mistakes in the raw data, so we cannot fix it, unfortunately.</p>
@@ -409,7 +409,7 @@ spark.sql(&quot;SELECT id, build_year FROM props WHERE build_year &gt;= 2017&quo
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2013 - 2017 Jeffluppes.nl All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2022 Jeffluppes.nl All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -449,7 +449,7 @@ spark.sql(&quot;SELECT id, build_year FROM props WHERE build_year &gt;= 2017&quo
   
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
-    <a href="/tags" class="mobile-nav-link">Tags</a>
+    <a href="/tags/" class="mobile-nav-link">Tags</a>
   
     <a href="/about" class="mobile-nav-link">About</a>
   
@@ -560,7 +560,7 @@ spark.sql(&quot;SELECT id, build_year FROM props WHERE build_year &gt;= 2017&quo
             Jeffluppes.nl
           </div>
           <div class="panel-body">
-            Copyright © 2017 Jeffrey Luppes All Rights Reserved.
+            Copyright © 2022 Jeffrey Luppes All Rights Reserved.
           </div>
         </div>
       </div>

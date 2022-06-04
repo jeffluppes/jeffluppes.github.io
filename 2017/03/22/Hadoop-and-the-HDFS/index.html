@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <title>big data series - hadoop and the hdfs | Jeffluppes.nl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="HDFSHadoopMapReduce" />
+  <meta name="keywords" content="HDFSHadoopMapReduce">
   
   
   
@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="Jeffluppes.nl">
 <meta property="og:description" content="HDFS and Map-ReduceThe general idea of this post is to work out a short hello-world type of tutorial. For convenience I’ll assume that you have some basic understanding of the idea behind Map-Reduce a">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-02T22:04:36.628Z">
+<meta property="og:updated_time" content="2017-09-02T21:04:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Big Data Series - Hadoop and the HDFS">
 <meta name="twitter:description" content="HDFS and Map-ReduceThe general idea of this post is to work out a short hello-world type of tutorial. For convenience I’ll assume that you have some basic understanding of the idea behind Map-Reduce a">
@@ -48,7 +48,7 @@
   <script src="/js/bootstrap.js"></script>
 
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/bootstrap.css">
 
   
     <link rel="stylesheet" href="/css/dialog.css">
@@ -57,7 +57,7 @@
   
 
   
-    <link rel="stylesheet" href="/css/header-post.css" >
+    <link rel="stylesheet" href="/css/header-post.css">
   
 
   
@@ -65,7 +65,7 @@
   
 
 </head>
-
+</html>
 
 
   <body data-spy="scroll" data-target="#toc" data-offset="50">
@@ -107,7 +107,7 @@
                 
                   <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                  <li> <a class="main-nav-link" href="/tags/">Tags</a> </li>
                 
                   <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
@@ -196,11 +196,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="HDFS-and-Map-Reduce"><a href="#HDFS-and-Map-Reduce" class="headerlink" title="HDFS and Map-Reduce"></a>HDFS and Map-Reduce</h2><p>The general idea of this post is to work out a short hello-world type of tutorial. For convenience I’ll assume that you have some basic understanding of the idea behind Map-Reduce and why you’d ought to use it. For this post though, I’m not going to go with a very complicated use case, instead sticking to the most basic solution (also I had other deadlines to meet).</p>
-<p>Keep in mind that what goes for Shakespeare should also go for <a href="https://en.wikipedia.org/wiki/Corpus_of_Contemporary_American_English" target="_blank" rel="external">the 450-million in words COCA</a>. Maybe something for next week, Arjen? :)</p>
+<p>Keep in mind that what goes for Shakespeare should also go for <a href="https://en.wikipedia.org/wiki/Corpus_of_Contemporary_American_English" target="_blank" rel="noopener">the 450-million in words COCA</a>. Maybe something for next week, Arjen? :)</p>
 <h3 id="Setting-up-the-environment"><a href="#Setting-up-the-environment" class="headerlink" title="Setting up the environment"></a>Setting up the environment</h3><p>Since I’m a stubborn old goat I’m running vagrant to run a virtual Ubuntu distribution. Inside of which I’m running a docker container as was requested per assignment. On my laptop, which runs Windows 8. </p>
-<p>Following the <a href="https://rubigdata.github.io/course/background/hadoop.html" target="_blank" rel="external">instructions</a> I install hadoop version 2.7.3 and set up a hdfs cluster. There is some non-trivial path setting up involved here, but it goes beyond the scope of this assignment. </p>
-<h3 id="Getting-data"><a href="#Getting-data" class="headerlink" title="Getting data"></a>Getting data</h3><p>The <a href="http://www.gutenberg.org/ebooks/100" target="_blank" rel="external">Complete Shakespeare</a> corpus hosted by Project Gutenberg is only 5.3 MB. Not exactly big data. But for our little tutorial it’ll do just fine. For convenience I download it using <code>wget</code>…<br><a id="more"></a></p>
-<h3 id="The-Hello-World-Example"><a href="#The-Hello-World-Example" class="headerlink" title="The Hello World Example"></a>The Hello World Example</h3><p>Considering everyone in the class had to do the same assignment I’m not going to take you by the hand to lead you through the entire  <a href="https://hadoop.apache.org/docs/r2.7.3/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Example:_WordCount_v1.0" target="_blank" rel="external">Hello World Example on Hadoop</a> again. However, a short summary is in place: </p>
+<p>Following the <a href="https://rubigdata.github.io/course/background/hadoop.html" target="_blank" rel="noopener">instructions</a> I install hadoop version 2.7.3 and set up a hdfs cluster. There is some non-trivial path setting up involved here, but it goes beyond the scope of this assignment. </p>
+<h3 id="Getting-data"><a href="#Getting-data" class="headerlink" title="Getting data"></a>Getting data</h3><p>The <a href="http://www.gutenberg.org/ebooks/100" target="_blank" rel="noopener">Complete Shakespeare</a> corpus hosted by Project Gutenberg is only 5.3 MB. Not exactly big data. But for our little tutorial it’ll do just fine. For convenience I download it using <code>wget</code>…<br><a id="more"></a></p>
+<h3 id="The-Hello-World-Example"><a href="#The-Hello-World-Example" class="headerlink" title="The Hello World Example"></a>The Hello World Example</h3><p>Considering everyone in the class had to do the same assignment I’m not going to take you by the hand to lead you through the entire  <a href="https://hadoop.apache.org/docs/r2.7.3/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Example:_WordCount_v1.0" target="_blank" rel="noopener">Hello World Example on Hadoop</a> again. However, a short summary is in place: </p>
 <p>The first steps are setting up the cluster. For the standalone version you don’t actually have to do much more. However, we can get Hadoop to run on a single node in a pseudo distributed manner. To first do this, we have to edit the xml config files found under etc/hadoop:</p>
 <p>etc/hadoop/core-site.xml:</p>
 <pre><code>&lt;configuration&gt;
@@ -327,7 +327,7 @@ bin/hdfs dfs -rm -r output
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2013 - 2017 Jeffluppes.nl All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2022 Jeffluppes.nl All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -367,7 +367,7 @@ bin/hdfs dfs -rm -r output
   
     <a href="/categories" class="mobile-nav-link">Categories</a>
   
-    <a href="/tags" class="mobile-nav-link">Tags</a>
+    <a href="/tags/" class="mobile-nav-link">Tags</a>
   
     <a href="/about" class="mobile-nav-link">About</a>
   
@@ -478,7 +478,7 @@ bin/hdfs dfs -rm -r output
             Jeffluppes.nl
           </div>
           <div class="panel-body">
-            Copyright © 2017 Jeffrey Luppes All Rights Reserved.
+            Copyright © 2022 Jeffrey Luppes All Rights Reserved.
           </div>
         </div>
       </div>
