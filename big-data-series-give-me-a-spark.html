@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="http://localhost:8000/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark)"
+    href="http://localhost:8000/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark)"
+          href="http://localhost:8000/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+          href="http://localhost:8000/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Jeffrey Luppes" />
+<meta name="description" content="So the third assignment in this series is running Spark and playing around with it. The first part was basically messing about with the query-processing, the second part is playing with data and dataframes. As these do not actually seem to be part of the required stuff for the post …" />
+<meta name="keywords" content="University, Programming, Spark, Kaggle">
+
+
+<meta property="og:site_name" content="Jeffrey Luppes"/>
+<meta property="og:title" content="Big Data Series - Give me a spark"/>
+<meta property="og:description" content="So the third assignment in this series is running Spark and playing around with it. The first part was basically messing about with the query-processing, the second part is playing with data and dataframes. As these do not actually seem to be part of the required stuff for the post …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://localhost:8000/big-data-series-give-me-a-spark.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-05-04 14:46:26+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://localhost:8000/author/jeffrey-luppes.html">
+<meta property="article:section" content="Academics"/>
+<meta property="article:tag" content="University"/>
+<meta property="article:tag" content="Programming"/>
+<meta property="article:tag" content="Spark"/>
+<meta property="article:tag" content="Kaggle"/>
+<meta property="og:image" content="">
+
+  <title>Jeffrey Luppes &ndash; Big Data Series - Give me a spark</title>
+
+</head>
+<body >
+  <aside>
+    <div>
+      <a href="http://localhost:8000">
+        <img src="http://localhost:8000/theme/img/profile.jpg" alt="Jeffrey Luppes" title="Jeffrey Luppes">
+      </a>
+
+      <h1>
+        <a href="http://localhost:8000">Jeffrey Luppes</a>
+      </h1>
+
+<p>Machine Learning Engineer and Data Scientist</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="http://localhost:8000/pages/about-me.html">
+                  About Me
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="http://localhost:8000/pages/contact.html">
+                  Contact
+                </a>
+              </li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/jeffluppes" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffluppes/" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/JLuppes" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-medium" href="https://medium.com/@jeffluppes" target="_blank">
+              <i class="fab fa-medium"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://localhost:8000">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="big-data-series-give-me-a-spark">Big Data Series - Give me a spark</h1>
+    <p>
+      Posted on do 04 mei 2017 in <a href="http://localhost:8000/category/academics.html">Academics</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>So the third assignment in this series is running Spark and playing around with it. The first part was basically messing about with the query-processing, the second part is playing with data and dataframes. As these do not actually seem to be part of the required stuff for the post, I have left them out completely.  </p>
+<p>The way I understand this is that I'm supposed to play with Spark, come up with something new, and write a short blog post detailing my experiences. </p>
+<blockquote>
+<p>Alternatively, you could decide to carry out a small analysis of a different open dataset, of your own choice; and present to your readers some basic properties of that data. You will notice that it is harder than following instructions, and you run the risk of getting stuck because the data does not parse well, etc.</p>
+</blockquote>
+<p>So without further ado, let's explore some datas. </p>
+<h3>Part 1 - Getting data</h3>
+<p>Kaggle is one of the top resources for Data Science competitions, where data scientists, analysts, and programmers of all flavors unite and compete for prizes. While IMO prize money mostly seems to go to people who already have top-tier knowledge (like people who work at Deepmind) or just a lot of time/resources behind them (I recall reading some people spend 5 hours a day on a competition, which would probably make the pay-off very poor for their time investment), it's kind of a data geek playground. I have selected the <a href="https://www.kaggle.com/c/sberbank-russian-housing-market">Sberbank competition</a> which was launched recently. </p>
+<p>The first step is simply downloading the accepting the conditions of the competition, and downloading a zip file for training and test data. Additional data about Russia's economy is available in different files, and the file description hints that these may be joined together with the proper instructions. All the data is in comma-seperated values. The training data is 44 MB. Because one cay only download the data once authenticated and I'm using a virtual machine, I've hosted the dataset elsewhere before pulling it in with <code>wget</code> as this seems an easier solution than setting up a shared partition.</p>
+<!-- more -->
+<h3>Part 2 - Import</h3>
+<p>if you are interested in following along, use <code>wget https://www.dropbox.com/s/4dmsg68lc509q32/train.csv?dl=0</code>. I'll make sure this file stays available for the next few weeks.</p>
+<p>Importing the data can be done with the same instructions as any other csv. </p>
+<div class="highlight"><pre><span></span><code><span class="n">val</span><span class="w"> </span><span class="n">rusdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span><span class="w"> </span><span class="bp">true</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;notebooks/BigData/data/train.csv?dl=0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span><span class="w"></span>
+</code></pre></div>
+
+<p>With <code>printSchema</code> I can take a look at the schema of the data set. This also allows for verification that everything got loaded in. </p>
+<div class="highlight"><pre><span></span><code>rusdata.printSchema
+</code></pre></div>
+
+<p>Which outputs all the fields from the dataset as follows: </p>
+<div class="highlight"><pre><span></span><code>root
+ |-- id: string (nullable = true)
+ |-- timestamp: string (nullable = true)
+ |-- full_sq: string (nullable = true)
+ |-- life_sq: string (nullable = true)
+ |-- floor: string (nullable = true)
+ |-- max_floor: string (nullable = true)
+ |-- material: string (nullable = true)
+ |-- build_year: string (nullable = true)
+ |-- num_room: string (nullable = true)
+ |-- kitch_sq: string (nullable = true)
+ |-- state: string (nullable = true)
+ |-- product_type: string (nullable = true)
+ |-- sub_area: string (nullable = true)
+ |-- area_m: string (nullable = true)
+ |-- raion_popul: string (nullable = true)
+ |-- green_zone_part: string (nullable = true)
+ |-- indust_part: string (nullable = true)
+ |-- children_preschool: string (nullable = true)
+ |-- preschool_quota: string (nullable = true)
+ |-- preschool_education_centers_raion: string (nullable = true)
+ ....
+
+ rusdata: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [id: string, timestamp: string ... 290 more fields]
+</code></pre></div>
+
+<p>292 fields. Not bad!</p>
+<h3>Part 3 - Playing</h3>
+<p>So now let's explore the data! How does a property object look like, actually?</p>
+<div class="highlight"><pre><span></span><code><span class="nv">rusdata</span>.<span class="k">show</span><span class="ss">(</span><span class="mi">1</span><span class="ss">)</span>
+</code></pre></div>
+
+<p>So it's just a single row in this massive csv. Each house has an ID and 290 other properties that go with it. Finally, the last property is the house price itself, which is used in the competition mainly. Something that catches my eye in both of these is the large amount of features that have a suffix of 500, 1000 or 2000. This could be how many of that particular feature are in a 500 or 1000 meter radius around the object. </p>
+<p>Something that is also peculiar is that there are no latitude or longtitude pairs (be it WGS or a Russian format, neither appear) instead the highest "resolution" is the area in which the property is located. E.g in the 'Kremlin' area. This makes data sort of anonymous, but I suspect it would not be hard to identify property objects based on the 292 features that we have if we chose to do this. </p>
+<p>So the first thought.. can we find data on the Kremlin itself? From wikipedia I find that the Grand Kremlin Palace was built between 1837 and 1849 and has a sqaura area of </p>
+<blockquote>
+<p>125 metres long, 47 metres high, and has a total area of about 25,000 square metres. It includes the earlier Terem Palace, nine churches from the 14th, 16th, and 17th centuries, the Holy Vestibule, and over 700 rooms</p>
+</blockquote>
+<p>Can we find that?</p>
+<div class="highlight"><pre><span></span><code>val potentialKremlin = rusdata.select(&quot;id&quot;,&quot;full_sq&quot;,&quot;life_sq&quot;,&quot;floor&quot;,&quot;build_year&quot;,&quot;num_room&quot;).where(&quot;build_year &lt;= 1849&quot;)
+potentialKremlin.count
+904
+</code></pre></div>
+
+<p>Now let's filter this again, as we know at that it has 700 rooms.. can we reduce the set of 904 objects to something we can count on our fingers? Let's filter this by selecting objects with more than 10 rooms. </p>
+<div class="highlight"><pre><span></span><code><span class="c">val potentialKremlin2 = potentialKremlin</span><span class="nt">.</span><span class="c">select(&quot;id&quot;</span><span class="nt">,</span><span class="c">&quot;full_sq&quot;</span><span class="nt">,</span><span class="c">&quot;life_sq&quot;</span><span class="nt">,</span><span class="c">&quot;floor&quot;</span><span class="nt">,</span><span class="c">&quot;build_year&quot;</span><span class="nt">,</span><span class="c">&quot;num_room&quot;)</span><span class="nt">.</span><span class="c">where(&quot;num_room </span><span class="nv">&gt;</span><span class="c">= 10&quot;)</span>
+
+<span class="c">potentialKremlin2</span><span class="nt">.</span><span class="c">show()</span>
+
+<span class="nb">+---+-------+-------+-----+----------+--------+</span><span class="c"></span>
+<span class="c">| id|full_sq|life_sq|floor|build_year|num_room|</span>
+<span class="nb">+---+-------+-------+-----+----------+--------+</span><span class="c"></span>
+<span class="nb">+---+-------+-------+-----+----------+--------+</span><span class="c"></span>
+</code></pre></div>
+
+<p>So it seems that the Kremlin is not in the data set, despite being in the Kremlin district. Just to check - are there any properties with more than ten rooms in the data set at all?</p>
+<div class="highlight"><pre><span></span><code><span class="c">rusdata</span><span class="nt">.</span><span class="c">select(&quot;id&quot;</span><span class="nt">,</span><span class="c">&quot;full_sq&quot;</span><span class="nt">,</span><span class="c">&quot;life_sq&quot;</span><span class="nt">,</span><span class="c">&quot;floor&quot;</span><span class="nt">,</span><span class="c">&quot;build_year&quot;</span><span class="nt">,</span><span class="c">&quot;num_room&quot;)</span><span class="nt">.</span><span class="c">where(&quot;num_room </span><span class="nv">&gt;</span><span class="c">= 10&quot;)</span><span class="nt">.</span><span class="c">show()</span>
+
+<span class="nb">+-----+-------+-------+-----+----------+--------+</span><span class="c"></span>
+<span class="c">|   id|full_sq|life_sq|floor|build_year|num_room|</span>
+<span class="nb">+-----+-------+-------+-----+----------+--------+</span><span class="c"></span>
+<span class="c">|11624|     40|     19|   17|      2011|      19|</span>
+<span class="c">|17767|     58|     34|    1|      1992|      10|</span>
+<span class="c">|26716|     51|     30|   14|      1984|      17|</span>
+<span class="c">|29175|     59|     33|   20|      2000|      10|</span>
+<span class="nb">+-----+-------+-------+-----+----------+--------+</span><span class="c"></span>
+</code></pre></div>
+
+<p>It seems that having tons of rooms is simply a more modern fad.</p>
+<p>Now, let's do some aggregation. Can we get a list of how many properties there are per region? This time we use SQL directly, but we need a dataframe first:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">val</span> <span class="nv">rusdataDF</span> <span class="o">=</span> <span class="nv">rusdata</span>.<span class="nv">select</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">id</span><span class="s2">&quot;</span>,<span class="s2">&quot;</span><span class="s">full_sq</span><span class="s2">&quot;</span>,<span class="s2">&quot;</span><span class="s">life_sq</span><span class="s2">&quot;</span>,<span class="s2">&quot;</span><span class="s">floor</span><span class="s2">&quot;</span>,<span class="s2">&quot;</span><span class="s">build_year</span><span class="s2">&quot;</span>,<span class="s2">&quot;</span><span class="s">num_room</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">sub_area</span><span class="s2">&quot;</span><span class="ss">)</span>
+<span class="nv">rusdataDF</span>.<span class="nv">createOrReplaceTempView</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">props</span><span class="s2">&quot;</span><span class="ss">)</span>
+<span class="nv">spark</span>.<span class="nv">sql</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">SELECT sub_area, count(sub_area) AS sa FROM props GROUP BY sub_area ORDER BY sa DESC</span><span class="s2">&quot;</span><span class="ss">)</span>.<span class="k">show</span><span class="ss">(</span><span class="mi">15</span><span class="ss">)</span>
+
+<span class="o">+--------------------+----+</span>
+<span class="o">|</span>            <span class="nv">sub_area</span><span class="o">|</span>  <span class="nv">sa</span><span class="o">|</span>
+<span class="o">+--------------------+----+</span>
+<span class="o">|</span> <span class="nv">Poselenie</span> <span class="nv">Sosenskoe</span><span class="o">|</span><span class="mi">1776</span><span class="o">|</span>
+<span class="o">|</span>          <span class="nv">Nekrasovka</span><span class="o">|</span><span class="mi">1611</span><span class="o">|</span>
+<span class="o">|</span><span class="nv">Poselenie</span> <span class="nv">Vnukovskoe</span><span class="o">|</span><span class="mi">1372</span><span class="o">|</span>
+<span class="o">|</span><span class="nv">Poselenie</span> <span class="nv">Moskovskij</span><span class="o">|</span> <span class="mi">925</span><span class="o">|</span>
+<span class="o">|</span><span class="nv">Poselenie</span> <span class="nv">Voskres</span>...<span class="o">|</span> <span class="mi">713</span><span class="o">|</span>
+<span class="o">|</span>              <span class="nv">Mitino</span><span class="o">|</span> <span class="mi">679</span><span class="o">|</span>
+<span class="o">|</span>            <span class="nv">Tverskoe</span><span class="o">|</span> <span class="mi">678</span><span class="o">|</span>
+<span class="o">|</span>            <span class="nv">Krjukovo</span><span class="o">|</span> <span class="mi">518</span><span class="o">|</span>
+<span class="o">|</span>             <span class="nv">Mar</span><span class="s1">&#39;</span><span class="s">ino| 508|</span>
+<span class="o">|</span><span class="nv">Poselenie</span> <span class="nv">Filimon</span>...<span class="o">|</span> <span class="mi">496</span><span class="o">|</span>
+<span class="o">|</span>      <span class="nv">Juzhnoe</span> <span class="nv">Butovo</span><span class="o">|</span> <span class="mi">451</span><span class="o">|</span>
+<span class="o">|</span><span class="nv">Poselenie</span> <span class="nv">Shherbinka</span><span class="o">|</span> <span class="mi">443</span><span class="o">|</span>
+<span class="o">|</span>            <span class="nv">Solncevo</span><span class="o">|</span> <span class="mi">421</span><span class="o">|</span>
+<span class="o">|</span>   <span class="nv">Zapadnoe</span> <span class="nv">Degunino</span><span class="o">|</span> <span class="mi">410</span><span class="o">|</span>
+<span class="o">|</span><span class="nv">Poselenie</span> <span class="nv">Desjono</span>...<span class="o">|</span> <span class="mi">362</span><span class="o">|</span>
+<span class="o">+--------------------+----+</span>
+
+<span class="nv">only</span> <span class="nv">showing</span> <span class="nv">top</span> <span class="mi">15</span> <span class="nv">rows</span>
+</code></pre></div>
+
+<p>Note: the sub_areas are supposed to be the 125 raions of Moscow. But are they, actually? </p>
+<div class="highlight"><pre><span></span><code>spark.sql(&quot;SELECT DISTINCT sub_area FROM props&quot;).count
+146
+</code></pre></div>
+
+<p>So we have more areas than there are raions. This means we should be distrustful of the data: it could at the very least mean that we cannot expect all 125 areas to be present in the data set. </p>
+<p>One of the things we might expect to find is negative or zero entries in the build_year column. Can we find these with a simple SQL statement?</p>
+<div class="highlight"><pre><span></span><code><span class="nv">spark</span>.<span class="nv">sql</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">SELECT id, build_year FROM props ORDER BY build_year ASC</span><span class="s2">&quot;</span><span class="ss">)</span>.<span class="k">show</span>
+
+<span class="o">+-----+----------+</span>
+<span class="o">|</span>   <span class="nv">id</span><span class="o">|</span><span class="nv">build_year</span><span class="o">|</span>
+<span class="o">+-----+----------+</span>
+<span class="o">|</span><span class="mi">11010</span><span class="o">|</span>         <span class="mi">0</span><span class="o">|</span>
+<span class="o">|</span><span class="mi">12811</span><span class="o">|</span>         <span class="mi">0</span><span class="o">|</span>
+<span class="o">|</span><span class="mi">11186</span><span class="o">|</span>         <span class="mi">0</span><span class="o">|</span>
+<span class="o">|</span><span class="mi">10145</span><span class="o">|</span>         <span class="mi">0</span><span class="o">|</span>
+<span class="o">+-----+----------+</span>
+</code></pre></div>
+
+<p>uh oh..</p>
+<div class="highlight"><pre><span></span><code>spark.sql(&quot;SELECT id, build_year FROM props WHERE build_year == 0&quot;).count
+530
+
+spark.sql(&quot;SELECT id, build_year FROM props WHERE build_year &gt;= 2017&quot;).count
+157
+</code></pre></div>
+
+<p>So at the very least there's something funny going on with the building year data. But it could also mean that these building are still being built. <a href="https://www.kaggle.com/c/sberbank-russian-housing-market/discussion/32247">A quick look at Kaggle's forum gives the following answer</a>: </p>
+<blockquote>
+<p>What 0 and 1 mean in 'build_year" column of the data?</p>
+<p>These are mistakes in the raw data, so we cannot fix it, unfortunately.</p>
+</blockquote>
+<p>And what about the houses that are being built or have been built after the data was collected (as the data is from 2015)</p>
+<blockquote>
+<p>it could be pre-investment (see product type).</p>
+</blockquote>
+<h3>Part 4 - Findings</h3>
+<p>I have added most of the queries I processed in the blog text above, but it would be really nice if I could host the spark notebook somewhere like I would with a ipython notebook. </p>
+<p>Overall I'm okay with looking at the data with Spark. For analysis though, I would use Python as it's more established and I can get more support. Additionally, there are a lot of packages available that make development so much more doable. </p>
+<p>I did like working with Spark. The SQL-rich syntax makes it easy to learn, and the things that I found gave me plenty of ammunition to start work in node, R or Python. </p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://localhost:8000/tag/university.html">University</a>
+      <a href="http://localhost:8000/tag/programming.html">Programming</a>
+      <a href="http://localhost:8000/tag/spark.html">Spark</a>
+      <a href="http://localhost:8000/tag/kaggle.html">Kaggle</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; 2022 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="http://localhost:8000/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="light"
+          type="text/javascript">
+  </script>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeffrey Luppes ",
+  "url" : "http://localhost:8000",
+  "image": "",
+  "description": "Jeffrey Luppes - personal blog"
+}
+</script>
+
+
+</body>
+</html>

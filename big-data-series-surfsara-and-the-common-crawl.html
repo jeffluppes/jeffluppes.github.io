@@ -1,0 +1,481 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="http://localhost:8000/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark)"
+    href="http://localhost:8000/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark)"
+          href="http://localhost:8000/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+          href="http://localhost:8000/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Jeffrey Luppes" />
+<meta name="description" content="This post will have a slightly different angle than the previous posts in the Big Data Course series. The goal for this post is just to detail my progress on a self-chosen, free format project which utilizes the Surfsara Hadoop cluster and the goal is not to solve a problem …" />
+<meta name="keywords" content="University, Programming, Spark, Hadoop, SurfSara, CommonCrawl">
+
+
+<meta property="og:site_name" content="Jeffrey Luppes"/>
+<meta property="og:title" content="Big Data Series - SurfSara and the Common Crawl"/>
+<meta property="og:description" content="This post will have a slightly different angle than the previous posts in the Big Data Course series. The goal for this post is just to detail my progress on a self-chosen, free format project which utilizes the Surfsara Hadoop cluster and the goal is not to solve a problem …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://localhost:8000/big-data-series-surfsara-and-the-common-crawl.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-07-07 23:03:48+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://localhost:8000/author/jeffrey-luppes.html">
+<meta property="article:section" content="Academics"/>
+<meta property="article:tag" content="University"/>
+<meta property="article:tag" content="Programming"/>
+<meta property="article:tag" content="Spark"/>
+<meta property="article:tag" content="Hadoop"/>
+<meta property="article:tag" content="SurfSara"/>
+<meta property="article:tag" content="CommonCrawl"/>
+<meta property="og:image" content="">
+
+  <title>Jeffrey Luppes &ndash; Big Data Series - SurfSara and the Common Crawl</title>
+
+</head>
+<body >
+  <aside>
+    <div>
+      <a href="http://localhost:8000">
+        <img src="http://localhost:8000/theme/img/profile.jpg" alt="Jeffrey Luppes" title="Jeffrey Luppes">
+      </a>
+
+      <h1>
+        <a href="http://localhost:8000">Jeffrey Luppes</a>
+      </h1>
+
+<p>Machine Learning Engineer and Data Scientist</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="http://localhost:8000/pages/about-me.html">
+                  About Me
+                </a>
+              </li>
+              <li>
+                <a target="_self"
+                   href="http://localhost:8000/pages/contact.html">
+                  Contact
+                </a>
+              </li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://github.com/jeffluppes" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffluppes/" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/JLuppes" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-medium" href="https://medium.com/@jeffluppes" target="_blank">
+              <i class="fab fa-medium"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank">
+              <i class="fas fa-rss"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="http://localhost:8000">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="big-data-series-surfsara-and-the-common-crawl">Big Data Series - SurfSara and the Common Crawl</h1>
+    <p>
+      Posted on vr 07 juli 2017 in <a href="http://localhost:8000/category/academics.html">Academics</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><img alt="I wish I learned Hadoop while still in diapers.." src="https://s-media-cache-ak0.pinimg.com/236x/b0/e3/cb/b0e3cb28debd0cc08f2bb5482c638b51--geek-humour-caption-contest.jpg"></p>
+<p>This post will have a slightly different angle than the previous posts in the Big Data Course series. The goal for this post is just to detail my progress on a self-chosen, free format project which utilizes the <a href="https://userinfo.surfsara.nl/systems/hadoop/hathi">Surfsara Hadoop cluster</a> and the goal is not to solve a problem but rather give an overview of the problems I encountered and the little things I came up with. I intend to post these both on the mini-site for the course and a personal blog, my apologies if my tone is a bit bland as a result. Here we go!</p>
+<h2>Hathi and Surfsara</h2>
+<p><a href="https://www.surf.nl/en/about-surf/subsidiaries/surfsara/">SurfSara</a> is a Dutch institute that provides web and data services to universities and schools. Students may know SURF from the cheap software or the internet they provide to high schools. <a href="https://nl.wikipedia.org/wiki/SURFsara_Nationaal_HPC_Centrum">Sara, though</a> is the high performance computing department, and used to be the academic center for computing prior to merging into SURF. They do a lot of cool things with big data which over time has come to include a Hadoop cluster named Hathi. </p>
+<h2>The Common Crawl</h2>
+<p>The Hathi cluster hosts a February 2016 collection from the Common Crawl. The Common Crawl is a collection of crawled web pages which comes pretty close to crawling the entirety of the web. The data hosted is in the petabyte range, however we only have access to a single snapshot.. which still takes up a good amount of terabytes and contains 1.73 billion urls. You don't want to download this on your mobile phone's data cap. </p>
+<p>The Common Crawl Data is stored in WARC files (Web Archive), an open-source format. </p>
+<p>So with all this data, there should be a lot of things to do! </p>
+<!-- more -->
+<p>Some ideas I had at this point:</p>
+<ul>
+<li>Count the length of all payloads across all pages on the internet and get some statistics.</li>
+<li>See how popular certain HTML tags are.</li>
+<li>Perform some semantic analysis on pages referring to presidents or politics.</li>
+<li>Look at how extreme right communities differ from extreme left communities in terms of vocabularies and word frequencies.</li>
+<li>Similarly, compare places like <strong>4chan</strong> and <strong>Reddit</strong> with each other. Who's more vile? There's some easy libraries for sentiment analysis..</li>
+</ul>
+<p>And so on.. but what I also played with is something closer to home. I kayak a lot and the kayaking community in the Netherlands is slowly dying: young people are turning away from adventurous sports in general, and kayaking is seen as boring when compared to other, fast-paced water sports (Not necessarily true, but still). Could I try to find places where it's worthwhile to advertise about kayaking perhaps? Or identify communities of people who also kayak, e.g. mountain bikers, sailers, bikers etc? Or perhaps from another perspective, can I try to do some dynamic filtering based on brands or parts of the sport to see what people associate it with?</p>
+<p>Plenty of ideas, so let's get started. </p>
+<h2>Part 2 - Setting up</h2>
+<p>I'm using my Windows laptop running a (Ubuntu) virtual machine which will be used to connect to SurfSara and develop the code. Similarly to the previous assignment in this series this works with a docker image and lots of command line work. Nothing to be scared of. </p>
+<p>Running an example program worked fine on the cluster. But I wanted something more than (redirectable) output in my terminal. </p>
+<p>In order to track the jobs given to Hathi a web interface is available. This is not really supported on Windows, but still doable. Using the <a href="http://www.secure-endpoints.com/heimdal/">Heimdall implementation</a> of Kerberos and the <a href="https://www.secure-endpoints.com/netidmgr/v2//">Identity Manager</a> I can set up my credentials. I found that I needed to stray from the <a href="http://computing.help.inf.ed.ac.uk/kerberos-windows">sort-of specific instructions courtesy of the Uni of Edinbourgh here</a> and actually ended up installing the Heimdall tools fully. I then had to tweak a couple of configurations inside my firefox browser in order to work with Kerberos, but I finally could inspect the progress of my submissions. This seems easy, but in the end was a non-trivial part that took hours to do and even then Firefox was prone to memory leaks.  </p>
+<p><img alt="A snapshot of the web interface to report on the progress of a submission" src="http://puu.sh/wE9DP/fa748088bf.png"></p>
+<h2>Part 3 - A local test</h2>
+<p>I started working with the spark notebook that was provided and after some tweaking around I could run code on a local WARC file containing the course website. This was an iterative process: I started with the grand idea of what I could do but after a few hours I found that I still had made no progress. Following Arjen's suggestion of settling for a simpler challenge when stuck I tried to implement the most basic word count. This was OK-ish, and could be expanded to the full crawl albeit a bit sluggish (slow), which would be decent towards meeting the assignment criteria but I'll let you be the judge of that. </p>
+<p>I also avoided SQL this time, as I recall reading that there are some issues when running SQL-queries on something of the order of 100TB. This could complicate things considering our 'stack' already consists of so many applications and tools. Additionally, having worked with MySQL as a teenager I'm still pretty sure that straight up SQL queries on non-indexed text fields is a baaaad idea.  </p>
+<p>I felt like I still really wanted to do more with the kayaking thing. After some pondering I settled on the following order of battle:</p>
+<ol>
+<li>Convert the crawl to text and look for the string <code>kayaking</code></li>
+<li>For the full crawl: figure out how to filter for a specific brand (e.g. <code>bever</code>)</li>
+<li>Construct a word count list upon the pages that get returned</li>
+<li>Output these to a file so I can work with it</li>
+<li>Visualize a word cloud, e.g. using the <code>d3.js</code> method already readily available, or something in python (This is outside the scope of this assignment, and I'll add it later)</li>
+</ol>
+<p>So I started with filtering for the text string <code>kayaking</code> after calling Arjen's HTML2Text method (step 1).</p>
+<div class="highlight"><pre><span></span><code>    map(wr =&gt; HTML2Txt(getContent(wr._2))).
+    map(w =&gt; w.toLowerCase()).
+    filter(w =&gt; w.contains(&quot;kayaking&quot;)).
+</code></pre></div>
+
+<p>Now on the basic corpus this returns my own page obviously, as I overshared my love for kayaking a fair bit. </p>
+<p>As per <a href="https://spark.apache.org/examples.html">Apache Spark's example a word count</a> is implemented with just a few lines of code (step 2):</p>
+<div class="highlight"><pre><span></span><code>    textFile.flatMap(line =&gt; line.split(&quot; &quot;))
+                     .map(word =&gt; (word, 1))
+                     .reduceByKey(_ + _)
+</code></pre></div>
+
+<p>This is a bit crude, as the "words" will include code snippets like the one found on this blog, and random gibberish like solitary punctuation marks. For a full pass over the crawl though I don't think it'll matter, as full words will drown out the noise. </p>
+<p>So now I've got a big old list of words with counts. Can I save this? Locally, I can use:</p>
+<p><code>warcl.saveAsTextFile("testje.txt")</code></p>
+<p>I'm guessing this will be different for the full crawl but one problem at a time. This creates a folder (!) with several files: output can be found in one file here. It's interesting that everything to save into a text file was done below the hood without a warning being thrown at my face for not saving to a hdfs!</p>
+<p><img alt="Much surprise when testje.txt turned out to be the folder and not the file!" src="http://puu.sh/wIZAR/429e39200c.png"></p>
+<p>There are some caveats with this:
+* In the presentations some people noticed an integer overflow when using word counts, can I figure out something for this?
+* I need to filter out common words such as "a", "the" and so on. I can do this at a high level or when making the visualisation later on. Will save the problem for now..
+* Between the docker container and my Ubuntu host I found that I can copy files using docker cp. What if my files are big, though? And what happens on the full crawl. Write to standard output and just do everything on the cluster? 
+* May I need to purge tags and code from my result file?
+* How can I easily scale this up to.. say looking at 20 brands at once?</p>
+<p>As was shown in the terminal above, it doesn't make sense yet to construct a word cloud from a single page, I suppose though that the same steps go for the full cluster. Let's move on and see if we can export the code to the full crawl!</p>
+<h2>Part 4 - From Concept to Cluster</h2>
+<p>The following section will detail the process I went through when exporting the app to the cluster. </p>
+<h3>Attempt 1 - Top 300 words over all sites containing "Kayaking"</h3>
+<p>The first attempt is going to go over the entire crawl and look for the term 'kayaking' amongst the payload of all sites. I see some potential issues with this.. mainly because I'm asking for the entire crawl to be parsed through html2text - I reckon that is going to be an immense bottleneck. </p>
+<p>The core idea is explained in the following two code snippets..</p>
+<div class="highlight"><pre><span></span><code>val warcc = warcf.
+    filter{ _._2.header.warcTypeIdx == 2 /* response */ }.
+    filter{ _._2.getHttpHeader().statusCode == 200 }.
+    filter{ _._2.getHttpHeader().contentType != null }.
+    filter{ _._2.getHttpHeader().contentType.startsWith(&quot;text/html&quot;) }
+    .map(wr =&gt; HTML2Txt(getContent(wr._2)))
+    .map(w =&gt; w.replaceAll(&quot;[?!,.\&quot;-()]&quot;, &quot;&quot;))
+    .map(w =&gt; w.toLowerCase())
+    .filter(_ != &quot;&quot;)
+    .filter(w =&gt; w.contains(&quot;kayaking&quot;))
+    .cache()
+</code></pre></div>
+
+<p>The above snippet checks for non-empty input and skips it. It should be refactored, but I'm still working on more ideas so I felt it should not be a big priority right now.</p>
+<p>It also checks for odd characters, e.g. ?! et cetera- we don't want any of that sillyness. </p>
+<p>Finally, this big pile of text needs to get filtered for the phrase <code>kayaking</code> - I expect this line just after HTML2Txt to be a huge bottleneck. </p>
+<p>The next snippet does the standard MR word count. I've added a sort and top-300 selection. </p>
+<div class="highlight"><pre><span></span><code><span class="o">//</span><span class="n">now</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">construct</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">anything</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">pages</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="n">spark</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">spark</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">examples</span><span class="o">.</span><span class="n">html</span><span class="w"></span>
+<span class="n">val</span><span class="w"> </span><span class="n">warcl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">warcc</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span><span class="w"></span>
+<span class="w">     </span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">word</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"></span>
+<span class="w">     </span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">_</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">commonWords</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">_1</span><span class="p">)))</span><span class="w"></span>
+<span class="w">     </span><span class="o">.</span><span class="n">sortBy</span><span class="p">(</span><span class="n">w</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">-</span><span class="n">w</span><span class="o">.</span><span class="n">_2</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+
+<p>Lastly, this gets printed to the output. </p>
+<h4>Filtering for Common words</h4>
+<p>I browsed around for a solution to the common word problem, as I didn't feel like editing my top 300 list every time. So I found <a href="https://stackoverflow.com/questions/41618474/filter-stop-words-in-spark">this stackoverflow question</a> about filtering words out of my input, by means of a sequence. </p>
+<p>So I still needed a sequence at that point, and I found <a href="http://xpo6.com/list-of-english-stop-words/">this list of English stop words..</a> which brings me to wonder if I'm going to see other languages pop to the top of the list. One problem at a time though. For clarity, here's the complete list. </p>
+<div class="highlight"><pre><span></span><code><span class="n">val</span><span class="w"> </span><span class="n">commonWords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">Set</span><span class="p">(</span><span class="ss">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;about&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;above&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;above&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;across&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;after&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;afterwards&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;again&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;against&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;almost&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;alone&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;along&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;already&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;also&quot;</span><span class="p">,</span><span class="ss">&quot;although&quot;</span><span class="p">,</span><span class="ss">&quot;always&quot;</span><span class="p">,</span><span class="ss">&quot;am&quot;</span><span class="p">,</span><span class="ss">&quot;among&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;amongst&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;amoungst&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;amount&quot;</span><span class="p">,</span><span class="w">  </span><span class="ss">&quot;an&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;and&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;another&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;any&quot;</span><span class="p">,</span><span class="ss">&quot;anyhow&quot;</span><span class="p">,</span><span class="ss">&quot;anyone&quot;</span><span class="p">,</span><span class="ss">&quot;anything&quot;</span><span class="p">,</span><span class="ss">&quot;anyway&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;anywhere&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;are&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;around&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;as&quot;</span><span class="p">,</span><span class="w">  </span><span class="ss">&quot;at&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;back&quot;</span><span class="p">,</span><span class="ss">&quot;be&quot;</span><span class="p">,</span><span class="ss">&quot;became&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;because&quot;</span><span class="p">,</span><span class="ss">&quot;become&quot;</span><span class="p">,</span><span class="ss">&quot;becomes&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;becoming&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;been&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;before&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;beforehand&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;behind&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;being&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;below&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;beside&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;besides&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;between&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;beyond&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;bill&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;both&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;bottom&quot;</span><span class="p">,</span><span class="ss">&quot;but&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;by&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;call&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;can&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;cannot&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;cant&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;co&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;con&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;could&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;couldnt&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;de&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;describe&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;detail&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;do&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;done&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;down&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;due&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;during&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;each&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;eg&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;eight&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;either&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;eleven&quot;</span><span class="p">,</span><span class="ss">&quot;else&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;elsewhere&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;empty&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;enough&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;etc&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;even&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;ever&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;every&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;everyone&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;everything&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;everywhere&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;except&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;few&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;fifteen&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;fify&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;fill&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;find&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;five&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;for&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;former&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;formerly&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;forty&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;found&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;four&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;from&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;front&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;full&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;further&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;get&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;give&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;go&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;had&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;has&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hasnt&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;have&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;he&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hence&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;her&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;here&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hereafter&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hereby&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;herein&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hereupon&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hers&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;herself&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;him&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;himself&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;his&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;how&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;however&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hundred&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;ie&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;if&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;in&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;inc&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;indeed&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;into&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;is&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;it&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;its&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;itself&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;keep&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;last&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;latter&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;latterly&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;least&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;less&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;ltd&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;made&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;many&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;may&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;me&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;meanwhile&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;might&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;mill&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;mine&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;more&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;moreover&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;most&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;mostly&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;move&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;much&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;must&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;my&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;myself&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;namely&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;neither&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;never&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;nevertheless&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;next&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;nine&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;no&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;nobody&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;none&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;noone&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;nor&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;not&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;nothing&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;now&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;nowhere&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;of&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;off&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;often&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;on&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;once&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;only&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;onto&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;or&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;other&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;others&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;otherwise&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;our&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;ours&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;ourselves&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;out&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;over&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;own&quot;</span><span class="p">,</span><span class="ss">&quot;part&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;per&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;perhaps&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;please&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;put&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;rather&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;re&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;same&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;see&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;seem&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;seemed&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;seeming&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;seems&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;serious&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;several&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;she&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;should&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;show&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;side&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;since&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;sincere&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;six&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;sixty&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;so&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;some&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;somehow&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;someone&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;something&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;sometime&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;sometimes&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;somewhere&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;still&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;such&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;system&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;take&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;ten&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;than&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;that&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;the&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;their&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;them&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;themselves&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;then&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;thence&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;there&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;thereafter&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;thereby&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;therefore&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;therein&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;thereupon&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;these&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;they&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;third&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;this&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;those&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;though&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;three&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;through&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;throughout&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;thru&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;thus&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;to&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;together&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;too&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;top&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;toward&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;towards&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;twelve&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;twenty&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;two&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;un&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;under&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;until&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;up&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;upon&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;us&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;very&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;via&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;was&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;we&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;well&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;were&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;what&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whatever&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;when&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whence&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whenever&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;where&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whereafter&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whereas&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whereby&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;wherein&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whereupon&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;wherever&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whether&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;which&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;while&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;who&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whoever&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whole&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whom&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;whose&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;why&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;will&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;with&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;within&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;without&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;would&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;yet&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;you&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;your&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;yours&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;yourself&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;yourselves&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;the&quot;</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+<h4>Getting the code to Hathi</h4>
+<p>So right now I have a very basic and simple example Scala app which is confined to the notebook. I still need to do some house keeping in order to get it on the cluster.</p>
+<p>The first step is exporting it to scala. This opens the file in my browser. <strong>I stored the file in a public location on the web (so I could get it via wget from the docker and pushed my updates to it</strong> - this allowed me to edit the file using the tools on my own machine and pull it when I want to run it on the cluster. This greatly reduced my effort by reducing my dependency on tools like <code>vim</code> - which, while excellent, do not have the range of capabilities like atom or VS Code do. Again, personal preference. </p>
+<p>I then used the skeleton from the example app on the hathi-surfsara image, replacing the original file and deleting the <code>/target/</code> folder. I made sure to follow the steps needed <a href="http://spark.apache.org/docs/2.1.1/quick-start.html#self-contained-applications">in the creating a self-contained app tutorial</a>: which meant stripping some code and defining a main method. Additionally, I added <code>jsoup</code> to the <code>libraryDependencies</code>. </p>
+<p>Using <code>sbt assembly</code> I then created a fat jar (stored in <code>/target/</code>) and submitted it via </p>
+<p><code>spark-submit --master yarn --deploy-mode cluster --num-executors 300 --class</code>
+<code>org.rubigdata.RUBigDataApp /hathi-client/spark/rubigdata/target/scala-2.11/RUBigDataApp-assembly-1.0.jar</code></p>
+<p>So for the next 1 minute 40 seconds I was thrilled! Hathi picked up my submission and seemed happy to do it. Then I got a nullPointerException.. turned out I was checking for the <code>contentType</code> before even checking if this wasn't <code>null</code> instead of the other way around.. eager beaver. I had the bright idea to implement a check for it, but did so in the wrong order.</p>
+<p>The next big error was regarding my use of <code>saveAsTextFile</code>. Because this would be called many times (once per warc file?) I would get the error that the folder already existed. I took the saveAsTextFile out, and redirected output about the top 300 to the stdout instead. </p>
+<p>After this small fix the code was submitted and I went to bed..</p>
+<p>After <strong>8 hours, 36 minutes and 45 seconds</strong> my code apparently hit an error: potentially having to do with a block being unavailable on the cluster. Just as I was rolling over hugging my pillow, the little cluster named Hathi was in tears. Had it failed the user, or had the user failed it?</p>
+<div class="highlight"><pre><span></span><code>User class threw exception: org.apache.spark.SparkException: Job aborted due to stage failure: Task 1263 in stage 0.0 failed 4 times, most recent failure: Lost task 1263.3 in stage 0.0 (TID 3214, worker168.hathi.surfsara.nl, executor 256): org.apache.hadoop.hdfs.BlockMissingException: Could not obtain block: BP-16922093-145.100.41.3-1392681459262:blk_1262268700_188594112 file=/data/public/common-crawl/crawl-data/CC-MAIN-2016-07/segments/1454701146196.88/warc/CC-MAIN-20160205193906-00216-ip-10-236-182-209.ec2.internal.warc.gz
+at org.apache.hadoop.hdfs.DFSInputStream.chooseDataNode(DFSInputStream.java:945) 
+at org.apache.hadoop.hdfs.DFSInputStream.blockSeekTo(DFSInputStream.java:604) 
+at org.apache.hadoop.hdfs.DFSInputStream.readWithStrategy(DFSInputStream.java:844) 
+at org.apache.hadoop.hdfs.DFSInputStream.read(DFSInputStream.java:896)
+at java.io.DataInputStream.read(DataInputStream.java:149) 
+</code></pre></div>
+
+<p>I tried to google the error, but found nothing that I could do as a normal user of the cluster. Most of these had to do with missing privs (might be possible) or corruption. </p>
+<p><a href="http://head05.hathi.surfsara.nl:8088/cluster/app/application_1486393309284_17724">Link to the application details</a></p>
+<p>I've posted an issue, meanwhile I'm going to run it on a single warc segment. </p>
+<h3>Attempt 2 - One segment</h3>
+<p>Using the index I've looked for <code>https://www.ukriversguidebook.co.uk/</code> - a large internet community of kayakers. This gives me a neat <a href="http://index.commoncrawl.org/CC-MAIN-2016-07-index?url=https%3A%2F%2Fwww.ukriversguidebook.co.uk%2F&amp;output=json">JSON output</a> containing the locations of all hits. I just picked one- and added it to my code as <code>"/data/public/common-crawl/crawl-data/CC-MAIN-2016-07/segments/1454701148402.62/*"</code>. The rest of the code remained unchanged for the reproducibility of errors. I submitted it with 300 executors and went to get a shave. </p>
+<p>15 minutes and 15 seconds later the submission was done, much to my surprise. I had covered 698 tasks. Bear in mind this submission was 1% of the entire crawl, and I stomped through with 300 executors. No error was given, and my glorious output was waiting for me. </p>
+<p>The following screenshot shows the inside of the Applicationmanager just after starting. Honestly, glancing over this felt like being inside mission control at NASA. 
+<img alt="Spark Jobs Overview (click for larger version)" src="http://puu.sh/wMZhb/48eb418bc5.png"></p>
+<p>Now the curious reader will want to know.. what did we get from this? </p>
+<p>Earlier I redirected output to stdout: this is where my little frequency list ended up. </p>
+<div class="highlight"><pre><span></span><code>womens;849513;
+ski;774168;
+jackets;738558;
+-;703664;
+ ;673135;
+clothing;614007;
+snowboard;581317;
+accessories;492069;
+pants;475875;
+bike;467037;
+bikes;463572;
+mens;460966;
+bags;456382;
+shop;430335;
+sunglasses;426637;
+shoes;423502;
+</code></pre></div>
+
+<p>There's still some noise. Apparently I missed a white space and '-'... oh well.  </p>
+<p>This list seems to indicate that most websites referring to kayaking sell clothing and gear for outdoor activities. That makes sense, given that this is a huge industry with many competitors. Perhaps it would be a good idea to create a second list with words common in retail. It's interesting that words like <code>sea</code> and <code>nature</code> don't appear at all. The word <code>safety</code> - which is at the heart of the sport is ranked #273. Perhaps this is just a batch with a lot of retail sites, but it seems like a decent idea to mine retail terms in order to filter them out for the next iteration. </p>
+<p>So I started to work and added another 150 words to the list with all those retail phrases. I refined the method and submitted the jar once more. Nothing was really different apart from a little retouching. Again, the code worked fine and I got a new list! </p>
+<p>I then wrote a little bit of javascript to convert the frequency list I had to a payload that could be used for a word cloud (credits: https://github.com/wvengen/d3-wordcloud) and generated the visualization. </p>
+<p><img alt="Now finally, we can use this!" src="http://puu.sh/wN9Kn/cab4b34482.png"></p>
+<p>The word cloud is pretty cool. Most of the junk has been filtered and we see a lot of sports and outdoor-related terms. I guess that the market for kayaking is the same as the market for bikes and wakeboarding. As a mountain biker myself this is amusing. It also shows Wisconsin. This might be random, but the American state also borders lake Michigan and other large lakes and rivers. </p>
+<h3>Attempt 3 - Selective filtering, and finding brands!</h3>
+<p>Lastly I wanted to filter this subsection for specific brands. While I could easily create a list of 50 or so brands of varying popularity I chose Rockpool. Rockpool is a manufacturer of sea kayaks with several models being extremely popular in the expedition kayaking scene. In a year or so, when I graduate.. you can pretty much guess where my pay check is going to. Look at this boat!</p>
+<p><img alt="A Rockpool kayak model: The Taran (source: ebay)" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ak0AAOSwyQtVtpHb/$_86.JPG"></p>
+<p>Jokes aside, let's find the same word list as for kayaking. I added a brands set at first, but that didn't work out quite well. While I could iterate through it with the following code..</p>
+<div class="highlight"><pre><span></span><code><span class="n">val</span> <span class="n">brands</span> <span class="o">=</span> <span class="nf">Set</span><span class="p">(</span><span class="s">&quot;p&amp;h&quot;</span><span class="p">,</span> <span class="s">&quot;valley&quot;</span><span class="p">,</span> <span class="s">&quot;rockpool&quot;</span><span class="p">,</span> <span class="s">&quot;peakuk&quot;</span><span class="p">)</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">brand</span> <span class="o">&lt;-</span> <span class="n">brands</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">brand</span><span class="o">+</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+        <span class="n">val</span> <span class="n">warcd</span> <span class="o">=</span> <span class="n">warcc</span> <span class="o">/*</span><span class="n">temp</span><span class="o">*/</span>
+        <span class="nf">warcd.cache</span><span class="p">()</span>     <span class="o">/*</span><span class="n">lazy</span> <span class="n">evaluation</span><span class="o">*/</span>
+        <span class="n">val</span> <span class="n">warcl</span> <span class="o">=</span> <span class="nf">warcd.filter</span><span class="p">(</span><span class="n">w</span> <span class="o">=&gt;</span> <span class="nf">w.contains</span><span class="p">(</span><span class="n">brand</span><span class="p">))</span>
+            <span class="nf">.flatMap</span><span class="p">(</span>_<span class="nf">.split</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">))</span>
+            <span class="nf">.filter</span><span class="p">(</span>_ <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+            <span class="nf">.map</span><span class="p">(</span><span class="n">word</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+            <span class="nf">.reduceByKey</span><span class="p">(</span>_ <span class="o">+</span> _<span class="p">)</span>
+            <span class="nf">.filter</span><span class="p">(</span> <span class="n">w</span> <span class="o">=&gt;</span> <span class="o">!</span><span class="p">(</span><span class="nf">commonWords.contains</span><span class="p">(</span><span class="n">w._1</span><span class="p">)))</span>
+            <span class="nf">.sortBy</span><span class="p">(</span><span class="n">w</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="n">w._2</span><span class="p">)</span>
+            <span class="nf">.take</span><span class="p">(</span><span class="m">300</span><span class="p">)</span> 
+</code></pre></div>
+
+<p>I would continously narrow down my collection. E.g. the first brand would go fine, but the second brand would be filtered from the subsection of the first brand and so on. This is due to Spark's Lazy Evaluation^tm where nothing is actually executed until a reduce operation- and in my code I only used <code>reduceByKey</code> until the end of each brand-specific execution. Regardless, being my favourite kayak manufacturer I chose Rockpool and got the following list: </p>
+<div class="highlight"><pre><span></span><code>{text: &#39;nov&#39;, size: 439},
+{text: &#39;mar&#39;, size: 407},
+{text: &#39;jan&#39;, size: 382},
+{text: &#39;dec&#39;, size: 379},
+{text: &#39;apr&#39;, size: 369},
+{text: &#39;feb&#39;, size: 363},
+{text: &#39;oct&#39;, size: 362},
+{text: &#39;jul&#39;, size: 355},
+{text: &#39;jun&#39;, size: 352},
+{text: &#39;sep&#39;, size: 338},
+{text: &#39;2006&#39;, size: 282},
+{text: &#39;aug&#39;, size: 265},
+{text: &#39;ago&#39;, size: 216},
+{text: &#39;stay&#39;, size: 214},
+{text: &#39;cottage&#39;, size: 214},
+{text: &#39;13&#39;, size: 202},
+{text: &#39;loch&#39;, size: 201},
+{text: &#39;12&#39;, size: 199},
+{text: &#39;16&#39;, size: 194},
+{text: &#39;holiday&#39;, size: 194},
+{text: &#39;house&#39;, size: 193},
+{text: &#39;21&#39;, size: 189},
+{text: &#39;11&#39;, size: 188},
+{text: &#39;17&#39;, size: 188},
+{text: &#39;20&#39;, size: 186},
+{text: &#39;22&#39;, size: 185},
+{text: &#39;15&#39;, size: 181},
+{text: &#39;14&#39;, size: 179},
+{text: &#39;27&#39;, size: 176},
+{text: &#39;19&#39;, size: 174},
+{text: &#39;night&#39;, size: 174},
+{text: &#39;28&#39;, size: 169},
+</code></pre></div>
+
+<p>While some words are close (e.g. <code>loch</code>) it seems we picked up a lot of calendar or blog contents. After some manual (I'm not going to run this on the cluster and wait another 20 minutes) removal of the nonsense I got the following list: </p>
+<div class="highlight"><pre><span></span><code>{text: &#39;ago&#39;, size: 216},
+{text: &#39;stay&#39;, size: 214},
+{text: &#39;cottage&#39;, size: 214},
+{text: &#39;loch&#39;, size: 201},
+{text: &#39;16&#39;, size: 194},
+{text: &#39;holiday&#39;, size: 194},
+{text: &#39;house&#39;, size: 193},
+{text: &#39;night&#39;, size: 174},
+{text: &#39;home&#39;, size: 167},
+{text: &#39;details&#39;, size: 165},
+{text: &#39;18&#39;, size: 157},
+{text: &#39;view&#39;, size: 156},
+{text: &#39;min&#39;, size: 155},
+{text: &#39;book&#39;, size: 155},
+{text: &#39;great&#39;, size: 137},
+{text: &#39;views&#39;, size: 137},
+{text: &#39;away&#39;, size: 127},
+{text: &#39;sea&#39;, size: 126},
+{text: &#39;reviews&#39;, size: 125},
+{text: &#39;close&#39;, size: 118},
+{text: &#39;years&#39;, size: 117},
+{text: &#39;sleeps&#39;, size: 114},
+{text: &#39;5/5&#39;, size: 110},
+</code></pre></div>
+
+<p>This is more like it. I kept the 16 and 18 as they are both kayak models. Overall, I pruned about 50 words- I might add a regular expression on my next run on the cluster. However, something like <code>5/5</code> (a rating, included in the list above) might get lost unintentionally. The word cloud on 'Rockpool' is as follows:</p>
+<p><img alt="The word cloud for filtering kayaking along with the brand rockpool" src="http://puu.sh/wNddt/17384de36a.png"></p>
+<p>The only downside to this is the small corpus I get. Even though I used 1% of the common crawl, most of the words appear about 200 times. I wish I could run it again to get more data, but I do not want to drain up the entire cluster for a entire day. </p>
+<h3>EDIT: Full crawl!</h3>
+<p>I re-submitted the first job that went over the entire crawl. This time I used the retailWords list, as well as filtering for pages that also contained the word <code>sea</code>. I opted to get the top 1000 words instead. The submission was succesful and ended after 10hrs, 47mins, 12sec. In total 69800 jobs were queued. The top 20 words on the entire crawl are:</p>
+<div class="highlight"><pre><span></span><code>    &#39;snowboard&#39; 58172829
+    &#39;accessories&#39; 47357717
+    &#39;bike&#39; 46462542
+    &#39;bikes&#39; 45888592
+    &#39;shop&#39; 40646038
+    &#39;country&#39; 28916820
+    &#39;water&#39; 27793604
+    &#39;cross&#39; 26669810
+    &#39;casual&#39; 26185575
+    &#39;gear&#39; 22752323
+    &#39;wisconsin&#39; 21410085
+    &#39;wakeboard&#39; 21104545
+    &#39;travel&#39; 19564475
+    &#39;packages&#39; 18880893
+    &#39;hiking&#39; 18660510
+    &#39;forum&#39; 17253484
+    &#39;helmets&#39; 16881583
+    &#39;royal&#39; 16747143
+    &#39;bindings&#39; 16617302
+    &#39;house&#39; 15067835
+</code></pre></div>
+
+<p>And the resulting word cloud is as follows:</p>
+<p><img alt="A full pass over the crawl resulted in the top 1000 words related to Kayaking. Click on the image for a larger version." src="https://i.redd.it/sz1qjbc4luaz.png"></p>
+<p>That concludes this blog post!</p>
+<h2>Part 5 - Evaluation</h2>
+<p>In the above post I walked you through my adventures with the Common Crawl and the Dutch National Hathi Hadoop Cluster. I started off with basic examples and tried to solve my own problems as I went. Eventually I formed the idea of generating a word cloud based on the term <code>kayaking</code>. When it apparently was not possible to make a pass over the entire crawl I grabbed a 900 GB partition and worked with 1% of the data. My idea was still to look for how individual brands are viewed: e.g. what words are asociated with brands like Rockpool?  Finally, I used javascript and the <code>d3.js</code> library to generate word clouds of my findings. </p>
+<p>Though I feel like I had to water down my challenges I feel like there's a lot of things that I can still do with all this data. I'm still in unfamiliar territory and I learnt more each time. I'm still working on this project and I'd like to continue building a few interesting vizualisations. I'm glad I didn't do the standard project, and it just feels better to try out many different things and get something of yourself out of a project like this.</p>
+<p>Overal I spent about 40 hours or so on this project. </p>
+<p>Dear reader, I thank you for your interest in this blog. </p>
+<h2>Part 6 - Course Evaluation</h2>
+<p>Though I already submitted the course evaluation I felt like it would be nice to include a few words on the process I went through for this course. I feel that using git, github and in particular the github pages tool - were enriching and powerful. I'm planning on including this repo with my own website, although I havent updated the latter in over two years. If I was a 2nd or 3rd-year student however, this would have instantly given me a portfolio of sorts which is incredibly useful to have. </p>
+<p>The way we went about it, trying to document our struggles with the various tools as we go is much closer to reality than just handing in a polished report that gets written after the product is already done. I would have liked more structure up front to combat the hours of troubleshooting I suppose, but in the end it turned out fine with just the support I found in the issue tracker and google. </p>
+<p>Speaking of the issue tracker, I think this was a great addition to the course and I hope it gets included for the students next year. It certainly helped a lot, and it breaks down the hurdles for students to step out and ask for help. I would advise to keep using it!  </p>
+<p>// Jeffrey</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://localhost:8000/tag/university.html">University</a>
+      <a href="http://localhost:8000/tag/programming.html">Programming</a>
+      <a href="http://localhost:8000/tag/spark.html">Spark</a>
+      <a href="http://localhost:8000/tag/hadoop.html">Hadoop</a>
+      <a href="http://localhost:8000/tag/surfsara.html">SurfSara</a>
+      <a href="http://localhost:8000/tag/commoncrawl.html">CommonCrawl</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; 2022 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="http://localhost:8000/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="light"
+          type="text/javascript">
+  </script>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeffrey Luppes ",
+  "url" : "http://localhost:8000",
+  "image": "",
+  "description": "Jeffrey Luppes - personal blog"
+}
+</script>
+
+
+</body>
+</html>
