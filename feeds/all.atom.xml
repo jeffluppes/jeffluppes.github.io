@@ -1,0 +1,1120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeffrey Luppes</title><link href="jeffluppes.github.io/" rel="alternate"></link><link href="jeffluppes.github.io/feeds/all.atom.xml" rel="self"></link><id>jeffluppes.github.io/</id><updated>2022-10-08T12:00:00+02:00</updated><subtitle>Machine Learning Engineer and Data Scientist</subtitle><entry><title>Thoughts on the state of Machine Learning Engineering</title><link href="jeffluppes.github.io/thoughts-on-the-state-of-machine-learning-engineering.html" rel="alternate"></link><published>2022-10-08T12:00:00+02:00</published><updated>2022-10-08T12:00:00+02:00</updated><author><name>Jeffrey Luppes</name></author><id>tag:None,2022-10-08:jeffluppes.github.io/thoughts-on-the-state-of-machine-learning-engineering.html</id><summary type="html">&lt;p&gt;In 2020 I wrote &lt;a href="https://medium.com/towards-data-science/how-to-become-a-machine-learning-engineer-in-2020-1161aa29261e"&gt;this piece&lt;/a&gt; on becoming a ML Engineer. Since then a lot has changed. The job title of ML Engineer is now a relatively common one - a search in October 2022 for Data Scientist and Machine Learning Engineer openings in my home country, the Netherlands, showed the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In 2020 I wrote &lt;a href="https://medium.com/towards-data-science/how-to-become-a-machine-learning-engineer-in-2020-1161aa29261e"&gt;this piece&lt;/a&gt; on becoming a ML Engineer. Since then a lot has changed. The job title of ML Engineer is now a relatively common one - a search in October 2022 for Data Scientist and Machine Learning Engineer openings in my home country, the Netherlands, showed the DS:ML ratio to be roughly 6 to 1. Prior to the title of ML Engineer becoming a thing there were obviously plenty of Data Scientists and Software Engineers doing ML Engineering; It simply wasn't called as such. &lt;/p&gt;
+&lt;p&gt;Perhaps the tools we used two to three years ago were a little bit more basic, despite already being more numerous than the first five generations of Pokémon put together. We've drifted towards consolidation, though not as much as I had hoped.&lt;/p&gt;
+&lt;p&gt;Originally I felt that eventually we'd all end up using the tools (e.g. Sagemaker, Vertex) on our cloud vendor of choice with perhaps some companies going for a platform like &lt;a href="https://wandb.ai/site"&gt;W&amp;amp;B&lt;/a&gt; or &lt;a href="https://clear.ml/"&gt;ClearML&lt;/a&gt;. The world of MLOps would be something that was easily surveyed and picking a platform would be a relatively straightforward choice. That hasn't &lt;em&gt;really&lt;/em&gt; happened. While the large chunks of the simple parts of the MLOps work can be covered by platforms there are still areas where small, manoeuvrable companies are the best. Take for example W&amp;amp;B's experiment tracking and compare it to Sagemaker Experiments. &lt;/p&gt;
+&lt;p&gt;There are a lot of these features that you may need something for. Do you need semantic search? A feature store that actually works? Multi-GPU endpoints? An API to receive feedback from prod? A/B tests? An inference serving option that works well with graph neural networks? A way to monitor drift in literally any NLP system? It goes on and on and you're unlikely to find all of these features in the same platform.&lt;/p&gt;
+&lt;p&gt;For DPG Media, we eventually designed a platform backed on AWS Sagemaker, with some extra tools added for functionality we found lacklustre on AWS. Every new feature we needed outside of Sagemaker meant another tool, and that's how we ended up with AWS Sagemaker with about 7 other applications and platforms. Of course, at the time, there were just two of us, so we wanted to use managed services as often as possible so we could do other stuff as well. But opting for managed tools means less flexibility and (usually) more costs. It's a thin line between engineering and madness. &lt;/p&gt;</content><category term="Blog"></category><category term="ML Engineering"></category><category term="MLOps"></category><category term="Machine Learning"></category></entry><entry><title>The class of 2015 - An analysis in what jobs the people I graduated with ended up</title><link href="jeffluppes.github.io/the-class-of-2015-an-analysis-in-what-jobs-the-people-i-graduated-with-ended-up.html" rel="alternate"></link><published>2020-03-25T12:03:38+01:00</published><updated>2020-03-25T12:03:38+01:00</updated><author><name>Jeffrey Luppes</name></author><id>tag:None,2020-03-25:jeffluppes.github.io/the-class-of-2015-an-analysis-in-what-jobs-the-people-i-graduated-with-ended-up.html</id><summary type="html">&lt;p&gt;Computer Science degrees are notorious for their attrition rate and a lot of people switch degrees. I've switched twice myself, going from CS to AI and then to Software Engineering. Due to the way the Dutch system is organized this almost meant starting from scratch. Frankly, not my best decisions …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Computer Science degrees are notorious for their attrition rate and a lot of people switch degrees. I've switched twice myself, going from CS to AI and then to Software Engineering. Due to the way the Dutch system is organized this almost meant starting from scratch. Frankly, not my best decisions. But I was young.&lt;/p&gt;
+&lt;p&gt;I figured that it could be interesting to look what everyone was doing now. Most people generally do find their way to the finish line and there is also a substantial part that starts working and doesnt finish their degree. Interestingly, the Hanze University of Applied Science &lt;a href="https://www.itacademy.nl/kennisbank/factsheets/factsheet"&gt;had the same idea&lt;/a&gt; and scraped linkedIn profiles of all their alumni - assumingly me included. They found that the top 3 roles for software engineers were:&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;ul&gt;
+&lt;li&gt;Developer&lt;/li&gt;
+&lt;li&gt;Software Engineer&lt;/li&gt;
+&lt;li&gt;Consultant&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I decided to do the same, but the motivation for me is a little different than the Hanze. For GDPR reasons the Hanze can claim their possession of this data is justified: after all, they should know where their graduates end up so they can adjust their curriculum every few decades. I also did not need to redo their work and classify the size of the company someone worked at or the location (North or Randstad et cetera..)&lt;/p&gt;
+&lt;h2&gt;Wait, where's that attendance list?&lt;/h2&gt;
+&lt;p&gt;I still had a grades list from the end of year 1 at which point there were 100 students left. Having made it through the first year, most would go on and graduate. Since scraping is a bit out of the question here, I decided to hit up their linkedin myself (and often saying hi or sending a friend request). I'd only collect their job title from Linkedin, which I added to a CSV.&lt;/p&gt;
+&lt;p&gt;Sure enough, out of &lt;strong&gt;103&lt;/strong&gt; students, there were &lt;strong&gt;78&lt;/strong&gt; I could find on LinkedIn. I saw happy faces and a lot of heavy metal shirts. Some people had left IT altogether. Some were doing a master's degree. Some had started a company abroad. It seems that the people I could not find had might've done so to minimize their footprint online, especially not uncommon when one goes into security.&lt;/p&gt;
+&lt;p&gt;At this point I did some limited post-processing on this list. I removed terms such as medior or senior (side note: hardly anyone was a junior) and tried to merge the various security, consultancy, and dev-related roles together towards a standardized format. Application Developer became Software Developer, but .NET developers and embedded systems developers kept their title. This is a bit arbitrary and opens up this little adventure to bias.&lt;/p&gt;
+&lt;p&gt;I removed eight non-IT roles, such as caretaker, military, nurse and store manager. For double roles I tried figuring out which was more reasonable. For instance if someone had founded a succesful company but still listed themselves as an developer, I figured that the Founder role was more defining.&lt;/p&gt;
+&lt;h2&gt;Findings&lt;/h2&gt;
+&lt;p&gt;Little to no surprise was that the top three is pretty much the same still the same. The full list is below, but here are some things that stood out to me:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Only two people started a company&lt;/li&gt;
+&lt;li&gt;There are no data scientists&lt;/li&gt;
+&lt;li&gt;Likewise, there are no software engineers in BI roles.&lt;/li&gt;
+&lt;li&gt;Two people are currently doing an internship - most likely as a part of a MSc degree requirement.&lt;/li&gt;
+&lt;li&gt;There is exactly one Software Architect&lt;/li&gt;
+&lt;li&gt;In the same vein of requiring experience, there are a handful of managers, but mostly related to products and not teams.&lt;/li&gt;
+&lt;li&gt;There are several cloud engineers. Back in 2015, this role was pretty much unheard of.&lt;/li&gt;
+&lt;li&gt;Yours truly is the only Machine Learning Engineer to make the sample.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My curiousity is now satisfied, but not before I made a word cloud of this collection.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Word cloud" src="/images/students.png"&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Job title&lt;/th&gt;
+&lt;th&gt;Count (n=70)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Software Developer&lt;/td&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Software Engineer&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Consultant&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.NET Developer&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Cloud Engineer&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Full-stack Developer&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Project Manager&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Product Owner&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Founder&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Security Consultant&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Network Engineer&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Intern&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Back-end Developer&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Account Manager&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Service Manager&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Solution Developer&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Embedded Software Engineer&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Functional Application Manager&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Mobile Developer&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Systems Engineer&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Front-end Developer&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Machine Learning Engineer&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Scrum Master&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Web Developer&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Field Engineer&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Change Manager&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Solution Experience Manager&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Software Architect&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DBA&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Sysadmin&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;img alt="Roles" src="/images/student_roles.png"&gt;&lt;/p&gt;</content><category term="Projects"></category><category term="Linkedin"></category><category term="Programming"></category><category term="Web Scraping"></category><category term="Python"></category></entry><entry><title>Building a bird detector from scratch with web scraping and deep learning (part 1)</title><link href="jeffluppes.github.io/building-a-bird-detector-from-scratch-with-web-scraping-and-deep-learning-part-1.html" rel="alternate"></link><published>2020-01-21T19:46:47+01:00</published><updated>2020-01-21T19:46:47+01:00</updated><author><name>Jeffrey Luppes</name></author><id>tag:None,2020-01-21:jeffluppes.github.io/building-a-bird-detector-from-scratch-with-web-scraping-and-deep-learning-part-1.html</id><summary type="html">&lt;p&gt;&lt;img alt="Birbs. Image by author." src="/images/vogels0.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This is part 1 in a series on this project, more posts will be written as the project progresses&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I'm an awful birder. While I've always been interested in birds I'm almost completely deaf to identifying them by their calls. I never started memorizing them and my ability to recognize …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="Birbs. Image by author." src="/images/vogels0.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This is part 1 in a series on this project, more posts will be written as the project progresses&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I'm an awful birder. While I've always been interested in birds I'm almost completely deaf to identifying them by their calls. I never started memorizing them and my ability to recognize them on the basis of visual cues is poor. It was only when I started kayaking (about five years ago) that I was exposed to more bird-watching, and during a trip to Schotland last year a couple of friends took me on my first bird watching trip. &lt;/p&gt;
+&lt;p&gt;So given that my human-based detection is obviously lacking I figured that with the plethora of bird data online, would it perhaps not be possible to scrape these and create a bird classifier using CNNs and general Python shenanigans? &lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h2&gt;Intro&lt;/h2&gt;
+&lt;p&gt;I also wanted to make a funny trinket out of this and deploy it to a Pi. I'm lucky to have family that live on a farm in a rural area and have multiple feeding stations for the birds. Apart from the 30-or so bird species that they've actively tracked over the past year, there are also chickens, hedgehogs, mice, rats, and various predators like hawks and foxes that drop by. Some of the feeding stations are viewable from indoors, while others are between trees and bush. This will be the testing ground.  &lt;/p&gt;
+&lt;p&gt;This is actually a very active research topic in the past couple of years, as ecologists, population biologists and researchers are using deep learning to automate detection. Consider that according to a May 2018 paper, roughly one third of papers on this subject was published in 2017 and 2018 [1]. Focus is particular on video and audio (e.g. bird calls).&lt;/p&gt;
+&lt;p&gt;As for approaches, it seems that my idea of CNNs and Pis is spot on. [2] Shows a CNN model with skip connections traind on 27 bird species in Taiwan can approach 99% accuracy. There is also another source that shows it is possible to use a Raspberry Pi for classification amongst three species [3]. And that's just scraping the surface: more advanced models are being developed. Further inspiration comes from Ben Hamm and his cat Metric [4]:&lt;/p&gt;
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/1A-Nf3QIJjM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;One particular website that's a huge hub for biologists and bird-watchers is the Dutch site www.waarneming.nl. It's worth mentioning waarneming employs their own suite of models and automatically classifies uploaded photos. In 2019, they received around eight million photos. With this data they've also put out their own deep learning-powered app: &lt;a href="https://play.google.com/store/apps/details?id=org.observation.obsidentify&amp;amp;hl=en"&gt;Obsidentify&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;But why would anyone do this if there's already apps (and with that probably APIs) that do this? For starters, I like the idea and challenge of bringing this end to end. It's a learning experience for me. Secondly, I like to gift this set up to my in-laws at some point so to have some kind of automated tracking when there's something going on in the garden. Scientifically this is a valid topic: bird classification scales poorly as does droning over photos or video streams is a labour-intensive task. &lt;/p&gt;
+&lt;h2&gt;Why is this a hard problem?&lt;/h2&gt;
+&lt;p&gt;While the training data mostly contains photo's of birds zoomed up and resting on a branch, the real-life data is much more messier. Consider this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Birds do, in general, not sit still long enough&lt;/li&gt;
+&lt;li&gt;There might be multiple birds and multiple species in a single shot&lt;/li&gt;
+&lt;li&gt;The size of a birds vary &lt;/li&gt;
+&lt;li&gt;Many bird species are dimorphic: males and females look different&lt;/li&gt;
+&lt;li&gt;Every bird species has different feeding strategies which result in different images, with some more inclined to frequent a station than others.&lt;/li&gt;
+&lt;li&gt;They might be in an odd point of view (e.g. viewing a bird from the rear)&lt;/li&gt;
+&lt;li&gt;Training data of the same species from different areas might be too different&lt;/li&gt;
+&lt;li&gt;The background (branches, fields) is very different from the feeding stations. Consider the "wolf vs background" problem where an AI system trained to distinguish wolves was actually picking up on the presence of snow in the training image to determine whether the photo was of a wolf or dog instead of the actual subject. This is a valid problem in this context&lt;/li&gt;
+&lt;li&gt;There might be a number of branches and foilage in the way of the birds (consider, for instance the header image of this post)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;As for actually doing it:&lt;/strong&gt;
+- Training a neural network simply requires a ton of labelled data.
+- There is a huge difference between photos shot with a telescopic lens of say 250mm+ and a wide-angle over the counter camera such as a the pi camera
+- The quality of these webcams, action cams and the pi-camera might simply be too bad to do this
+- Some excellent training data might explictely forbid usage (licence)
+- Some of the images available are simply cell-phone camera shots through a telescope or of a DSLR-display.
+- In order to adequately classify birds, I have to recognize (a) an image contains a bird (a binary problem), (b) find where in the image the bird is and predict a bounding box around it and (c) classify the bird.&lt;/p&gt;
+&lt;p&gt;In all, there's a large potential for a miss-match between the training data and the real-world case I'm trying to work on. &lt;/p&gt;
+&lt;h2&gt;Act 1: Identifying training data&lt;/h2&gt;
+&lt;p&gt;&lt;a href="www.waarneming.nl"&gt;Waarneming.nl&lt;/a&gt; has photo's publicly available and the data is relatively easy to access. Since the goal environment (a farm in the Netherlands) and the training data environment (most uploads are from Belgium and the Netherlands) are the same, this was my first choice for training data.&lt;/p&gt;
+&lt;p&gt;There's also &lt;a href="https://www.flickr.com/services/api/"&gt;Flickr&lt;/a&gt; which even publicly exposes an API for these goals. This might be the best / easiest option if you're not looking for data from Europe. &lt;a href="https://ebird.org/home"&gt;eBird&lt;/a&gt; seems to be scrape-able the same way. While searching for 'Staartmees' on Flickr yields only about 2000 hits, checking for 'Long-tailed tit' gives around 62.000 photos. &lt;/p&gt;
+&lt;p&gt;Lastly, there are two datasets that might be of use. First there's the &lt;a href="http://www.vision.caltech.edu/visipedia/CUB-200-2011.html"&gt;Caltech-UCSD Birds-200-2011
+&lt;/a&gt; data set of almost 12000 photos and 200 species. This information may be useful later on for detecting a bounding box (a square to identify &lt;em&gt;where&lt;/em&gt; in an image a bird is located) around a bird. Similarly, there is the &lt;a href="http://bird.nae-lab.org/dataset/"&gt;Japanese Wild Birds in a Wind Farm: Image Dataset for Bird Detection&lt;/a&gt; data set for detection, although this is again only useful for detection and not classification - an important distinction.&lt;/p&gt;
+&lt;h2&gt;Act 2: Scraping training data&lt;/h2&gt;
+&lt;p&gt;I set out to scrape the data from waarneming.nl as this is the absolute closest to my real-life use case and the image quality is insanely high, being mostly from birders with professional gear. Futhermore, as the data is community-sourced and often verified, I can directly treat the image labels as based in truth (something that would not be possible with say Flickr). I turned to the gallery:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Waarneming Gallery" src="/images/vogels1.png"&gt;&lt;/p&gt;
+&lt;p&gt;Waarneming has a gallery function that lists 24 bird photos each time. Despite there being more images on the site than the gallery, only the gallery has the &lt;code&gt;app-ratio-box-image&lt;/code&gt; class, so this allows us to collect only these links. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Html of the gallery" src="/images/vogels2.png"&gt;&lt;/p&gt;
+&lt;p&gt;Also note that the html includes links to the image (ending in &lt;code&gt;.jpg&lt;/code&gt;) as a page describing an image (ending with &lt;code&gt;photos/&amp;lt;image_id&amp;gt;/&lt;/code&gt;. This leads to a page that has meta data on the image - more on that in a bit.&lt;/p&gt;
+&lt;p&gt;Based on the species list (below) I looked at querying for each specific bird. However, there are many possible species and a simple search might return multiple possible hits (subspecies might be returned). Since I'd have to make a list of each species' latin name anyway, I just searched for an individual species and collected the species' id. I stored these in a dict like below:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;species_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;species_x&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For each species in the list I crawled the site. I could not find a robots.txt that disallowed web scraping and the license found on &lt;a href="https://waarneming.nl/tos/"&gt;https://waarneming.nl/tos/&lt;/a&gt; explictely permits non-commercial use by individuls. However, because the strain on a website can be considerable it is a good practise to build in a pause of 1 second between requests. I did not initially do this as I had honestly had not considered the strain on their servers. &lt;/p&gt;
+&lt;p&gt;The below script accomplishes the main scraping goals. I made use of the &lt;code&gt;beautifulsoup&lt;/code&gt; and &lt;code&gt;requests&lt;/code&gt; libraries to collect the html from the pages and parse them. I also included a call to check which images I already have downloaded, so I don't waste resources fetching the same image twice. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MAXIMAGES&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;IMAGESPERPAGE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# construct the url&lt;/span&gt;
+    &lt;span class="n"&gt;URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https://waarneming.nl/species/&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;identifier&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/photos/&amp;#39;&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;?after_date=2018-01-01&amp;amp;before_date=2020-01-19&amp;amp;page=&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# fetch the url and content&lt;/span&gt;
+    &lt;span class="n"&gt;page&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;URL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;soup&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BeautifulSoup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;html.parser&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;#find the images&lt;/span&gt;
+    &lt;span class="n"&gt;tags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;soup&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findAll&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;img&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;class&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;app-ratio-box-image&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="n"&gt;photolinks&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;tags&lt;/span&gt;
+
+    &lt;span class="c1"&gt;#pause for one second out of courtesy&lt;/span&gt;
+    &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# get the photoids we already have scraped from before&lt;/span&gt;
+&lt;span class="n"&gt;photoids&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_photoid_list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;species&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;metadata&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+&lt;span class="c1"&gt;# download photos and store them in their new home&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;photolinks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="c1"&gt;#url without arguments&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;src&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;?w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="c1"&gt;#obtain filename from url&lt;/span&gt;
+    &lt;span class="n"&gt;filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="c1"&gt;#check if we have encountered this photo before - will be substantially slower with large n&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;photoids&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+
+        &lt;span class="c1"&gt;# we have a new photo, so lets check the metadata first&lt;/span&gt;
+        &lt;span class="n"&gt;meta&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_metadata&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;meta&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;photoid&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;
+            &lt;span class="n"&gt;metadata&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;meta&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;meta&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Licentie&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;ALLOWED_LICENSES&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RAWFOLDER&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;species&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;
+                &lt;span class="n"&gt;get_and_store_image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+                &lt;span class="c1"&gt;#also resize the image and store them seperately&lt;/span&gt;
+                &lt;span class="n"&gt;outputpath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PROCESSEDFOLDER&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;species&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.png&amp;#39;&lt;/span&gt;
+
+                &lt;span class="n"&gt;convert_and_store_img&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;outputpath&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;new_photos&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+                &lt;span class="c1"&gt;#pause for one second out of courtesy&lt;/span&gt;
+                &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The above code includes calls to the following methods and variables:
+&lt;code&gt;get_photoid_list&lt;/code&gt; searches the &lt;code&gt;species&lt;/code&gt; directory for any existing photos (because there's no point in downloading the same photo twice if we re-run the script)
+&lt;code&gt;ALLOWED_LICENSES&lt;/code&gt; contains a list of licences that allow us to scrape. 
+&lt;code&gt;get_and_store_image&lt;/code&gt; requests the image from an url and stores it to local disk
+&lt;code&gt;get_metadata&lt;/code&gt; requests the page that holds info on a particular &lt;code&gt;photoid&lt;/code&gt; and outputs the photo details to a &lt;code&gt;meta&lt;/code&gt; object. This way, we can trace which photo's we crawl and who made them, but also the license for an individual photo. 
+&lt;code&gt;convert_and_store_img&lt;/code&gt; changes the photo to a set &lt;code&gt;x&lt;/code&gt; by &lt;code&gt;y&lt;/code&gt; size and also appends each image so all the training data has the same dimensions. 
+&lt;code&gt;time.sleep(1)&lt;/code&gt; tells the scrape script to pause for one second.
+&lt;code&gt;metadata&lt;/code&gt; is a list of &lt;code&gt;meta&lt;/code&gt; objects I store to disk afterwards.&lt;/p&gt;
+&lt;p&gt;The attentive reader might notice we're also collecting metadata on images we don't scrape. This is mainly because I want to trace the different licences and other metadata associated with them and to verify that everything works correctly. The metadata is stored to a flat file. Below is the &lt;code&gt;get_metadata&lt;/code&gt; call:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_metadata&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;photoid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;24691898&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;Given a photo-id, return metadata in a dict&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+
+    &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https://waarneming.nl/photos/&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;photoid&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;page&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;soup&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BeautifulSoup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;html.parser&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;tags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;soup&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;table&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;class&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;table app-content-section&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="n"&gt;meta&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="p"&gt;{}&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;tags&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="c1"&gt;# find all table rows&lt;/span&gt;
+        &lt;span class="n"&gt;rows&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tags&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;tr&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;values&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="n"&gt;keys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="c1"&gt;# get the table content and return as two lists&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="c1"&gt;# actual content is listed in the &amp;lt;td&amp;gt;, while &amp;lt;th&amp;gt; holds the keys. &lt;/span&gt;
+            &lt;span class="n"&gt;descriptions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;th&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;cols&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;td&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ele&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;descriptions&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ele&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+                &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cols&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+        &lt;span class="c1"&gt;#create a dict out of the data we fetched&lt;/span&gt;
+        &lt;span class="n"&gt;meta&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;meta&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;...which returns the following:
+&lt;img alt="Metadata" src="/images/vogels3.png"&gt;&lt;/p&gt;
+&lt;p&gt;The data is contained in a table, and each row only contains a &lt;code&gt;&amp;lt;th&amp;gt;&lt;/code&gt; (header) and &lt;code&gt;&amp;lt;tr&amp;gt;&lt;/code&gt; (row). Thus, we obtain the keys from the &lt;code&gt;&amp;lt;th&amp;gt;&lt;/code&gt; and the values from information enclosed by the &lt;code&gt;&amp;lt;tr&amp;gt;&lt;/code&gt; tags. Note that we fail elegantly: if there's nothing in the table (or the table is not there) we return an empty meta. And if we do not have the meta object explictely stating what kind of value we have for a license, we don't download the photo. &lt;/p&gt;
+&lt;p&gt;With that, we're all set to start scraping. Let's define what birds we want to look for. &lt;/p&gt;
+&lt;h3&gt;Species list&lt;/h3&gt;
+&lt;p&gt;The below lists the species I collected data about.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;#&lt;/th&gt;
+&lt;th&gt;Latin NamE&lt;/th&gt;
+&lt;th&gt;English Name&lt;/th&gt;
+&lt;th&gt;Dutch Name&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Cyanistes caeruleus&lt;/td&gt;
+&lt;td&gt;Eurasian blue tit&lt;/td&gt;
+&lt;td&gt;Pimpelmees&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;Parus major&lt;/td&gt;
+&lt;td&gt;Great tit&lt;/td&gt;
+&lt;td&gt;Koolmees&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;Aegithalos caudatus&lt;/td&gt;
+&lt;td&gt;Long-tailed tit&lt;/td&gt;
+&lt;td&gt;Staartmees&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;Lophophanes cristatus&lt;/td&gt;
+&lt;td&gt;European crested tit&lt;/td&gt;
+&lt;td&gt;Kuifmees&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;Fringilla coelebs&lt;/td&gt;
+&lt;td&gt;Common chaffinch&lt;/td&gt;
+&lt;td&gt;Vink&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;Turdus merula&lt;/td&gt;
+&lt;td&gt;Common blackbird&lt;/td&gt;
+&lt;td&gt;Merel&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;Sturnus vulgaris&lt;/td&gt;
+&lt;td&gt;Common starling&lt;/td&gt;
+&lt;td&gt;Spreeuw&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;Passer montanus&lt;/td&gt;
+&lt;td&gt;Eurasian tree sparrow&lt;/td&gt;
+&lt;td&gt;Ringmus&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;Passer domesticus&lt;/td&gt;
+&lt;td&gt;House sparrow&lt;/td&gt;
+&lt;td&gt;Huismus&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;Emberiza citrinella&lt;/td&gt;
+&lt;td&gt;Yellowhammer&lt;/td&gt;
+&lt;td&gt;Geelgors&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;Prunella modularis&lt;/td&gt;
+&lt;td&gt;Dunnock&lt;/td&gt;
+&lt;td&gt;Heggenmus&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;Certhia brachydactyla&lt;/td&gt;
+&lt;td&gt;Short-toed treecreeper&lt;/td&gt;
+&lt;td&gt;Boomkruiper&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;Chloris chloris&lt;/td&gt;
+&lt;td&gt;European greenfinch&lt;/td&gt;
+&lt;td&gt;Groenling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;Sitta europaea&lt;/td&gt;
+&lt;td&gt;Eurasian nuthatch&lt;/td&gt;
+&lt;td&gt;Boomklever&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;Erithacus rubecula&lt;/td&gt;
+&lt;td&gt;Robin&lt;/td&gt;
+&lt;td&gt;Roodborstje&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;16&lt;/td&gt;
+&lt;td&gt;Dendrocopos major&lt;/td&gt;
+&lt;td&gt;Great spotted woodpecker&lt;/td&gt;
+&lt;td&gt;Grote Bonte Specht&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;17&lt;/td&gt;
+&lt;td&gt;Pica Pica&lt;/td&gt;
+&lt;td&gt;Magpie&lt;/td&gt;
+&lt;td&gt;Ekster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;18&lt;/td&gt;
+&lt;td&gt;Carduelis carduelis&lt;/td&gt;
+&lt;td&gt;European goldfinch&lt;/td&gt;
+&lt;td&gt;Putter&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;19&lt;/td&gt;
+&lt;td&gt;Troglodytes troglodytes&lt;/td&gt;
+&lt;td&gt;Eurasian wren&lt;/td&gt;
+&lt;td&gt;Winterkoning&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;td&gt;Turdus philomelos&lt;/td&gt;
+&lt;td&gt;Song thrush&lt;/td&gt;
+&lt;td&gt;Zanglijster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;21&lt;/td&gt;
+&lt;td&gt;Columba palumbus&lt;/td&gt;
+&lt;td&gt;Common wood pigeon&lt;/td&gt;
+&lt;td&gt;Houtduif&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;Streptopelia decaocto&lt;/td&gt;
+&lt;td&gt;Eurasian collared dove&lt;/td&gt;
+&lt;td&gt;Turkse Tortel&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;23&lt;/td&gt;
+&lt;td&gt;Columba Oenas&lt;/td&gt;
+&lt;td&gt;Stock dove&lt;/td&gt;
+&lt;td&gt;Holenduif&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;24&lt;/td&gt;
+&lt;td&gt;Motacilla Alba&lt;/td&gt;
+&lt;td&gt;White wagtail&lt;/td&gt;
+&lt;td&gt;Witte Kwikstaart&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;25&lt;/td&gt;
+&lt;td&gt;Picus Viridis&lt;/td&gt;
+&lt;td&gt;European green woodpecker&lt;/td&gt;
+&lt;td&gt;Groene Specht&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;26&lt;/td&gt;
+&lt;td&gt;Garrulus glandarius&lt;/td&gt;
+&lt;td&gt;Eurasian jay&lt;/td&gt;
+&lt;td&gt;Gaai&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;27&lt;/td&gt;
+&lt;td&gt;Fringilla Montifringilla&lt;/td&gt;
+&lt;td&gt;Brambling&lt;/td&gt;
+&lt;td&gt;Keep&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;28&lt;/td&gt;
+&lt;td&gt;Turdus Iliacus&lt;/td&gt;
+&lt;td&gt;Redwing&lt;/td&gt;
+&lt;td&gt;Koperwiek&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;29&lt;/td&gt;
+&lt;td&gt;Turdus Pilaris&lt;/td&gt;
+&lt;td&gt;Fieldfare&lt;/td&gt;
+&lt;td&gt;Kramsvogel&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;Oriolus Oriolus&lt;/td&gt;
+&lt;td&gt;Eurasian golden oriole&lt;/td&gt;
+&lt;td&gt;Wielewaal&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Pre-processing data&lt;/h3&gt;
+&lt;p&gt;In order to re-shape the data into a format that a ML model can interpret I performed the following steps. &lt;/p&gt;
+&lt;p&gt;1) I Resized the image to have a max dimension of 256 by 256
+2) Centered the image and padded the sides wherever it was less than 256
+3) Cut a 224 x224 section from the middle of the image&lt;/p&gt;
+&lt;p&gt;This builds heavily on the python version of the opencv library as well as numpy. The result is a 224 by 224 photo from any input photo. &lt;/p&gt;
+&lt;p&gt;The resizing of images might not be needed for every possible network, but it might be important to some convolutional architectures. I chose 224 by 224 because these are the dimensions that some of the pre-trained networks available in Keras - such as vgg16 [5] - work with. While it would be massively better for training time to pick a smaller size (say 32x32), the bird is generally only a small portion of the pixels in the image. I fear that if I was to limit the size too aggresively I'd limit the usefulness of my training data too much. &lt;/p&gt;
+&lt;p&gt;The below code snippet shows how the resizing and centering is done.  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;center_image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;Convenience function to return a centered image&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="n"&gt;img_size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# centering&lt;/span&gt;
+    &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;img_size&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+    &lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;img_size&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+    &lt;span class="n"&gt;resized&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]],&lt;/span&gt; &lt;span class="n"&gt;dtype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uint8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;resized&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;:(&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="p"&gt;:(&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;img&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;resized&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I am actually trimming the edges a little as I figured that the bird in any given photo from this data set is likely in the middle of the photo. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;#resize &lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]):&lt;/span&gt;
+    &lt;span class="n"&gt;tile_size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;tile_size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+
+&lt;span class="c1"&gt;#centering&lt;/span&gt;
+&lt;span class="n"&gt;img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;center_image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cv2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tile_size&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;#output should be 224*224px for a quick vggnet16&lt;/span&gt;
+&lt;span class="n"&gt;img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;240&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;240&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;The actual scraping&lt;/h3&gt;
+&lt;p&gt;So now I have methods defined for going through the gallery, collecting the links along the way. For each link I store the metadata and look up whether the licence is in my &lt;code&gt;ALLOWED?LICENCES&lt;/code&gt; list. Roughly 60% of all photo's are blocked by a licence. If there´s a match I download the image.&lt;/p&gt;
+&lt;p&gt;With the 30 bird species I defined earlier it´s just a simple list of dicts to go through for scraping. Here &lt;code&gt;bird_scraper&lt;/code&gt; takes a bird name (used for constructing a folder) and an id to query with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;species&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;bird_scraper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# show a random photo to brighten the day&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;:&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;show_random_img_from_folder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RAWFOLDER&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img alt="Examples" src="/images/vogels4.png"&gt;&lt;/p&gt;
+&lt;p&gt;In the end I show a random image from the samples I collected. I figured that this would be a nice screenshot to include because it demonstrates three problems:
+* The bird versus background problem (when we are training, are we actually modelling the birds or are we overfitting on their habitat?)
+* The odd angle 
+* The bird itself might only be a very small portion of the photo&lt;/p&gt;
+&lt;p&gt;Now, let's see how many photos we captured..&lt;/p&gt;
+&lt;h2&gt;Act 3: Results&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="Scraping Results" src="/images/vogels5.png"&gt;&lt;/p&gt;
+&lt;p&gt;The total number of bird photos I scraped per species is shown in the graph below. Apparently the common birds are all a bit even, while I could not query for more than 90 &lt;em&gt;Groenling&lt;/em&gt; photos. This might be a bug or some kind of anti-scraping measure, as I always thought these birds were fairly common. 
+&lt;img alt="Distribution" src="/images/vogels6.png"&gt;&lt;/p&gt;
+&lt;h2&gt;Discussion&lt;/h2&gt;
+&lt;p&gt;After starting out I decided to limit the scraping to a max of 4000 samples per bird species, which I further brought down by &lt;em&gt;instead of scraping until I had 4000 images&lt;/em&gt; going for 4000 images and just using how many images were allowed as training data. That meant that I scraped roughly half of that number. My goal is not to build the best possible system, but only 2000 samples per bird will mean its likely difficult to train a model. &lt;/p&gt;
+&lt;p&gt;While most data scientists and like will argue that scraping is perfectly legal, the legality of web scraping licenced material is much more a grey area. Roughly 60% of the data is licensed with a 'no derivative' variant or 'all rights reserved'. &lt;/p&gt;
+&lt;p&gt;In total, my scraping netted in &lt;code&gt;60.149&lt;/code&gt; usable images across 30 species. While some classes have a ton of samples (also because I started off with requesting more than I needed), others have much less samples available. This skew in the data should &lt;em&gt;probably&lt;/em&gt; be addressed while constructing a model in the next post in this series.&lt;/p&gt;
+&lt;p&gt;Disclaimer: this blog post details a project that's still very much underway. I intend to retrain the models before I deploy the 'final' models and further refine the technique, and then also update this blog post. The header image is one of my own photos and I will strive to include many as my own photos as test data. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;This blog post benefited from ongoing discussion with experts from a variety of backgrounds.&lt;/strong&gt; I would like to thank a number of people: Linde Koeweiden, Jobien Veninga and Johan van den Burg. I would also like to thank the people behind &lt;a href="waarneming.nl"&gt;Waarneming&lt;/a&gt; for their interest in my project and pointing out issues with my approach.&lt;/p&gt;
+&lt;p&gt;Papers referenced in this post:
+[1]: Christin, S., Hervet, E., &amp;amp; Lecomte, N. (2019). Applications for deep learning in ecology. Methods in Ecology and Evolution, 10(10), 1632-1644.
+[2]: Huang, Y. P., &amp;amp; Basanta, H. (2019). Bird image retrieval and recognition using a deep learning platform. IEEE Access, 7, 66980-66989.
+[3]: Ferreira, A. C., Silva, L. R., Renna, F., Brandl, H. B., Renoult, J. P., Farine, D. R. &amp;amp; Doutrelant, C. (2019). Deep learning-based methods for individual recognition in small birds. bioRxiv, 862557.
+[4]: Cats, Rats, A.I., Oh My! - Ben Hamm: https://www.youtube.com/watch?v=1A-Nf3QIJjM
+[5]: Simonyan, K., &amp;amp; Zisserman, A. (2014). Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556.&lt;/p&gt;</content><category term="Projects"></category><category term="Birding"></category><category term="Programming"></category><category term="Pet Projects"></category><category term="Python"></category><category term="Web Scraping"></category><category term="Machine Learning"></category><category term="Raspberry Pi"></category></entry><entry><title>Google Cloud Platform Certified Data Engineer</title><link href="jeffluppes.github.io/google-cloud-platform-certified-data-engineer.html" rel="alternate"></link><published>2019-12-22T22:42:45+01:00</published><updated>2019-12-22T22:42:45+01:00</updated><author><name>Jeffrey Luppes</name></author><id>tag:None,2019-12-22:jeffluppes.github.io/google-cloud-platform-certified-data-engineer.html</id><summary type="html">&lt;p&gt;&lt;img alt="GCP data Engineer!" src="/images/gcp_data_engineer.png"&gt;&lt;/p&gt;
+&lt;p&gt;Whoooo! I passed the GCP data engineer exam. In truth, I am not really a data engineer.. but it is a role I can fill and I strongly feel that as a data scientist you should be able to have a solid grasp of engineering too, or at least understand …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="GCP data Engineer!" src="/images/gcp_data_engineer.png"&gt;&lt;/p&gt;
+&lt;p&gt;Whoooo! I passed the GCP data engineer exam. In truth, I am not really a data engineer.. but it is a role I can fill and I strongly feel that as a data scientist you should be able to have a solid grasp of engineering too, or at least understand it well enough to know what the challenges are. The exam was about 2 hours long and is supposed to be roughly equivalent to the AWS professional level certifications. Funny enough, it actually covers a lot of the ML engineering topics. Perhaps there's a ML exam in the works?&lt;/p&gt;
+&lt;p&gt;*Update: As of 2020 there is now a GCP Machine Learning certification. I passed it in 2021. You can read more about it &lt;a href="https://medium.com/towards-data-science/a-comprehensive-study-guide-for-the-google-professional-machine-learning-engineer-certification-1e411db4d2cf"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;!-- more --&gt;
+
+&lt;p&gt;I suppose I got lucky with the matter. I've been working with GCP for about a year now and I've mostly been involved whenever there's a ML demand. &lt;/p&gt;
+&lt;p&gt;As for studying strategies: I had a four-day training back in August. After that, I spent about 20 hours doing coursera courses and about 16 studying with the exam guide as my guideline. Particularly the last part was vital. &lt;/p&gt;
+&lt;p&gt;You can check out the certification here: https://www.credential.net/a015b522-77d3-48c0-b7f7-16c9948a9ac4&lt;/p&gt;</content><category term="Cloud"></category><category term="GCP"></category><category term="Programming"></category><category term="Google"></category><category term="Certifications"></category></entry><entry><title>Big Data Series</title><link href="jeffluppes.github.io/big-data-series.html" rel="alternate"></link><published>2017-09-02T22:42:45+02:00</published><updated>2017-09-02T22:42:45+02:00</updated><author><name>Jeffrey Luppes</name></author><id>tag:None,2017-09-02:jeffluppes.github.io/big-data-series.html</id><summary type="html">&lt;p&gt;I've just added three blog posts I made during the &lt;a href="http://www.ru.nl/studiegids/science/vm/osirislinks/ibc/nwi-ibc036/"&gt;Big Data bachelor course&lt;/a&gt; given at the Radboud university. As a master's student I'm allowed to take on one or two bachelor courses if there's a good reason... because no other course really goes into Spark, hadoop and Scala I …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've just added three blog posts I made during the &lt;a href="http://www.ru.nl/studiegids/science/vm/osirislinks/ibc/nwi-ibc036/"&gt;Big Data bachelor course&lt;/a&gt; given at the Radboud university. As a master's student I'm allowed to take on one or two bachelor courses if there's a good reason... because no other course really goes into Spark, hadoop and Scala I figured it would be a nice addition to the Python-heavy curriculum. Not that I dislike Python, of course. &lt;/p&gt;
+&lt;p&gt;There are three posts in total:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hadoop and the HDFS&lt;/strong&gt; - an introduction to hadoop and HDFS.
+&lt;strong&gt;Spark&lt;/strong&gt; - On looking at a Kaggle competition data set in Spark
+&lt;strong&gt;The class project&lt;/strong&gt;: A solo project about submitting code to a national research cluster and running queries against 1.73 billion web pages. &lt;/p&gt;
+&lt;p&gt;You can find the posts here: &lt;a href="/categories/Assignment/Big-Data-Series/"&gt;Big Data Series&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I learnt a lot and finished the class project with a 9.5, so hoped to share it.&lt;/p&gt;</content><category term="Academics"></category><category term="University"></category><category term="Programming"></category><category term="Spark"></category><category term="Scala"></category><category term="Hadoop"></category></entry><entry><title>Big Data Series - SurfSara and the Common Crawl</title><link href="jeffluppes.github.io/big-data-series-surfsara-and-the-common-crawl.html" rel="alternate"></link><published>2017-07-07T23:03:48+02:00</published><updated>2017-07-07T23:03:48+02:00</updated><author><name>Jeffrey Luppes</name></author><id>tag:None,2017-07-07:jeffluppes.github.io/big-data-series-surfsara-and-the-common-crawl.html</id><summary type="html">&lt;p&gt;&lt;img alt="I wish I learned Hadoop while still in diapers.." src="https://s-media-cache-ak0.pinimg.com/236x/b0/e3/cb/b0e3cb28debd0cc08f2bb5482c638b51--geek-humour-caption-contest.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;This post will have a slightly different angle than the previous posts in the Big Data Course series. The goal for this post is just to detail my progress on a self-chosen, free format project which utilizes the &lt;a href="https://userinfo.surfsara.nl/systems/hadoop/hathi"&gt;Surfsara Hadoop cluster&lt;/a&gt; and the goal is not to solve a problem …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="I wish I learned Hadoop while still in diapers.." src="https://s-media-cache-ak0.pinimg.com/236x/b0/e3/cb/b0e3cb28debd0cc08f2bb5482c638b51--geek-humour-caption-contest.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;This post will have a slightly different angle than the previous posts in the Big Data Course series. The goal for this post is just to detail my progress on a self-chosen, free format project which utilizes the &lt;a href="https://userinfo.surfsara.nl/systems/hadoop/hathi"&gt;Surfsara Hadoop cluster&lt;/a&gt; and the goal is not to solve a problem but rather give an overview of the problems I encountered and the little things I came up with. I intend to post these both on the mini-site for the course and a personal blog, my apologies if my tone is a bit bland as a result. Here we go!&lt;/p&gt;
+&lt;h2&gt;Hathi and Surfsara&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.surf.nl/en/about-surf/subsidiaries/surfsara/"&gt;SurfSara&lt;/a&gt; is a Dutch institute that provides web and data services to universities and schools. Students may know SURF from the cheap software or the internet they provide to high schools. &lt;a href="https://nl.wikipedia.org/wiki/SURFsara_Nationaal_HPC_Centrum"&gt;Sara, though&lt;/a&gt; is the high performance computing department, and used to be the academic center for computing prior to merging into SURF. They do a lot of cool things with big data which over time has come to include a Hadoop cluster named Hathi. &lt;/p&gt;
+&lt;h2&gt;The Common Crawl&lt;/h2&gt;
+&lt;p&gt;The Hathi cluster hosts a February 2016 collection from the Common Crawl. The Common Crawl is a collection of crawled web pages which comes pretty close to crawling the entirety of the web. The data hosted is in the petabyte range, however we only have access to a single snapshot.. which still takes up a good amount of terabytes and contains 1.73 billion urls. You don't want to download this on your mobile phone's data cap. &lt;/p&gt;
+&lt;p&gt;The Common Crawl Data is stored in WARC files (Web Archive), an open-source format. &lt;/p&gt;
+&lt;p&gt;So with all this data, there should be a lot of things to do! &lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;Some ideas I had at this point:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Count the length of all payloads across all pages on the internet and get some statistics.&lt;/li&gt;
+&lt;li&gt;See how popular certain HTML tags are.&lt;/li&gt;
+&lt;li&gt;Perform some semantic analysis on pages referring to presidents or politics.&lt;/li&gt;
+&lt;li&gt;Look at how extreme right communities differ from extreme left communities in terms of vocabularies and word frequencies.&lt;/li&gt;
+&lt;li&gt;Similarly, compare places like &lt;strong&gt;4chan&lt;/strong&gt; and &lt;strong&gt;Reddit&lt;/strong&gt; with each other. Who's more vile? There's some easy libraries for sentiment analysis..&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And so on.. but what I also played with is something closer to home. I kayak a lot and the kayaking community in the Netherlands is slowly dying: young people are turning away from adventurous sports in general, and kayaking is seen as boring when compared to other, fast-paced water sports (Not necessarily true, but still). Could I try to find places where it's worthwhile to advertise about kayaking perhaps? Or identify communities of people who also kayak, e.g. mountain bikers, sailers, bikers etc? Or perhaps from another perspective, can I try to do some dynamic filtering based on brands or parts of the sport to see what people associate it with?&lt;/p&gt;
+&lt;p&gt;Plenty of ideas, so let's get started. &lt;/p&gt;
+&lt;h2&gt;Part 2 - Setting up&lt;/h2&gt;
+&lt;p&gt;I'm using my Windows laptop running a (Ubuntu) virtual machine which will be used to connect to SurfSara and develop the code. Similarly to the previous assignment in this series this works with a docker image and lots of command line work. Nothing to be scared of. &lt;/p&gt;
+&lt;p&gt;Running an example program worked fine on the cluster. But I wanted something more than (redirectable) output in my terminal. &lt;/p&gt;
+&lt;p&gt;In order to track the jobs given to Hathi a web interface is available. This is not really supported on Windows, but still doable. Using the &lt;a href="http://www.secure-endpoints.com/heimdal/"&gt;Heimdall implementation&lt;/a&gt; of Kerberos and the &lt;a href="https://www.secure-endpoints.com/netidmgr/v2//"&gt;Identity Manager&lt;/a&gt; I can set up my credentials. I found that I needed to stray from the &lt;a href="http://computing.help.inf.ed.ac.uk/kerberos-windows"&gt;sort-of specific instructions courtesy of the Uni of Edinbourgh here&lt;/a&gt; and actually ended up installing the Heimdall tools fully. I then had to tweak a couple of configurations inside my firefox browser in order to work with Kerberos, but I finally could inspect the progress of my submissions. This seems easy, but in the end was a non-trivial part that took hours to do and even then Firefox was prone to memory leaks.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="A snapshot of the web interface to report on the progress of a submission" src="http://puu.sh/wE9DP/fa748088bf.png"&gt;&lt;/p&gt;
+&lt;h2&gt;Part 3 - A local test&lt;/h2&gt;
+&lt;p&gt;I started working with the spark notebook that was provided and after some tweaking around I could run code on a local WARC file containing the course website. This was an iterative process: I started with the grand idea of what I could do but after a few hours I found that I still had made no progress. Following Arjen's suggestion of settling for a simpler challenge when stuck I tried to implement the most basic word count. This was OK-ish, and could be expanded to the full crawl albeit a bit sluggish (slow), which would be decent towards meeting the assignment criteria but I'll let you be the judge of that. &lt;/p&gt;
+&lt;p&gt;I also avoided SQL this time, as I recall reading that there are some issues when running SQL-queries on something of the order of 100TB. This could complicate things considering our 'stack' already consists of so many applications and tools. Additionally, having worked with MySQL as a teenager I'm still pretty sure that straight up SQL queries on non-indexed text fields is a baaaad idea.  &lt;/p&gt;
+&lt;p&gt;I felt like I still really wanted to do more with the kayaking thing. After some pondering I settled on the following order of battle:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Convert the crawl to text and look for the string &lt;code&gt;kayaking&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;For the full crawl: figure out how to filter for a specific brand (e.g. &lt;code&gt;bever&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Construct a word count list upon the pages that get returned&lt;/li&gt;
+&lt;li&gt;Output these to a file so I can work with it&lt;/li&gt;
+&lt;li&gt;Visualize a word cloud, e.g. using the &lt;code&gt;d3.js&lt;/code&gt; method already readily available, or something in python (This is outside the scope of this assignment, and I'll add it later)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So I started with filtering for the text string &lt;code&gt;kayaking&lt;/code&gt; after calling Arjen's HTML2Text method (step 1).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;    map(wr =&amp;gt; HTML2Txt(getContent(wr._2))).
+    map(w =&amp;gt; w.toLowerCase()).
+    filter(w =&amp;gt; w.contains(&amp;quot;kayaking&amp;quot;)).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now on the basic corpus this returns my own page obviously, as I overshared my love for kayaking a fair bit. &lt;/p&gt;
+&lt;p&gt;As per &lt;a href="https://spark.apache.org/examples.html"&gt;Apache Spark's example a word count&lt;/a&gt; is implemented with just a few lines of code (step 2):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;    textFile.flatMap(line =&amp;gt; line.split(&amp;quot; &amp;quot;))
+                     .map(word =&amp;gt; (word, 1))
+                     .reduceByKey(_ + _)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is a bit crude, as the "words" will include code snippets like the one found on this blog, and random gibberish like solitary punctuation marks. For a full pass over the crawl though I don't think it'll matter, as full words will drown out the noise. &lt;/p&gt;
+&lt;p&gt;So now I've got a big old list of words with counts. Can I save this? Locally, I can use:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;warcl.saveAsTextFile("testje.txt")&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;I'm guessing this will be different for the full crawl but one problem at a time. This creates a folder (!) with several files: output can be found in one file here. It's interesting that everything to save into a text file was done below the hood without a warning being thrown at my face for not saving to a hdfs!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Much surprise when testje.txt turned out to be the folder and not the file!" src="http://puu.sh/wIZAR/429e39200c.png"&gt;&lt;/p&gt;
+&lt;p&gt;There are some caveats with this:
+* In the presentations some people noticed an integer overflow when using word counts, can I figure out something for this?
+* I need to filter out common words such as "a", "the" and so on. I can do this at a high level or when making the visualisation later on. Will save the problem for now..
+* Between the docker container and my Ubuntu host I found that I can copy files using docker cp. What if my files are big, though? And what happens on the full crawl. Write to standard output and just do everything on the cluster? 
+* May I need to purge tags and code from my result file?
+* How can I easily scale this up to.. say looking at 20 brands at once?&lt;/p&gt;
+&lt;p&gt;As was shown in the terminal above, it doesn't make sense yet to construct a word cloud from a single page, I suppose though that the same steps go for the full cluster. Let's move on and see if we can export the code to the full crawl!&lt;/p&gt;
+&lt;h2&gt;Part 4 - From Concept to Cluster&lt;/h2&gt;
+&lt;p&gt;The following section will detail the process I went through when exporting the app to the cluster. &lt;/p&gt;
+&lt;h3&gt;Attempt 1 - Top 300 words over all sites containing "Kayaking"&lt;/h3&gt;
+&lt;p&gt;The first attempt is going to go over the entire crawl and look for the term 'kayaking' amongst the payload of all sites. I see some potential issues with this.. mainly because I'm asking for the entire crawl to be parsed through html2text - I reckon that is going to be an immense bottleneck. &lt;/p&gt;
+&lt;p&gt;The core idea is explained in the following two code snippets..&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;val warcc = warcf.
+    filter{ _._2.header.warcTypeIdx == 2 /* response */ }.
+    filter{ _._2.getHttpHeader().statusCode == 200 }.
+    filter{ _._2.getHttpHeader().contentType != null }.
+    filter{ _._2.getHttpHeader().contentType.startsWith(&amp;quot;text/html&amp;quot;) }
+    .map(wr =&amp;gt; HTML2Txt(getContent(wr._2)))
+    .map(w =&amp;gt; w.replaceAll(&amp;quot;[?!,.\&amp;quot;-()]&amp;quot;, &amp;quot;&amp;quot;))
+    .map(w =&amp;gt; w.toLowerCase())
+    .filter(_ != &amp;quot;&amp;quot;)
+    .filter(w =&amp;gt; w.contains(&amp;quot;kayaking&amp;quot;))
+    .cache()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The above snippet checks for non-empty input and skips it. It should be refactored, but I'm still working on more ideas so I felt it should not be a big priority right now.&lt;/p&gt;
+&lt;p&gt;It also checks for odd characters, e.g. ?! et cetera- we don't want any of that sillyness. &lt;/p&gt;
+&lt;p&gt;Finally, this big pile of text needs to get filtered for the phrase &lt;code&gt;kayaking&lt;/code&gt; - I expect this line just after HTML2Txt to be a huge bottleneck. &lt;/p&gt;
+&lt;p&gt;The next snippet does the standard MR word count. I've added a sort and top-300 selection. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;now&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;construct&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;with&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;anything&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pages&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;we&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;have&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;found&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;per&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;spark&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;example&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;spark&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apache&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;examples&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;warcl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;warcc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;flatMap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reduceByKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;commonWords&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_1&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sortBy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;take&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Lastly, this gets printed to the output. &lt;/p&gt;
+&lt;h4&gt;Filtering for Common words&lt;/h4&gt;
+&lt;p&gt;I browsed around for a solution to the common word problem, as I didn't feel like editing my top 300 list every time. So I found &lt;a href="https://stackoverflow.com/questions/41618474/filter-stop-words-in-spark"&gt;this stackoverflow question&lt;/a&gt; about filtering words out of my input, by means of a sequence. &lt;/p&gt;
+&lt;p&gt;So I still needed a sequence at that point, and I found &lt;a href="http://xpo6.com/list-of-english-stop-words/"&gt;this list of English stop words..&lt;/a&gt; which brings me to wonder if I'm going to see other languages pop to the top of the list. One problem at a time though. For clarity, here's the complete list. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;commonWords&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;about&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;above&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;above&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;across&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;after&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;afterwards&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;again&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;against&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;all&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;almost&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;alone&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;along&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;already&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;also&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;although&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;always&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;am&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;among&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;amongst&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;amoungst&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;amount&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;an&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;and&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;another&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;any&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;anyhow&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;anyone&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;anything&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;anyway&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;anywhere&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;are&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;around&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;as&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;at&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;back&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;be&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;became&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;because&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;become&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;becomes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;becoming&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;been&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;before&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;beforehand&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;behind&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;being&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;below&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;beside&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;besides&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;between&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;beyond&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;bill&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;both&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;bottom&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;but&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;by&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;call&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;can&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;cannot&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;cant&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;co&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;con&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;could&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;couldnt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;de&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;describe&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;detail&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;do&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;done&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;down&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;due&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;during&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;each&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;eg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;eight&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;either&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;eleven&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;else&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;elsewhere&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;empty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;enough&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;etc&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;even&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;ever&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;every&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;everyone&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;everything&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;everywhere&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;except&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;few&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;fifteen&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;fify&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;fill&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;find&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;five&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;for&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;former&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;formerly&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;forty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;found&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;four&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;from&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;front&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;full&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;further&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;give&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;go&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;had&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;has&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;hasnt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;have&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;he&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;hence&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;her&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;here&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;hereafter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;hereby&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;herein&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;hereupon&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;hers&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;herself&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;him&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;himself&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;his&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;how&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;however&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;hundred&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;ie&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;if&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;in&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;inc&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;indeed&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;into&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;is&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;it&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;its&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;itself&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;keep&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;last&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;latter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;latterly&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;least&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;less&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;ltd&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;made&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;many&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;may&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;me&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;meanwhile&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;might&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;mill&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;mine&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;more&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;moreover&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;most&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;mostly&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;move&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;much&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;must&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;my&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;myself&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;namely&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;neither&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;never&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;nevertheless&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;next&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;nine&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;no&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;nobody&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;none&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;noone&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;nor&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;not&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;nothing&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;now&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;nowhere&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;of&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;off&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;often&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;on&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;once&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;one&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;only&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;onto&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;or&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;other&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;others&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;otherwise&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;our&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;ours&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;ourselves&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;out&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;over&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;own&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;part&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;per&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;perhaps&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;please&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;put&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;rather&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;re&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;same&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;see&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;seem&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;seemed&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;seeming&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;seems&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;serious&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;several&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;she&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;should&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;show&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;side&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;since&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;sincere&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;six&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;sixty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;so&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;some&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;somehow&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;someone&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;something&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;sometime&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;sometimes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;somewhere&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;still&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;such&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;system&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;take&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;ten&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;than&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;that&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;the&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;their&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;them&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;themselves&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;then&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;thence&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;there&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;thereafter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;thereby&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;therefore&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;therein&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;thereupon&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;these&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;they&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;third&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;this&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;those&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;though&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;three&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;through&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;throughout&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;thru&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;thus&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;to&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;together&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;too&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;top&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;toward&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;towards&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;twelve&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;twenty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;two&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;un&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;under&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;until&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;up&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;upon&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;us&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;very&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;via&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;was&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;we&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;well&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;were&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;what&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whatever&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;when&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whence&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whenever&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;where&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whereafter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whereas&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whereby&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;wherein&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whereupon&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;wherever&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whether&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;which&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;while&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;who&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whoever&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whole&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whom&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;whose&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;why&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;will&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;with&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;within&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;without&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;would&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;yet&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;you&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;your&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;yours&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;yourself&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;yourselves&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;the&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;Getting the code to Hathi&lt;/h4&gt;
+&lt;p&gt;So right now I have a very basic and simple example Scala app which is confined to the notebook. I still need to do some house keeping in order to get it on the cluster.&lt;/p&gt;
+&lt;p&gt;The first step is exporting it to scala. This opens the file in my browser. &lt;strong&gt;I stored the file in a public location on the web (so I could get it via wget from the docker and pushed my updates to it&lt;/strong&gt; - this allowed me to edit the file using the tools on my own machine and pull it when I want to run it on the cluster. This greatly reduced my effort by reducing my dependency on tools like &lt;code&gt;vim&lt;/code&gt; - which, while excellent, do not have the range of capabilities like atom or VS Code do. Again, personal preference. &lt;/p&gt;
+&lt;p&gt;I then used the skeleton from the example app on the hathi-surfsara image, replacing the original file and deleting the &lt;code&gt;/target/&lt;/code&gt; folder. I made sure to follow the steps needed &lt;a href="http://spark.apache.org/docs/2.1.1/quick-start.html#self-contained-applications"&gt;in the creating a self-contained app tutorial&lt;/a&gt;: which meant stripping some code and defining a main method. Additionally, I added &lt;code&gt;jsoup&lt;/code&gt; to the &lt;code&gt;libraryDependencies&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;Using &lt;code&gt;sbt assembly&lt;/code&gt; I then created a fat jar (stored in &lt;code&gt;/target/&lt;/code&gt;) and submitted it via &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;spark-submit --master yarn --deploy-mode cluster --num-executors 300 --class&lt;/code&gt;
+&lt;code&gt;org.rubigdata.RUBigDataApp /hathi-client/spark/rubigdata/target/scala-2.11/RUBigDataApp-assembly-1.0.jar&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;So for the next 1 minute 40 seconds I was thrilled! Hathi picked up my submission and seemed happy to do it. Then I got a nullPointerException.. turned out I was checking for the &lt;code&gt;contentType&lt;/code&gt; before even checking if this wasn't &lt;code&gt;null&lt;/code&gt; instead of the other way around.. eager beaver. I had the bright idea to implement a check for it, but did so in the wrong order.&lt;/p&gt;
+&lt;p&gt;The next big error was regarding my use of &lt;code&gt;saveAsTextFile&lt;/code&gt;. Because this would be called many times (once per warc file?) I would get the error that the folder already existed. I took the saveAsTextFile out, and redirected output about the top 300 to the stdout instead. &lt;/p&gt;
+&lt;p&gt;After this small fix the code was submitted and I went to bed..&lt;/p&gt;
+&lt;p&gt;After &lt;strong&gt;8 hours, 36 minutes and 45 seconds&lt;/strong&gt; my code apparently hit an error: potentially having to do with a block being unavailable on the cluster. Just as I was rolling over hugging my pillow, the little cluster named Hathi was in tears. Had it failed the user, or had the user failed it?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;User class threw exception: org.apache.spark.SparkException: Job aborted due to stage failure: Task 1263 in stage 0.0 failed 4 times, most recent failure: Lost task 1263.3 in stage 0.0 (TID 3214, worker168.hathi.surfsara.nl, executor 256): org.apache.hadoop.hdfs.BlockMissingException: Could not obtain block: BP-16922093-145.100.41.3-1392681459262:blk_1262268700_188594112 file=/data/public/common-crawl/crawl-data/CC-MAIN-2016-07/segments/1454701146196.88/warc/CC-MAIN-20160205193906-00216-ip-10-236-182-209.ec2.internal.warc.gz
+at org.apache.hadoop.hdfs.DFSInputStream.chooseDataNode(DFSInputStream.java:945) 
+at org.apache.hadoop.hdfs.DFSInputStream.blockSeekTo(DFSInputStream.java:604) 
+at org.apache.hadoop.hdfs.DFSInputStream.readWithStrategy(DFSInputStream.java:844) 
+at org.apache.hadoop.hdfs.DFSInputStream.read(DFSInputStream.java:896)
+at java.io.DataInputStream.read(DataInputStream.java:149) 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I tried to google the error, but found nothing that I could do as a normal user of the cluster. Most of these had to do with missing privs (might be possible) or corruption. &lt;/p&gt;
+&lt;p&gt;&lt;a href="http://head05.hathi.surfsara.nl:8088/cluster/app/application_1486393309284_17724"&gt;Link to the application details&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I've posted an issue, meanwhile I'm going to run it on a single warc segment. &lt;/p&gt;
+&lt;h3&gt;Attempt 2 - One segment&lt;/h3&gt;
+&lt;p&gt;Using the index I've looked for &lt;code&gt;https://www.ukriversguidebook.co.uk/&lt;/code&gt; - a large internet community of kayakers. This gives me a neat &lt;a href="http://index.commoncrawl.org/CC-MAIN-2016-07-index?url=https%3A%2F%2Fwww.ukriversguidebook.co.uk%2F&amp;amp;output=json"&gt;JSON output&lt;/a&gt; containing the locations of all hits. I just picked one- and added it to my code as &lt;code&gt;"/data/public/common-crawl/crawl-data/CC-MAIN-2016-07/segments/1454701148402.62/*"&lt;/code&gt;. The rest of the code remained unchanged for the reproducibility of errors. I submitted it with 300 executors and went to get a shave. &lt;/p&gt;
+&lt;p&gt;15 minutes and 15 seconds later the submission was done, much to my surprise. I had covered 698 tasks. Bear in mind this submission was 1% of the entire crawl, and I stomped through with 300 executors. No error was given, and my glorious output was waiting for me. &lt;/p&gt;
+&lt;p&gt;The following screenshot shows the inside of the Applicationmanager just after starting. Honestly, glancing over this felt like being inside mission control at NASA. 
+&lt;img alt="Spark Jobs Overview (click for larger version)" src="http://puu.sh/wMZhb/48eb418bc5.png"&gt;&lt;/p&gt;
+&lt;p&gt;Now the curious reader will want to know.. what did we get from this? &lt;/p&gt;
+&lt;p&gt;Earlier I redirected output to stdout: this is where my little frequency list ended up. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;womens;849513;
+ski;774168;
+jackets;738558;
+-;703664;
+ ;673135;
+clothing;614007;
+snowboard;581317;
+accessories;492069;
+pants;475875;
+bike;467037;
+bikes;463572;
+mens;460966;
+bags;456382;
+shop;430335;
+sunglasses;426637;
+shoes;423502;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There's still some noise. Apparently I missed a white space and '-'... oh well.  &lt;/p&gt;
+&lt;p&gt;This list seems to indicate that most websites referring to kayaking sell clothing and gear for outdoor activities. That makes sense, given that this is a huge industry with many competitors. Perhaps it would be a good idea to create a second list with words common in retail. It's interesting that words like &lt;code&gt;sea&lt;/code&gt; and &lt;code&gt;nature&lt;/code&gt; don't appear at all. The word &lt;code&gt;safety&lt;/code&gt; - which is at the heart of the sport is ranked #273. Perhaps this is just a batch with a lot of retail sites, but it seems like a decent idea to mine retail terms in order to filter them out for the next iteration. &lt;/p&gt;
+&lt;p&gt;So I started to work and added another 150 words to the list with all those retail phrases. I refined the method and submitted the jar once more. Nothing was really different apart from a little retouching. Again, the code worked fine and I got a new list! &lt;/p&gt;
+&lt;p&gt;I then wrote a little bit of javascript to convert the frequency list I had to a payload that could be used for a word cloud (credits: https://github.com/wvengen/d3-wordcloud) and generated the visualization. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Now finally, we can use this!" src="http://puu.sh/wN9Kn/cab4b34482.png"&gt;&lt;/p&gt;
+&lt;p&gt;The word cloud is pretty cool. Most of the junk has been filtered and we see a lot of sports and outdoor-related terms. I guess that the market for kayaking is the same as the market for bikes and wakeboarding. As a mountain biker myself this is amusing. It also shows Wisconsin. This might be random, but the American state also borders lake Michigan and other large lakes and rivers. &lt;/p&gt;
+&lt;h3&gt;Attempt 3 - Selective filtering, and finding brands!&lt;/h3&gt;
+&lt;p&gt;Lastly I wanted to filter this subsection for specific brands. While I could easily create a list of 50 or so brands of varying popularity I chose Rockpool. Rockpool is a manufacturer of sea kayaks with several models being extremely popular in the expedition kayaking scene. In a year or so, when I graduate.. you can pretty much guess where my pay check is going to. Look at this boat!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A Rockpool kayak model: The Taran (source: ebay)" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/ak0AAOSwyQtVtpHb/$_86.JPG"&gt;&lt;/p&gt;
+&lt;p&gt;Jokes aside, let's find the same word list as for kayaking. I added a brands set at first, but that didn't work out quite well. While I could iterate through it with the following code..&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="n"&gt;brands&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;Set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;p&amp;amp;h&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;valley&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;rockpool&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;peakuk&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nf"&gt;for &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;brand&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;brands&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;brand&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="n"&gt;warcd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;warcc&lt;/span&gt; &lt;span class="o"&gt;/*&lt;/span&gt;&lt;span class="n"&gt;temp&lt;/span&gt;&lt;span class="o"&gt;*/&lt;/span&gt;
+        &lt;span class="nf"&gt;warcd.cache&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;     &lt;span class="o"&gt;/*&lt;/span&gt;&lt;span class="n"&gt;lazy&lt;/span&gt; &lt;span class="n"&gt;evaluation&lt;/span&gt;&lt;span class="o"&gt;*/&lt;/span&gt;
+        &lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="n"&gt;warcl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;warcd.filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;w.contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;brand&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="nf"&gt;.flatMap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;_&lt;span class="nf"&gt;.split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="nf"&gt;.filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;_ &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="nf"&gt;.map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="nf"&gt;.reduceByKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;_ &lt;span class="o"&gt;+&lt;/span&gt; _&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="nf"&gt;.filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;commonWords.contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w._1&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+            &lt;span class="nf"&gt;.sortBy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;w._2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="nf"&gt;.take&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;300&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I would continously narrow down my collection. E.g. the first brand would go fine, but the second brand would be filtered from the subsection of the first brand and so on. This is due to Spark's Lazy Evaluation^tm where nothing is actually executed until a reduce operation- and in my code I only used &lt;code&gt;reduceByKey&lt;/code&gt; until the end of each brand-specific execution. Regardless, being my favourite kayak manufacturer I chose Rockpool and got the following list: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;{text: &amp;#39;nov&amp;#39;, size: 439},
+{text: &amp;#39;mar&amp;#39;, size: 407},
+{text: &amp;#39;jan&amp;#39;, size: 382},
+{text: &amp;#39;dec&amp;#39;, size: 379},
+{text: &amp;#39;apr&amp;#39;, size: 369},
+{text: &amp;#39;feb&amp;#39;, size: 363},
+{text: &amp;#39;oct&amp;#39;, size: 362},
+{text: &amp;#39;jul&amp;#39;, size: 355},
+{text: &amp;#39;jun&amp;#39;, size: 352},
+{text: &amp;#39;sep&amp;#39;, size: 338},
+{text: &amp;#39;2006&amp;#39;, size: 282},
+{text: &amp;#39;aug&amp;#39;, size: 265},
+{text: &amp;#39;ago&amp;#39;, size: 216},
+{text: &amp;#39;stay&amp;#39;, size: 214},
+{text: &amp;#39;cottage&amp;#39;, size: 214},
+{text: &amp;#39;13&amp;#39;, size: 202},
+{text: &amp;#39;loch&amp;#39;, size: 201},
+{text: &amp;#39;12&amp;#39;, size: 199},
+{text: &amp;#39;16&amp;#39;, size: 194},
+{text: &amp;#39;holiday&amp;#39;, size: 194},
+{text: &amp;#39;house&amp;#39;, size: 193},
+{text: &amp;#39;21&amp;#39;, size: 189},
+{text: &amp;#39;11&amp;#39;, size: 188},
+{text: &amp;#39;17&amp;#39;, size: 188},
+{text: &amp;#39;20&amp;#39;, size: 186},
+{text: &amp;#39;22&amp;#39;, size: 185},
+{text: &amp;#39;15&amp;#39;, size: 181},
+{text: &amp;#39;14&amp;#39;, size: 179},
+{text: &amp;#39;27&amp;#39;, size: 176},
+{text: &amp;#39;19&amp;#39;, size: 174},
+{text: &amp;#39;night&amp;#39;, size: 174},
+{text: &amp;#39;28&amp;#39;, size: 169},
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;While some words are close (e.g. &lt;code&gt;loch&lt;/code&gt;) it seems we picked up a lot of calendar or blog contents. After some manual (I'm not going to run this on the cluster and wait another 20 minutes) removal of the nonsense I got the following list: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;{text: &amp;#39;ago&amp;#39;, size: 216},
+{text: &amp;#39;stay&amp;#39;, size: 214},
+{text: &amp;#39;cottage&amp;#39;, size: 214},
+{text: &amp;#39;loch&amp;#39;, size: 201},
+{text: &amp;#39;16&amp;#39;, size: 194},
+{text: &amp;#39;holiday&amp;#39;, size: 194},
+{text: &amp;#39;house&amp;#39;, size: 193},
+{text: &amp;#39;night&amp;#39;, size: 174},
+{text: &amp;#39;home&amp;#39;, size: 167},
+{text: &amp;#39;details&amp;#39;, size: 165},
+{text: &amp;#39;18&amp;#39;, size: 157},
+{text: &amp;#39;view&amp;#39;, size: 156},
+{text: &amp;#39;min&amp;#39;, size: 155},
+{text: &amp;#39;book&amp;#39;, size: 155},
+{text: &amp;#39;great&amp;#39;, size: 137},
+{text: &amp;#39;views&amp;#39;, size: 137},
+{text: &amp;#39;away&amp;#39;, size: 127},
+{text: &amp;#39;sea&amp;#39;, size: 126},
+{text: &amp;#39;reviews&amp;#39;, size: 125},
+{text: &amp;#39;close&amp;#39;, size: 118},
+{text: &amp;#39;years&amp;#39;, size: 117},
+{text: &amp;#39;sleeps&amp;#39;, size: 114},
+{text: &amp;#39;5/5&amp;#39;, size: 110},
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is more like it. I kept the 16 and 18 as they are both kayak models. Overall, I pruned about 50 words- I might add a regular expression on my next run on the cluster. However, something like &lt;code&gt;5/5&lt;/code&gt; (a rating, included in the list above) might get lost unintentionally. The word cloud on 'Rockpool' is as follows:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="The word cloud for filtering kayaking along with the brand rockpool" src="http://puu.sh/wNddt/17384de36a.png"&gt;&lt;/p&gt;
+&lt;p&gt;The only downside to this is the small corpus I get. Even though I used 1% of the common crawl, most of the words appear about 200 times. I wish I could run it again to get more data, but I do not want to drain up the entire cluster for a entire day. &lt;/p&gt;
+&lt;h3&gt;EDIT: Full crawl!&lt;/h3&gt;
+&lt;p&gt;I re-submitted the first job that went over the entire crawl. This time I used the retailWords list, as well as filtering for pages that also contained the word &lt;code&gt;sea&lt;/code&gt;. I opted to get the top 1000 words instead. The submission was succesful and ended after 10hrs, 47mins, 12sec. In total 69800 jobs were queued. The top 20 words on the entire crawl are:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;    &amp;#39;snowboard&amp;#39; 58172829
+    &amp;#39;accessories&amp;#39; 47357717
+    &amp;#39;bike&amp;#39; 46462542
+    &amp;#39;bikes&amp;#39; 45888592
+    &amp;#39;shop&amp;#39; 40646038
+    &amp;#39;country&amp;#39; 28916820
+    &amp;#39;water&amp;#39; 27793604
+    &amp;#39;cross&amp;#39; 26669810
+    &amp;#39;casual&amp;#39; 26185575
+    &amp;#39;gear&amp;#39; 22752323
+    &amp;#39;wisconsin&amp;#39; 21410085
+    &amp;#39;wakeboard&amp;#39; 21104545
+    &amp;#39;travel&amp;#39; 19564475
+    &amp;#39;packages&amp;#39; 18880893
+    &amp;#39;hiking&amp;#39; 18660510
+    &amp;#39;forum&amp;#39; 17253484
+    &amp;#39;helmets&amp;#39; 16881583
+    &amp;#39;royal&amp;#39; 16747143
+    &amp;#39;bindings&amp;#39; 16617302
+    &amp;#39;house&amp;#39; 15067835
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And the resulting word cloud is as follows:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A full pass over the crawl resulted in the top 1000 words related to Kayaking. Click on the image for a larger version." src="https://i.redd.it/sz1qjbc4luaz.png"&gt;&lt;/p&gt;
+&lt;p&gt;That concludes this blog post!&lt;/p&gt;
+&lt;h2&gt;Part 5 - Evaluation&lt;/h2&gt;
+&lt;p&gt;In the above post I walked you through my adventures with the Common Crawl and the Dutch National Hathi Hadoop Cluster. I started off with basic examples and tried to solve my own problems as I went. Eventually I formed the idea of generating a word cloud based on the term &lt;code&gt;kayaking&lt;/code&gt;. When it apparently was not possible to make a pass over the entire crawl I grabbed a 900 GB partition and worked with 1% of the data. My idea was still to look for how individual brands are viewed: e.g. what words are asociated with brands like Rockpool?  Finally, I used javascript and the &lt;code&gt;d3.js&lt;/code&gt; library to generate word clouds of my findings. &lt;/p&gt;
+&lt;p&gt;Though I feel like I had to water down my challenges I feel like there's a lot of things that I can still do with all this data. I'm still in unfamiliar territory and I learnt more each time. I'm still working on this project and I'd like to continue building a few interesting vizualisations. I'm glad I didn't do the standard project, and it just feels better to try out many different things and get something of yourself out of a project like this.&lt;/p&gt;
+&lt;p&gt;Overal I spent about 40 hours or so on this project. &lt;/p&gt;
+&lt;p&gt;Dear reader, I thank you for your interest in this blog. &lt;/p&gt;
+&lt;h2&gt;Part 6 - Course Evaluation&lt;/h2&gt;
+&lt;p&gt;Though I already submitted the course evaluation I felt like it would be nice to include a few words on the process I went through for this course. I feel that using git, github and in particular the github pages tool - were enriching and powerful. I'm planning on including this repo with my own website, although I havent updated the latter in over two years. If I was a 2nd or 3rd-year student however, this would have instantly given me a portfolio of sorts which is incredibly useful to have. &lt;/p&gt;
+&lt;p&gt;The way we went about it, trying to document our struggles with the various tools as we go is much closer to reality than just handing in a polished report that gets written after the product is already done. I would have liked more structure up front to combat the hours of troubleshooting I suppose, but in the end it turned out fine with just the support I found in the issue tracker and google. &lt;/p&gt;
+&lt;p&gt;Speaking of the issue tracker, I think this was a great addition to the course and I hope it gets included for the students next year. It certainly helped a lot, and it breaks down the hurdles for students to step out and ask for help. I would advise to keep using it!  &lt;/p&gt;
+&lt;p&gt;// Jeffrey&lt;/p&gt;</content><category term="Academics"></category><category term="University"></category><category term="Programming"></category><category term="Spark"></category><category term="Hadoop"></category><category term="SurfSara"></category><category term="CommonCrawl"></category></entry><entry><title>Big Data Series - Give me a spark</title><link href="jeffluppes.github.io/big-data-series-give-me-a-spark.html" rel="alternate"></link><published>2017-05-04T14:46:26+02:00</published><updated>2017-05-04T14:46:26+02:00</updated><author><name>Jeffrey Luppes</name></author><id>tag:None,2017-05-04:jeffluppes.github.io/big-data-series-give-me-a-spark.html</id><summary type="html">&lt;p&gt;So the third assignment in this series is running Spark and playing around with it. The first part was basically messing about with the query-processing, the second part is playing with data and dataframes. As these do not actually seem to be part of the required stuff for the post …&lt;/p&gt;</summary><content type="html">&lt;p&gt;So the third assignment in this series is running Spark and playing around with it. The first part was basically messing about with the query-processing, the second part is playing with data and dataframes. As these do not actually seem to be part of the required stuff for the post, I have left them out completely.  &lt;/p&gt;
+&lt;p&gt;The way I understand this is that I'm supposed to play with Spark, come up with something new, and write a short blog post detailing my experiences. &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Alternatively, you could decide to carry out a small analysis of a different open dataset, of your own choice; and present to your readers some basic properties of that data. You will notice that it is harder than following instructions, and you run the risk of getting stuck because the data does not parse well, etc.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So without further ado, let's explore some datas. &lt;/p&gt;
+&lt;h3&gt;Part 1 - Getting data&lt;/h3&gt;
+&lt;p&gt;Kaggle is one of the top resources for Data Science competitions, where data scientists, analysts, and programmers of all flavors unite and compete for prizes. While IMO prize money mostly seems to go to people who already have top-tier knowledge (like people who work at Deepmind) or just a lot of time/resources behind them (I recall reading some people spend 5 hours a day on a competition, which would probably make the pay-off very poor for their time investment), it's kind of a data geek playground. I have selected the &lt;a href="https://www.kaggle.com/c/sberbank-russian-housing-market"&gt;Sberbank competition&lt;/a&gt; which was launched recently. &lt;/p&gt;
+&lt;p&gt;The first step is simply downloading the accepting the conditions of the competition, and downloading a zip file for training and test data. Additional data about Russia's economy is available in different files, and the file description hints that these may be joined together with the proper instructions. All the data is in comma-seperated values. The training data is 44 MB. Because one cay only download the data once authenticated and I'm using a virtual machine, I've hosted the dataset elsewhere before pulling it in with &lt;code&gt;wget&lt;/code&gt; as this seems an easier solution than setting up a shared partition.&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h3&gt;Part 2 - Import&lt;/h3&gt;
+&lt;p&gt;if you are interested in following along, use &lt;code&gt;wget https://www.dropbox.com/s/4dmsg68lc509q32/train.csv?dl=0&lt;/code&gt;. I'll make sure this file stays available for the next few weeks.&lt;/p&gt;
+&lt;p&gt;Importing the data can be done with the same instructions as any other csv. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;rusdata&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;spark&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;header&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="bp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;notebooks/BigData/data/train.csv?dl=0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;With &lt;code&gt;printSchema&lt;/code&gt; I can take a look at the schema of the data set. This also allows for verification that everything got loaded in. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;rusdata.printSchema
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Which outputs all the fields from the dataset as follows: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;root
+ |-- id: string (nullable = true)
+ |-- timestamp: string (nullable = true)
+ |-- full_sq: string (nullable = true)
+ |-- life_sq: string (nullable = true)
+ |-- floor: string (nullable = true)
+ |-- max_floor: string (nullable = true)
+ |-- material: string (nullable = true)
+ |-- build_year: string (nullable = true)
+ |-- num_room: string (nullable = true)
+ |-- kitch_sq: string (nullable = true)
+ |-- state: string (nullable = true)
+ |-- product_type: string (nullable = true)
+ |-- sub_area: string (nullable = true)
+ |-- area_m: string (nullable = true)
+ |-- raion_popul: string (nullable = true)
+ |-- green_zone_part: string (nullable = true)
+ |-- indust_part: string (nullable = true)
+ |-- children_preschool: string (nullable = true)
+ |-- preschool_quota: string (nullable = true)
+ |-- preschool_education_centers_raion: string (nullable = true)
+ ....
+
+ rusdata: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [id: string, timestamp: string ... 290 more fields]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;292 fields. Not bad!&lt;/p&gt;
+&lt;h3&gt;Part 3 - Playing&lt;/h3&gt;
+&lt;p&gt;So now let's explore the data! How does a property object look like, actually?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;rusdata&lt;/span&gt;.&lt;span class="k"&gt;show&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So it's just a single row in this massive csv. Each house has an ID and 290 other properties that go with it. Finally, the last property is the house price itself, which is used in the competition mainly. Something that catches my eye in both of these is the large amount of features that have a suffix of 500, 1000 or 2000. This could be how many of that particular feature are in a 500 or 1000 meter radius around the object. &lt;/p&gt;
+&lt;p&gt;Something that is also peculiar is that there are no latitude or longtitude pairs (be it WGS or a Russian format, neither appear) instead the highest "resolution" is the area in which the property is located. E.g in the 'Kremlin' area. This makes data sort of anonymous, but I suspect it would not be hard to identify property objects based on the 292 features that we have if we chose to do this. &lt;/p&gt;
+&lt;p&gt;So the first thought.. can we find data on the Kremlin itself? From wikipedia I find that the Grand Kremlin Palace was built between 1837 and 1849 and has a sqaura area of &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;125 metres long, 47 metres high, and has a total area of about 25,000 square metres. It includes the earlier Terem Palace, nine churches from the 14th, 16th, and 17th centuries, the Holy Vestibule, and over 700 rooms&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Can we find that?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;val potentialKremlin = rusdata.select(&amp;quot;id&amp;quot;,&amp;quot;full_sq&amp;quot;,&amp;quot;life_sq&amp;quot;,&amp;quot;floor&amp;quot;,&amp;quot;build_year&amp;quot;,&amp;quot;num_room&amp;quot;).where(&amp;quot;build_year &amp;lt;= 1849&amp;quot;)
+potentialKremlin.count
+904
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now let's filter this again, as we know at that it has 700 rooms.. can we reduce the set of 904 objects to something we can count on our fingers? Let's filter this by selecting objects with more than 10 rooms. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;val potentialKremlin2 = potentialKremlin&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;select(&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;,&lt;/span&gt;&lt;span class="c"&gt;&amp;quot;full_sq&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;,&lt;/span&gt;&lt;span class="c"&gt;&amp;quot;life_sq&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;,&lt;/span&gt;&lt;span class="c"&gt;&amp;quot;floor&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;,&lt;/span&gt;&lt;span class="c"&gt;&amp;quot;build_year&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;,&lt;/span&gt;&lt;span class="c"&gt;&amp;quot;num_room&amp;quot;)&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;where(&amp;quot;num_room &lt;/span&gt;&lt;span class="nv"&gt;&amp;gt;&lt;/span&gt;&lt;span class="c"&gt;= 10&amp;quot;)&lt;/span&gt;
+
+&lt;span class="c"&gt;potentialKremlin2&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;show()&lt;/span&gt;
+
+&lt;span class="nb"&gt;+---+-------+-------+-----+----------+--------+&lt;/span&gt;&lt;span class="c"&gt;&lt;/span&gt;
+&lt;span class="c"&gt;| id|full_sq|life_sq|floor|build_year|num_room|&lt;/span&gt;
+&lt;span class="nb"&gt;+---+-------+-------+-----+----------+--------+&lt;/span&gt;&lt;span class="c"&gt;&lt;/span&gt;
+&lt;span class="nb"&gt;+---+-------+-------+-----+----------+--------+&lt;/span&gt;&lt;span class="c"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So it seems that the Kremlin is not in the data set, despite being in the Kremlin district. Just to check - are there any properties with more than ten rooms in the data set at all?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;rusdata&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;select(&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;,&lt;/span&gt;&lt;span class="c"&gt;&amp;quot;full_sq&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;,&lt;/span&gt;&lt;span class="c"&gt;&amp;quot;life_sq&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;,&lt;/span&gt;&lt;span class="c"&gt;&amp;quot;floor&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;,&lt;/span&gt;&lt;span class="c"&gt;&amp;quot;build_year&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;,&lt;/span&gt;&lt;span class="c"&gt;&amp;quot;num_room&amp;quot;)&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;where(&amp;quot;num_room &lt;/span&gt;&lt;span class="nv"&gt;&amp;gt;&lt;/span&gt;&lt;span class="c"&gt;= 10&amp;quot;)&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;show()&lt;/span&gt;
+
+&lt;span class="nb"&gt;+-----+-------+-------+-----+----------+--------+&lt;/span&gt;&lt;span class="c"&gt;&lt;/span&gt;
+&lt;span class="c"&gt;|   id|full_sq|life_sq|floor|build_year|num_room|&lt;/span&gt;
+&lt;span class="nb"&gt;+-----+-------+-------+-----+----------+--------+&lt;/span&gt;&lt;span class="c"&gt;&lt;/span&gt;
+&lt;span class="c"&gt;|11624|     40|     19|   17|      2011|      19|&lt;/span&gt;
+&lt;span class="c"&gt;|17767|     58|     34|    1|      1992|      10|&lt;/span&gt;
+&lt;span class="c"&gt;|26716|     51|     30|   14|      1984|      17|&lt;/span&gt;
+&lt;span class="c"&gt;|29175|     59|     33|   20|      2000|      10|&lt;/span&gt;
+&lt;span class="nb"&gt;+-----+-------+-------+-----+----------+--------+&lt;/span&gt;&lt;span class="c"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It seems that having tons of rooms is simply a more modern fad.&lt;/p&gt;
+&lt;p&gt;Now, let's do some aggregation. Can we get a list of how many properties there are per region? This time we use SQL directly, but we need a dataframe first:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;val&lt;/span&gt; &lt;span class="nv"&gt;rusdataDF&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;rusdata&lt;/span&gt;.&lt;span class="nv"&gt;select&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;id&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;full_sq&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;life_sq&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;floor&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;build_year&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;num_room&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;sub_area&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;rusdataDF&lt;/span&gt;.&lt;span class="nv"&gt;createOrReplaceTempView&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;props&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;spark&lt;/span&gt;.&lt;span class="nv"&gt;sql&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;SELECT sub_area, count(sub_area) AS sa FROM props GROUP BY sub_area ORDER BY sa DESC&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;.&lt;span class="k"&gt;show&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+
+&lt;span class="o"&gt;+--------------------+----+&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;            &lt;span class="nv"&gt;sub_area&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="nv"&gt;sa&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;+--------------------+----+&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Poselenie&lt;/span&gt; &lt;span class="nv"&gt;Sosenskoe&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="mi"&gt;1776&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;          &lt;span class="nv"&gt;Nekrasovka&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="mi"&gt;1611&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;Poselenie&lt;/span&gt; &lt;span class="nv"&gt;Vnukovskoe&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="mi"&gt;1372&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;Poselenie&lt;/span&gt; &lt;span class="nv"&gt;Moskovskij&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;925&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;Poselenie&lt;/span&gt; &lt;span class="nv"&gt;Voskres&lt;/span&gt;...&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;713&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;              &lt;span class="nv"&gt;Mitino&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;679&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;            &lt;span class="nv"&gt;Tverskoe&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;678&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;            &lt;span class="nv"&gt;Krjukovo&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;518&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;             &lt;span class="nv"&gt;Mar&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;ino| 508|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;Poselenie&lt;/span&gt; &lt;span class="nv"&gt;Filimon&lt;/span&gt;...&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;496&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="nv"&gt;Juzhnoe&lt;/span&gt; &lt;span class="nv"&gt;Butovo&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;451&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;Poselenie&lt;/span&gt; &lt;span class="nv"&gt;Shherbinka&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;443&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;            &lt;span class="nv"&gt;Solncevo&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;421&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="nv"&gt;Zapadnoe&lt;/span&gt; &lt;span class="nv"&gt;Degunino&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;410&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;Poselenie&lt;/span&gt; &lt;span class="nv"&gt;Desjono&lt;/span&gt;...&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;362&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;+--------------------+----+&lt;/span&gt;
+
+&lt;span class="nv"&gt;only&lt;/span&gt; &lt;span class="nv"&gt;showing&lt;/span&gt; &lt;span class="nv"&gt;top&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt; &lt;span class="nv"&gt;rows&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: the sub_areas are supposed to be the 125 raions of Moscow. But are they, actually? &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;spark.sql(&amp;quot;SELECT DISTINCT sub_area FROM props&amp;quot;).count
+146
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So we have more areas than there are raions. This means we should be distrustful of the data: it could at the very least mean that we cannot expect all 125 areas to be present in the data set. &lt;/p&gt;
+&lt;p&gt;One of the things we might expect to find is negative or zero entries in the build_year column. Can we find these with a simple SQL statement?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;spark&lt;/span&gt;.&lt;span class="nv"&gt;sql&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;SELECT id, build_year FROM props ORDER BY build_year ASC&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;.&lt;span class="k"&gt;show&lt;/span&gt;
+
+&lt;span class="o"&gt;+-----+----------+&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;build_year&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;+-----+----------+&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="mi"&gt;11010&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="mi"&gt;12811&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="mi"&gt;11186&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="mi"&gt;10145&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;+-----+----------+&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;uh oh..&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;spark.sql(&amp;quot;SELECT id, build_year FROM props WHERE build_year == 0&amp;quot;).count
+530
+
+spark.sql(&amp;quot;SELECT id, build_year FROM props WHERE build_year &amp;gt;= 2017&amp;quot;).count
+157
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So at the very least there's something funny going on with the building year data. But it could also mean that these building are still being built. &lt;a href="https://www.kaggle.com/c/sberbank-russian-housing-market/discussion/32247"&gt;A quick look at Kaggle's forum gives the following answer&lt;/a&gt;: &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What 0 and 1 mean in 'build_year" column of the data?&lt;/p&gt;
+&lt;p&gt;These are mistakes in the raw data, so we cannot fix it, unfortunately.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And what about the houses that are being built or have been built after the data was collected (as the data is from 2015)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;it could be pre-investment (see product type).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Part 4 - Findings&lt;/h3&gt;
+&lt;p&gt;I have added most of the queries I processed in the blog text above, but it would be really nice if I could host the spark notebook somewhere like I would with a ipython notebook. &lt;/p&gt;
+&lt;p&gt;Overall I'm okay with looking at the data with Spark. For analysis though, I would use Python as it's more established and I can get more support. Additionally, there are a lot of packages available that make development so much more doable. &lt;/p&gt;
+&lt;p&gt;I did like working with Spark. The SQL-rich syntax makes it easy to learn, and the things that I found gave me plenty of ammunition to start work in node, R or Python. &lt;/p&gt;</content><category term="Academics"></category><category term="University"></category><category term="Programming"></category><category term="Spark"></category><category term="Kaggle"></category></entry><entry><title>Big Data Series - Hadoop and HDFS</title><link href="jeffluppes.github.io/big-data-series-hadoop-and-hdfs.html" rel="alternate"></link><published>2017-03-22T20:40:27+01:00</published><updated>2017-03-22T20:40:27+01:00</updated><author><name>Jeffrey Luppes</name></author><id>tag:None,2017-03-22:jeffluppes.github.io/big-data-series-hadoop-and-hdfs.html</id><summary type="html">&lt;p&gt;The general idea of this post is to work out a short hello-world type of tutorial. For convenience I'll assume that you have some basic understanding of the idea behind Map-Reduce and why you'd ought to use it. For this post though, I'm not going to go with a very …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The general idea of this post is to work out a short hello-world type of tutorial. For convenience I'll assume that you have some basic understanding of the idea behind Map-Reduce and why you'd ought to use it. For this post though, I'm not going to go with a very complicated use case, instead sticking to the most basic solution (also I had other deadlines to meet).&lt;/p&gt;
+&lt;p&gt;Keep in mind that what goes for Shakespeare should also go for &lt;a href="https://en.wikipedia.org/wiki/Corpus_of_Contemporary_American_English"&gt;the 450-million in words COCA&lt;/a&gt;. Maybe something for next week, Arjen? :)&lt;/p&gt;
+&lt;h3&gt;Setting up the environment&lt;/h3&gt;
+&lt;p&gt;Since I'm a stubborn old goat I'm running vagrant to run a virtual Ubuntu distribution. Inside of which I'm running a docker container as was requested per assignment. On my laptop, which runs Windows 8. &lt;/p&gt;
+&lt;p&gt;Following the &lt;a href="https://rubigdata.github.io/course/background/hadoop.html"&gt;instructions&lt;/a&gt; I install hadoop version 2.7.3 and set up a hdfs cluster. There is some non-trivial path setting up involved here, but it goes beyond the scope of this assignment. &lt;/p&gt;
+&lt;h3&gt;Getting data&lt;/h3&gt;
+&lt;p&gt;The &lt;a href="http://www.gutenberg.org/ebooks/100"&gt;Complete Shakespeare&lt;/a&gt; corpus hosted by Project Gutenberg is only 5.3 MB. Not exactly big data. But for our little tutorial it'll do just fine. For convenience I download it using &lt;code&gt;wget&lt;/code&gt;...  &lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h3&gt;The Hello World Example&lt;/h3&gt;
+&lt;p&gt;Considering everyone in the class had to do the same assignment I'm not going to take you by the hand to lead you through the entire  &lt;a href="https://hadoop.apache.org/docs/r2.7.3/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Example:_WordCount_v1.0"&gt;Hello World Example on Hadoop&lt;/a&gt; again. However, a short summary is in place: &lt;/p&gt;
+&lt;p&gt;The first steps are setting up the cluster. For the standalone version you don't actually have to do much more. However, we can get Hadoop to run on a single node in a pseudo distributed manner. To first do this, we have to edit the xml config files found under etc/hadoop:&lt;/p&gt;
+&lt;p&gt;etc/hadoop/core-site.xml:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;name&amp;gt;&lt;/span&gt;fs.defaultFS&lt;span class="nt"&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;value&amp;gt;&lt;/span&gt;hdfs://localhost:9000&lt;span class="nt"&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;etc/hadoop/hdfs-site.xml:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;name&amp;gt;&lt;/span&gt;dfs.replication&lt;span class="nt"&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;value&amp;gt;&lt;/span&gt;1&lt;span class="nt"&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After that, we need to get hadoop to format a new HDFS:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;bin/hdfs namenode -format
+sbin/start-dfs.sh
+bin/hdfs dfs -mkdir -p /user/root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, we pull the corpus and the java file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wget http://www.gutenberg.org/ebooks/100.txt.utf-8
+wget https://gist.githubusercontent.com/WKuipers/87a1439b09d5477d21119abefdb84db0/raw/c327b9f74d30684b1ad2a0087a6de805503379d3/WordCount.java
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And make the directories we need plus the jar we're going to run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;hdfs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;dfs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mkdir&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;hdfs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;dfs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;put&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;100.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;utf&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;hadoop&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tools&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;javac&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Main&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;WordCount&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;jar&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;cf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;wc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;WordCount&lt;/span&gt;&lt;span class="o"&gt;*.&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally, we run the jar on the corpus: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;bin/hadoop jar wc.jar WordCount input output
+bin/hdfs dfs -get output/part-r-00000
+bin/hdfs dfs -rm -r output
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We can inspect the results with Nano. This is a bit archaic, but what in computer science isn't?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nano part-r-00000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In the resulting file we have tuples of each token with the cumulative count of their occurence. Don't be alarmed if it looks off: the script does not actually know that "Juliet." and "Juliet?" refer to the same token. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So how does Mapreduce really count these words?&lt;/strong&gt;
+The &lt;code&gt;WordCount&lt;/code&gt; java code contains a simpel flow consisting of a map-step that emits words (including special characters such as !?,.:) that are deliited by whitespace along with a count of how many times they were encountered. This processing is done one line at a time.&lt;/p&gt;
+&lt;p&gt;In the reduce step each map is combined so that we get a nice hash map that sums up the values.&lt;/p&gt;
+&lt;h3&gt;Food for thought (or other questions..)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;So what happens when you just do the standalone part of the tutorial?&lt;/strong&gt;
+A standalone operation just builds a single node. This is probably very handy for programming and debugging. In this mode the commands are handled by just a single node which is kind of defeating the purpose of hadoop!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So what's different in the pseudo-dist case?&lt;/strong&gt;
+In the pseudo-distributed case we build a simulated cluster with multiple nodes. This would allow big tasks to be done in an asynchronous way. In the pseudo-distributed case I had to do more set-up and much more debugging. &lt;/p&gt;
+&lt;p&gt;Really, the standalone variant and the simulated clusters just look like debugging settings for when you can't or will not work on a real cluster. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So who's the most popular kid in town?&lt;/strong&gt;
+So there are more ways to determine who's more popular. If we count purely the amount of times Romeo or Juliet spoke, we just have to look for the lines starting with their name. For Romeo this is "Rom." and he has 167 lines. Our tragic Juliet "Jul." only has 117. &lt;/p&gt;
+&lt;p&gt;But who gets the most mentions? "Juliet" is mentioned 68 times, while "Romeo" in all its forms gets mentioned 152 times. &lt;/p&gt;
+&lt;p&gt;*Things aren't always fair on fourteen year-olds.  *&lt;/p&gt;
+&lt;p&gt;Sometimes our brains are able to repress bad memories. However, it all came back to me when I saw the Java code... those long days in a hot and sweaty computer lab, trying to understand OO did however make me into the man I am. &lt;/p&gt;</content><category term="Academics"></category><category term="University"></category><category term="Programming"></category><category term="Spark"></category><category term="MapReduce"></category><category term="Hadoop"></category></entry><entry><title>Salt on the Road - Tracking Gritters by webscraping</title><link href="jeffluppes.github.io/salt-on-the-road-tracking-gritters-by-webscraping.html" rel="alternate"></link><published>2016-01-16T11:11:20+01:00</published><updated>2016-01-16T11:11:20+01:00</updated><author><name>Jeffrey Luppes</name></author><id>tag:None,2016-01-16:jeffluppes.github.io/salt-on-the-road-tracking-gritters-by-webscraping.html</id><summary type="html">&lt;p&gt;&lt;img alt="Gritter - or Strooiwagen in Dutch" src="http://www.rtlnieuws.nl/sites/default/files/styles/landscape_2/public/content/images/2014/12/25/ANP-strooiwagen_0.jpg?itok=o3xMA_4s"&gt;&lt;/p&gt;
+&lt;p&gt;Last year, the Dutch Rijkswaterstaat (a part of the Dutch Ministry of Infrastructure and the Environment) released a website where you could track where salt scattering trucks - also known as gritters - moved in real-time. This is particularly useful as Dutch infrastructure always seems to shut down completely during the first …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="Gritter - or Strooiwagen in Dutch" src="http://www.rtlnieuws.nl/sites/default/files/styles/landscape_2/public/content/images/2014/12/25/ANP-strooiwagen_0.jpg?itok=o3xMA_4s"&gt;&lt;/p&gt;
+&lt;p&gt;Last year, the Dutch Rijkswaterstaat (a part of the Dutch Ministry of Infrastructure and the Environment) released a website where you could track where salt scattering trucks - also known as gritters - moved in real-time. This is particularly useful as Dutch infrastructure always seems to shut down completely during the first days of mild snow and you need to know if there's a chance you might make it to work today.&lt;/p&gt;
+&lt;p&gt;The Rijkswaterstaat website features a Google Maps widget that shows which trucks are active and moving and which are not.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="The Rijkswaterstaat website" src="http://i.imgur.com/HIgVab1.png"&gt;&lt;/p&gt;
+&lt;h1&gt;Getting the data&lt;/h1&gt;
+&lt;p&gt;The website features an API, which while not publicly advertised can be found by opening dev tools in any modern browser and looking at the requests made by the page. This url can then be approached via the URL.&lt;/p&gt;
+&lt;p&gt;Snooping around I found a nice stream of JSON data:&lt;/p&gt;
+&lt;!-- more --&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;108191021&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;workcode_id&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;34&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;latitude&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;52.053938&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;longitude&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;5.115533&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The response includes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;coordinate pairs in latitude and longitude (in WGS84!)&lt;/li&gt;
+&lt;li&gt;a truck identifier (id)&lt;/li&gt;
+&lt;li&gt;a code whether the truck is active or not. (workcode_id)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Visualizing the data&lt;/h1&gt;
+&lt;p&gt;I quickly wrote a small script to download this JSON from their site - every sixty seconds or so - and started to build my own real-time overview of the gritter truck by converting the data to GeoJSON and plotting it in &lt;a href="https://github.com/TNOCS/csWeb"&gt;TNO's Common Sense&lt;/a&gt;. This yielded the following image.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A map of the Netherlands. Each point represents a truck. White circles indicate the truck is currently operating, while orange stands for being on standby." src="http://i.imgur.com/GlfrABw.png"&gt;&lt;/p&gt;
+&lt;p&gt;At this point I could only see where they were located. If I wanted to get new data I would have to refresh my map, and I'd still be working with point data. I had to find a way to collect historical data of the trucks.&lt;/p&gt;
+&lt;p&gt;A second version of the script used an array of past values to collect historical data. Every time the script requested the JSON file, I would add the new values to an array I'd connect to each truck, and save it on my local file system. With a little bit of extra code I converted these to GeoJSON &lt;a href="http://geojson.org/geojson-spec.html#linestring"&gt;LineStrings&lt;/a&gt;, which are essentially lines between each coordinate pair I received. Now I had a way to show where trucks had been moving. The following image is aggregated from a day worth of data:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="An overview of a day's worth of movements" src="http://i.imgur.com/h29xLYp.png"&gt;&lt;/p&gt;
+&lt;p&gt;Not surprisingly, it only showed which roads were part of the Rijkswaterstaat's responsibility: main high ways et cetera. What was kind of cool though was that you could see exactly where they were, including ramps.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Highway crossing" src="http://i.imgur.com/60EEFBm.png"&gt;&lt;/p&gt;
+&lt;h1&gt;Wrapping up&lt;/h1&gt;
+&lt;p&gt;That's about it. I found the data, transformed it, and made a pretty image of it. Very little code had to be written thanks to the tools available.  &lt;/p&gt;
+&lt;p&gt;The code can be found on &lt;a href="https://github.com/jeffluppes/strooiwagens"&gt;Github&lt;/a&gt; for anyone who wants to mess with it.&lt;/p&gt;
+&lt;p&gt;*Update: The Rijkswaterstaat website has been updated and the API path has been changed. You can find the new JSON file &lt;a href="http://rijkswaterstaatstrooit.nl/wagensvol.json"&gt;here&lt;/a&gt; They also added a nice historical viewing option, which shows you where trucks have been in the past six hours. *&lt;/p&gt;</content><category term="Projects"></category><category term="Pet Project"></category><category term="Programming"></category><category term="JavaScript"></category><category term="Web Scraping"></category></entry></feed>
