@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="A schematic of a sprawling MLOps platform: many connected tool boxes feeding a central model.">
+  <!-- purple-subtone palette: lilac paper, deep plum ink, mid-purple accent -->
+  <rect width="1600" height="900" fill="#f3eff7"/>
+
+  <!-- faint drafting grid -->
+  <g stroke="#2a1a3e" stroke-opacity="0.05" stroke-width="1">
+    <g>
+      <line x1="100" y1="0" x2="100" y2="900"/><line x1="200" y1="0" x2="200" y2="900"/>
+      <line x1="300" y1="0" x2="300" y2="900"/><line x1="400" y1="0" x2="400" y2="900"/>
+      <line x1="500" y1="0" x2="500" y2="900"/><line x1="600" y1="0" x2="600" y2="900"/>
+      <line x1="700" y1="0" x2="700" y2="900"/><line x1="800" y1="0" x2="800" y2="900"/>
+      <line x1="900" y1="0" x2="900" y2="900"/><line x1="1000" y1="0" x2="1000" y2="900"/>
+      <line x1="1100" y1="0" x2="1100" y2="900"/><line x1="1200" y1="0" x2="1200" y2="900"/>
+      <line x1="1300" y1="0" x2="1300" y2="900"/><line x1="1400" y1="0" x2="1400" y2="900"/>
+      <line x1="1500" y1="0" x2="1500" y2="900"/>
+    </g>
+    <g>
+      <line x1="0" y1="100" x2="1600" y2="100"/><line x1="0" y1="200" x2="1600" y2="200"/>
+      <line x1="0" y1="300" x2="1600" y2="300"/><line x1="0" y1="400" x2="1600" y2="400"/>
+      <line x1="0" y1="500" x2="1600" y2="500"/><line x1="0" y1="600" x2="1600" y2="600"/>
+      <line x1="0" y1="700" x2="1600" y2="700"/><line x1="0" y1="800" x2="1600" y2="800"/>
+    </g>
+  </g>
+
+  <!-- connectors (drawn first so boxes sit on top) -->
+  <g stroke="#3b2a52" stroke-width="2.5" fill="none">
+    <path d="M300 190 H560 V430"/>
+    <path d="M300 330 H560"/>
+    <path d="M300 470 H480 V450 H560"/>
+    <path d="M300 610 H480 V470 H560"/>
+    <path d="M300 750 H520 V490 H560"/>
+    <!-- right side out of the model -->
+    <path d="M840 430 H1040"/>
+    <path d="M840 460 H1000 V250 H1200"/>
+    <path d="M840 490 H1000 V660 H1200"/>
+  </g>
+
+  <!-- accent connector: the one that actually carries the model to prod -->
+  <path d="M840 445 H1040" stroke="#8a4fff" stroke-width="4" fill="none"/>
+
+  <!-- left: the sprawl of tools -->
+  <g font-family="'IBM Plex Mono', monospace" font-size="19" font-weight="600" fill="#3b2a52">
+    <g fill="#f3eff7" stroke="#3b2a52" stroke-width="2.5">
+      <rect x="110" y="160" width="190" height="60"/>
+      <rect x="110" y="300" width="190" height="60"/>
+      <rect x="110" y="440" width="190" height="60"/>
+      <rect x="110" y="580" width="190" height="60"/>
+      <rect x="110" y="720" width="190" height="60"/>
+    </g>
+    <text x="205" y="197" text-anchor="middle">SAGEMAKER</text>
+    <text x="205" y="337" text-anchor="middle">AIRFLOW</text>
+    <text x="205" y="477" text-anchor="middle">MLFLOW</text>
+    <text x="205" y="617" text-anchor="middle">FEATURE STORE</text>
+    <text x="205" y="757" text-anchor="middle">DRIFT MONITOR</text>
+  </g>
+
+  <!-- center: the model -->
+  <g>
+    <rect x="560" y="370" width="280" height="150" fill="#2a1a3e"/>
+    <rect x="548" y="358" width="280" height="150" fill="none" stroke="#3b2a52" stroke-width="2.5"/>
+    <text x="700" y="430" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="40" font-weight="800" fill="#f3eff7">MODEL</text>
+    <text x="700" y="470" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="14" letter-spacing="3" fill="#b58cff">// IN PROD</text>
+  </g>
+
+  <!-- right: outputs -->
+  <g font-family="'IBM Plex Mono', monospace" font-size="19" font-weight="600" fill="#3b2a52">
+    <g fill="#f3eff7" stroke="#3b2a52" stroke-width="2.5">
+      <rect x="1040" y="220" width="190" height="60"/>
+      <rect x="1040" y="415" width="190" height="60"/>
+      <rect x="1040" y="630" width="190" height="60"/>
+    </g>
+    <text x="1135" y="257" text-anchor="middle">A/B TESTS</text>
+    <text x="1135" y="452" text-anchor="middle" fill="#6a2fd6">SERVING API</text>
+    <text x="1135" y="667" text-anchor="middle">FEEDBACK</text>
+  </g>
+
+  <!-- crosshair + corner ticks (engineering-manual flavour) -->
+  <g stroke="#3b2a52" stroke-width="2" fill="none">
+    <path d="M40 40 H90 M40 40 V90"/>
+    <path d="M1560 40 H1510 M1560 40 V90"/>
+    <path d="M40 860 H90 M40 860 V810"/>
+    <path d="M1560 860 H1510 M1560 860 V810"/>
+  </g>
+
+  <!-- header + footer labels -->
+  <text x="40" y="825" font-family="'IBM Plex Mono', monospace" font-size="18" letter-spacing="3" fill="#8a7aa6">// FIG.01 - ONE PLATFORM, MANY TOOLS</text>
+  <text x="1560" y="825" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="18" letter-spacing="3" fill="#8a7aa6">MLOPS / 2022</text>
+
+  <!-- big faint number, editorial touch -->
+  <text x="1510" y="150" text-anchor="end" font-family="'Space Grotesk', sans-serif" font-size="150" font-weight="800" fill="#2a1a3e" fill-opacity="0.06">01</text>
+</svg>

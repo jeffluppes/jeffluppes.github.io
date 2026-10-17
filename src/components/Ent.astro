@@ -1,0 +1,50 @@
+---
+/**
+ * Ent — a spaCy displaCy-style named-entity highlight, brutalised.
+ * Keeps displaCy's colored background, but with hard square corners to match
+ * the site's no-radius house style. The entity type is kept as a `title`
+ * tooltip (shown on hover) rather than a visible label, to avoid clutter.
+ *
+ * Usage: <Ent label="ORG">Independer</Ent>
+ */
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+const type = label.toUpperCase();
+---
+<mark class="ent" data-ent={type} title={type}>
+  <slot />
+</mark>
+
+<style>
+  .ent {
+    /* displaCy base, but square (brutalist) instead of border-radius: 0.35em */
+    display: inline;
+    padding: 0.2em 0.4em;
+    margin: 0 0.1em;
+    line-height: 1;
+    border-radius: 0;
+    color: var(--ink);
+    background: var(--ent-color, #ddd);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  /* displaCy-flavoured entity-type palette, warmed to sit on paper */
+  .ent[data-ent="PERSON"]  { --ent-color: #aa9cfc; }
+  .ent[data-ent="ORG"]     { --ent-color: #7aecec; }
+  .ent[data-ent="GPE"]     { --ent-color: #feca74; }
+  .ent[data-ent="LOC"]     { --ent-color: #ff9561; }
+  .ent[data-ent="PRODUCT"] { --ent-color: #bfe1d9; }
+  .ent[data-ent="SKILL"]   { --ent-color: #c0ffb3; }
+  .ent[data-ent="LANG"]    { --ent-color: #ffb3b3; }
+  .ent[data-ent="DATE"]    { --ent-color: #bfeeb7; }
+  .ent[data-ent="WORK"]    { --ent-color: #e4e7d2; }
+  /* quantified-impact types: nudged off displaCy's muted default so numbers
+     and money actually pop, while staying in the warm paper palette */
+  .ent[data-ent="MONEY"]   { --ent-color: #9be6b4; }
+  .ent[data-ent="CARDINAL"]{ --ent-color: #ffe08a; }
+  .ent[data-ent="QUANTITY"]{ --ent-color: #ffe08a; }
+  /* fallback */
+  .ent:not([data-ent]) { --ent-color: #ddd; }
+</style>

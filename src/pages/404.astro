@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404 Not found" description="Page not found.">
+  <section class="wrap nf">
+    <p class="label accent">// Error 404</p>
+    <h1 class="nf__title">This page returned null.</h1>
+    <p class="nf__lede">
+      The route you asked for isn't in the index. It may have moved, or never existed.
+    </p>
+    <div class="nf__actions">
+      <a href="/" class="btn btn--solid">Back home</a>
+      <a href="/blog" class="btn">Browse the blog</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { padding-top: clamp(48px, 8vw, 96px); padding-bottom: clamp(48px, 8vw, 96px); }
+  .nf__title { margin-top: 14px; }
+  .nf__lede { margin-top: 18px; color: var(--ink-soft); font-size: 1.1rem; }
+  .nf__actions { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; }
+</style>

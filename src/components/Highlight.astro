@@ -1,0 +1,31 @@
+---
+/**
+ * Highlight — renders a string with inline entity markers into text + Ent pills.
+ *
+ * Marker syntax inside the string: [[TYPE:phrase]]
+ *   e.g. "Owned the [[SKILL:engineering direction]] of the team."
+ *
+ * Everything outside markers is plain text. TYPE maps to the Ent palette
+ * (SKILL, ORG, PRODUCT, GPE, LOC, WORK, LANG, MONEY, CARDINAL, DATE, PERSON).
+ */
+import Ent from "./Ent.astro";
+
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+
+type Seg = { t: "text"; v: string } | { t: "ent"; label: string; v: string };
+
+const segments: Seg[] = [];
+const re = /\[\[([A-Z]+):([^\]]+)\]\]/g;
+let last = 0;
+let m: RegExpExecArray | null;
+while ((m = re.exec(text)) !== null) {
+  if (m.index > last) segments.push({ t: "text", v: text.slice(last, m.index) });
+  segments.push({ t: "ent", label: m[1], v: m[2] });
+  last = m.index + m[0].length;
+}
+if (last < text.length) segments.push({ t: "text", v: text.slice(last) });
+---
+{segments.map((s) => (s.t === "ent" ? <Ent label={s.label}>{s.v}</Ent> : <Fragment>{s.v}</Fragment>))}

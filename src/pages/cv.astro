@@ -1,0 +1,466 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Ent from "../components/Ent.astro";
+import Highlight from "../components/Highlight.astro";
+import { SITE, SOCIALS } from "../consts";
+
+const summary =
+  "Senior AI/ML Engineer focused on designing and deploying production AI systems, with a focus on NLP, LLMs, agentic AI, and MLOps. I work on AI/ML platforms and cloud infrastructure across AWS, GCP, and Azure, combining hands-on engineering with the leadership side of getting things into production.";
+
+const experience = [
+  {
+    role: "Senior AI / Machine Learning Engineer",
+    org: "Independer (part of DPG Media)",
+    place: "Hilversum, The Netherlands",
+    period: "Sep 2025 to present",
+    points: [
+      "Independer is a Dutch scale-up that helps consumers make decisions about financial and utility services.",
+      "For Independer, I work mainly on the [[WORK:Azure machine learning platform]] and the direction of the data science team, building [[SKILL:recommendation and targeting models]] and working closely with product, engineering, and compliance.",
+    ],
+  },
+  {
+    role: "Senior AI / Machine Learning Engineer",
+    org: "DPG Media (De Persgroep), Online Services Data Platform Team",
+    place: "Amsterdam, The Netherlands",
+    period: "Apr 2021 to Aug 2025",
+    points: [
+      "DPG Media's Online Services runs a family of well-known Dutch consumer brands.",
+      "I was the main engineer behind the [[SKILL:ML platform]] used across those brands, built on [[PRODUCT:AWS SageMaker]], Airflow, dbt, MLflow, and Terraform so teams could deploy models without needing dedicated ML expertise.",
+      "Along the way I built [[SKILL:language and recommendation models]], an [[SKILL:AI job-enrichment service]] using NLP and LLM agents, and some early [[SKILL:agentic AI]] experiments, as well as learning-to-rank improvements for search.",
+      "I also mentored engineers and interns and started an internal [[WORK:machine learning guild]] for knowledge sharing.",
+    ],
+  },
+  {
+    role: "Senior Machine Learning Engineer",
+    org: "Atos SE",
+    place: "Amsterdam, The Netherlands",
+    period: "Sep 2018 to Mar 2021",
+    points: [
+      "Worked as an ML consultant for clients across [[GPE:Europe and beyond]], as part of Atos's Expert Community on Artificial Intelligence, and co-authored [[CARDINAL:two patent applications]].",
+      "Projects ranged from an [[SKILL:AI chatbot]] for customer service in the aerospace industry, to cloud strategy for a central bank, to [[SKILL:entity extraction]] over historical national archives and [[SKILL:fraud-detection models]] for customs.",
+    ],
+  },
+  {
+    role: "Data Scientist Intern",
+    org: "Topicus Finance",
+    place: "Deventer, The Netherlands",
+    period: "Feb 2018 to Jun 2018",
+    points: [
+      "Developed a web app with [[SKILL:recommender models]] based on historical data, to sell mortgages and financial products.",
+    ],
+  },
+  {
+    role: "Data Engineer / Data Engineer Intern",
+    org: "TNO (Netherlands Organisation for Applied Scientific Research)",
+    place: "Groningen, The Netherlands",
+    period: "Feb 2015 to Feb 2016",
+    points: [
+      "Built [[SKILL:data pipelines]] for large EU economic datasets and a [[SKILL:geospatial database system]] with a RESTful API, supporting research projects and map-based monitoring tools.",
+    ],
+  },
+  {
+    role: "Software Engineering Intern",
+    org: "University Medical Center Groningen (UMCG)",
+    place: "Groningen, The Netherlands",
+    period: "Feb 2014 to Jun 2014",
+    points: [
+      "Built a prenatal-screening application that ran in production for several years, and used an [[SKILL:NLP heuristics system]] to consolidate full-text medical databases across departments.",
+    ],
+  },
+  {
+    role: "Software Engineering Intern",
+    org: "Hanze University of Applied Science and Zorginstelling Noord-Nederland (ZINN)",
+    place: "Groningen, The Netherlands",
+    period: "Feb 2013 to Jun 2013",
+    points: [
+      "Developed Java APIs for sound and lighting devices creating immersive experiences, used in a stimulation environment to combat the effects of [[SKILL:Alzheimer's disease]] and improve quality of life for patients in late stages.",
+    ],
+  },
+  {
+    role: "Helpdesk Support Staff / Game World Admin",
+    org: "InnoGames GmbH",
+    place: "Hamburg, Germany (Remote)",
+    period: "Dec 2008 to Jan 2015",
+    points: [
+      "Answered support tickets, developed JavaScript tools, and moderated half a dozen game servers for the game Tribalwars.",
+      "Maintained the player wiki and translated documentation from German to English.",
+    ],
+  },
+];
+
+const education = [
+  {
+    school: "Radboud University",
+    place: "Nijmegen, The Netherlands",
+    period: "Feb 2017 to Aug 2019",
+    degree: "M.Sc. Computing Science, Data Science and AI specialisation",
+    points: [
+      "Master thesis: \"Classifying Short Text for the Harmonized System with Convolutional Neural Networks\". ",
+      "Organized talks and workshops for prospective students and was an on-boarding buddy for international students.",
+    ],
+  },
+  {
+    school: "Radboud University",
+    place: "Nijmegen, The Netherlands",
+    period: "Sep 2016 to Feb 2017",
+    degree: "Pre-MSc Computer Science and Mathematics",
+    points: [
+      "Pre-master program of 30 ECTS (6 months) bridging Software Engineering and Computer Science.",
+    ],
+  },
+  {
+    school: "Hanzehogeschool Groningen",
+    place: "Groningen, The Netherlands",
+    period: "Sep 2011 to Aug 2015",
+    degree:
+      "4-year B.Sc. in Computer Science, major Software Engineering, minor AI (Rijksuniversiteit Groningen)",
+    points: [
+      "Bachelor thesis: \"An Auditable Database and APIs for Geospatial Data\", based on work at TNO (under confidentiality agreement).",
+    ],
+  },
+];
+
+const certifications = [
+  { year: "2026", name: "Databricks Certified Machine Learning Professional", by: "Databricks" },
+  { year: "2025", name: "AWS Certification Subject Matter Expert AI/ML: Foundational", by: "AWS" },
+  { year: "2024", name: "AWS Certified AI Practitioner: Foundational (Beta tester)", by: "AWS" },
+  { year: "2024", name: "AWS Certified Machine Learning Engineer: Associate (Beta tester)", by: "AWS" },
+  { year: "2023", name: "AWS Certified Solutions Architect: Associate", by: "AWS" },
+  { year: "2022", name: "AWS Certified Machine Learning: Specialty", by: "AWS" },
+  { year: "2021", name: "Google Cloud Platform Certified Machine Learning Engineer", by: "Google" },
+  { year: "2020", name: "Azure Certified Data Engineer Associate", by: "Microsoft" },
+  { year: "2020", name: "TensorFlow Developer Certificate", by: "Google" },
+  { year: "2020", name: "Google Cloud Platform Certified Cloud Architect", by: "Google" },
+  { year: "2019", name: "Google Cloud Platform Certified Data Engineer", by: "Google" },
+];
+
+// Each group maps to a displaCy-style entity type, so the pills read like
+// NER output: SKILL for techniques, PRODUCT for tools, etc.
+const skills = [
+  { group: "AI / ML", ent: "SKILL", items: ["AI", "Deep Learning", "LLMs", "Agentic AI", "Machine Learning", "Computer Vision", "NLP", "Transformers", "CNNs", "RNNs", "bi-LSTMs", "word2vec", "XGBoost", "Naive Bayes", "Recommender Systems", "Learning-to-Rank", "Entity Extraction", "Fraud Detection", "Web Scraping"] },
+  { group: "Development", ent: "PRODUCT", items: ["Python", "SQL", "JavaScript", "Hugging Face Transformers", "PyTorch", "TensorFlow", "scikit-learn", "FastAPI", "Jupyter", "Next.js", "Git", "n8n", "Kiro"] },
+  { group: "Cloud & Ops", ent: "ORG", items: ["AWS", "Google Cloud Platform", "Azure", "SageMaker", "Bedrock", "Lambda", "Databricks", "Airflow", "dbt", "Spark", "BigQuery", "MLflow", "MLOps", "DevOps", "Docker", "Kubernetes", "Terraform", "IaC", "CI/CD", "Grafana"] },
+  { group: "Competencies", ent: "WORK", items: ["Problem Solver", "Team Player", "Result Oriented", "Self-Starter", "Continuous Learner", "Creative"] },
+  { group: "Languages", ent: "LANG", items: ["Dutch (native)", "English (C2, fluent)", "German (B1, conversational)", "French (A2)"] },
+];
+
+const honors = [
+  { year: "2026", title: "[[SKILL:First place]]: Miro x Kiro AWS Hackathon Amsterdam. Building Today to Pitch (a Better) Tomorrow", kind: "Hackathon", url: "https://www.linkedin.com/posts/natalie-nedre_yesterday-we-welcomed-incredible-builders-ugcPost-7465509464851312640-bhlb/" },
+  { year: "2026", title: "[[WORK:Semi-finalist]] (#107) AWS 10,000 AIdeas hackathon. \"DadBot\", an agentic app built with Bedrock, Lambda, and Next.js", kind: "Hackathon", url: "https://builder.aws.com/content/3AjDRYruH2LqmpPFSNpXnjFAfnz/aideas-dadbot-an-ai-assistant-to-stay-healthy-and-slay-the-dad-bod-not-just-for-dads" },
+  { year: "2025", title: "(AI Method for) Verification of Declared Content. [[PRODUCT:EU Patent]] no. EP3945454B1, issued Nov 2025", kind: "Patent", url: "https://worldwide.espacenet.com/patent/search/family/072145323/publication/EP3945454A1?q=20305888.8" },
+  { year: "2023 to present", title: "AWS Subject Matter Expert (SME) ML/AI and MLOps. Contributed to the AI Practitioner and ML Engineer certification exams, remote and on-site at AWS HQ in Seattle", kind: "Honor", url: "" },
+  { year: "2020", title: "Danish Digital Awards: [[SKILL:Gold Award]] in Analytics and AI (Lilly project)", kind: "Award", url: "https://danishdigitalaward.dk/project/satair-robo-quote/" },
+  { year: "2020", title: "Danish Digital Awards: [[SKILL:Gold Award]] in Marketing Automation (Lilly project)", kind: "Award", url: "https://danishdigitalaward.dk/project/satair-robo-quote/" },
+  { year: "2017", title: "[[SKILL:First place]]: RvN@ Student Hackathon for connecting small-medium businesses", kind: "Hackathon", url: "" },
+];
+
+const talks = [
+  { title: "Job or Not: Doing Machine Learning for Nationale Vacaturebank", venue: "MLOps community meetup Amsterdam @ ING", place: "Amsterdam, NL", date: "Feb 2025", note: "Technical talk on doing ML for one of the biggest job boards in the Netherlands." },
+  { title: "Learnings from ML in Production", venue: "Groningen ML Community Meetup", place: "Groningen, NL", date: "Oct 2023", note: "A longer talk on doing ML in production and building the ML platform for DPG Online Services." },
+  { title: "MLOps @ DPG: lessons from prod", venue: "MLOps community meetup Amsterdam @ Booking.com", place: "Amsterdam, NL", date: "Aug 2023", note: "Technical talk on the painful and humbling lessons from prod." },
+];
+
+const volunteering = [
+  { role: "Kayak Instructor and Guide", org: "Paddling groups and clubs", place: "The Netherlands", period: "Feb 2017 to present", points: [
+    "Certified kayak instructor; I teach new paddlers, guide trips, and help with rescue training.",
+  ] },
+  { role: "Board Member", org: "A local paddling club", place: "The Netherlands", period: "Feb 2019 to Jan 2021", points: [
+    "Helped run a local kayaking club with 300+ members, looking after communication and rebuilding its website and membership admin.",
+  ] },
+];
+---
+
+<BaseLayout title="CV" description="Curriculum vitae of Jeffrey Luppes, Senior AI/ML Engineer.">
+  <article class="cv wrap">
+    <header class="cv__head">
+      <div>
+        <p class="label accent">// Curriculum Vitae</p>
+        <h1>Jeffrey Luppes</h1>
+        <p class="cv__role">{SITE.tagline} &middot; {SITE.location}</p>
+      </div>
+      <div class="cv__links">
+        {SOCIALS.filter((s) => s.label !== "RSS").map((s) => (
+          <a href={s.href} class="tag">{s.label} &#8599;</a>
+        ))}
+      </div>
+    </header>
+
+    <p class="cv__summary">{summary}</p>
+
+    <aside class="cv__note">
+      <span class="label cv__note-tag">// Note</span>
+      <p>
+        You're viewing the <strong>abridged CV</strong>. Some figures, client
+        names, and project details are kept off the public version for privacy.
+        I'm happy to share the full CV on request, so feel free to{" "}
+        <a href="/about#say-hello">get in touch</a>.
+      </p>
+    </aside>
+
+    <!-- EXPERIENCE -->
+    <section class="cv__section">
+      <h2 class="cv__h2">Work Experience</h2>
+      {experience.map((job) => (
+        <div class="entry">
+          <div class="entry__top">
+            <div>
+              <h3 class="entry__role">{job.role}</h3>
+              <p class="label entry__org">{job.org}</p>
+            </div>
+            <div class="entry__right">
+              <span class="entry__place">{job.place}</span>
+              <span class="label entry__period">{job.period}</span>
+            </div>
+          </div>
+          <ul class="entry__points">
+            {job.points.map((p) => <li><Highlight text={p} /></li>)}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="cv__section">
+      <h2 class="cv__h2">Education</h2>
+      {education.map((ed) => (
+        <div class="entry">
+          <div class="entry__top">
+            <div>
+              <h3 class="entry__role">{ed.school}</h3>
+              <p class="label entry__org">{ed.degree}</p>
+            </div>
+            <div class="entry__right">
+              <span class="entry__place">{ed.place}</span>
+              <span class="label entry__period">{ed.period}</span>
+            </div>
+          </div>
+          <ul class="entry__points">
+            {ed.points.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="cv__section">
+      <h2 class="cv__h2">Professional Certifications</h2>
+      <ul class="rows">
+        {certifications.map((c) => (
+          <li class="row">
+            <span class="label row__year">{c.year}</span>
+            <span class="row__name">{c.name}</span>
+            <span class="brand-pill" data-brand={c.by.toLowerCase()}>{c.by}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="cv__section">
+      <h2 class="cv__h2">Skills &amp; Technologies</h2>
+      <dl class="skills">
+        {skills.map((s) => (
+          <div class="skills__row">
+            <dt class="label">{s.group}</dt>
+            <dd class="skills__ents">
+              {s.items.map((item) => <Ent label={s.ent}>{item}</Ent>)}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <!-- HONORS -->
+    <section class="cv__section">
+      <h2 class="cv__h2">Patents, Honors &amp; Awards</h2>
+      <ul class="rows">
+        {honors.map((h) => (
+          <li class="row">
+            <span class="label row__year">{h.year}</span>
+            <span class="row__name">
+              <Highlight text={h.title} />
+              {h.url && (
+                <a href={h.url} class="row__link" target="_blank" rel="noopener noreferrer">
+                  [link]<span class="row__ext" aria-hidden="true">&#8599;</span>
+                </a>
+              )}
+            </span>
+            <span class="label row__by">{h.kind}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- TALKS -->
+    <section class="cv__section">
+      <h2 class="cv__h2">Selected Presentations</h2>
+      {talks.map((t) => (
+        <div class="entry">
+          <div class="entry__top">
+            <div>
+              <h3 class="entry__role entry__role--sm">{t.title}</h3>
+              <p class="label entry__org">{t.venue}</p>
+            </div>
+            <div class="entry__right">
+              <span class="entry__place">{t.place}</span>
+              <span class="label entry__period">{t.date}</span>
+            </div>
+          </div>
+          <ul class="entry__points"><li>{t.note}</li></ul>
+        </div>
+      ))}
+    </section>
+
+    <!-- VOLUNTEERING -->
+    <section class="cv__section">
+      <h2 class="cv__h2">Volunteering / Other</h2>
+      {volunteering.map((v) => (
+        <div class="entry">
+          <div class="entry__top">
+            <div>
+              <h3 class="entry__role entry__role--sm">{v.role}</h3>
+              <p class="label entry__org">{v.org}</p>
+            </div>
+            <div class="entry__right">
+              <span class="entry__place">{v.place}</span>
+              <span class="label entry__period">{v.period}</span>
+            </div>
+          </div>
+          <ul class="entry__points">
+            {v.points.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+      ))}
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .cv { padding-top: clamp(32px, 5vw, 56px); max-width: 900px; }
+
+  .cv__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+    border-bottom: 3px solid var(--line);
+  }
+  .cv__role { margin-top: 6px; color: var(--ink-soft); font-size: 1.05rem; }
+  .cv__links { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .cv__summary {
+    margin-top: 22px;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: none;
+  }
+
+  .cv__note {
+    margin-top: 20px;
+    display: flex;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    background: var(--paper-2);
+  }
+  .cv__note-tag { flex: none; padding-top: 2px; color: var(--accent-ink); }
+  .cv__note p { margin: 0; font-size: 0.92rem; color: var(--ink-soft); max-width: none; }
+  .cv__note a { color: var(--accent-ink); }
+
+  .cv__section { margin-top: clamp(36px, 5vw, 56px); }
+  .cv__h2 {
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--line);
+  }
+
+  .entry { margin-bottom: 28px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .entry__role { font-size: 1.25rem; line-height: 1.15; }
+  .entry__role--sm { font-size: 1.1rem; }
+  .entry__org { margin-top: 4px; }
+  .entry__right { text-align: right; display: flex; flex-direction: column; gap: 2px; }
+  .entry__place { color: var(--accent-ink); font-size: 0.95rem; font-style: italic; }
+  .entry__points { margin-top: 12px; padding-left: 1.1em; }
+  .entry__points li { margin-top: 8px; color: var(--ink-soft); font-size: 0.98rem; max-width: 72ch; line-height: 1.8; }
+
+  /* compact two/three-column rows for certs + honors */
+  .rows { list-style: none; padding: 0; }
+  .row {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 16px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .row:last-child { border-bottom: none; }
+  .row__year { color: var(--accent-ink); }
+  .row__name { font-weight: 500; }
+
+  /* brand pills for cert issuers — square, hard-edged, brand-colored */
+  .brand-pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3em 0.65em;
+    border: 2px solid var(--line);
+    white-space: nowrap;
+    color: #fff;
+    background: #777;
+  }
+  .brand-pill[data-brand="aws"]       { background: #ff9900; color: #16150f; }
+  .brand-pill[data-brand="google"]    { background: #4285f4; color: #fff; }
+  .brand-pill[data-brand="microsoft"] { background: #0078d4; color: #fff; }
+  .brand-pill[data-brand="databricks"]{ background: #ff3621; color: #fff; }
+  .row__link {
+    margin-left: 8px;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--accent-ink);
+    border-bottom: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .row__link:hover { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+  .row__ext { margin-left: 2px; }
+
+  /* skills definition list */
+  .skills { display: flex; flex-direction: column; }
+  .skills__row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: baseline;
+  }
+  .skills__row:last-child { border-bottom: none; }
+  .skills dt { padding-top: 2px; }
+  .skills dd { margin: 0; color: var(--ink-soft); }
+  .skills__hint { display: block; margin-bottom: 16px; color: var(--ink-faint); }
+  .skills__ents { display: flex; flex-wrap: wrap; gap: 10px 6px; align-items: center; }
+
+  @media (max-width: 600px) {
+    .entry__top { flex-direction: column; }
+    .entry__right { text-align: left; flex-direction: row; gap: 12px; }
+    .row { grid-template-columns: 70px 1fr; }
+    .brand-pill { grid-column: 2; justify-self: start; margin-top: 4px; }
+    .skills__row { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>

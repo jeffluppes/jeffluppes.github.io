@@ -1,0 +1,150 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import { SITE } from "../consts";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const recent = posts.slice(0, 4);
+
+const focus = [
+  { n: "01", t: "ML Platforms & MLOps", d: "Building ML platforms teams deploy on, with SageMaker, Databricks, Airflow, MLflow, and Terraform, so models stay maintainable and monitored." },
+  { n: "02", t: "Cloud, across the big three", d: "I've been hands-on with AWS, GCP, and Azure, backed by certifications on each. I've helped AWS shape their ML certification exams too." },
+  { n: "03", t: "NLP & LLMs", d: "Natural Language Processing is what I feel most comfortable with. Transformers, classification, and search over messy real-world language, now increasingly with LLMs and agentic workflows." },
+  { n: "04", t: "Models in production", d: "Recommendation, ranking, and job-enrichment models serving real traffic at scale, with the plumbing to keep them sharp." },
+];
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section class="hero wrap">
+    <p class="label hero__kicker">// {SITE.tagline} &middot; {SITE.location}</p>
+    <h1 class="hero__title">
+      Hi, I'm <mark class="ent ent--person">Jeffrey<span class="ent__label">Person</span></mark>. I work on
+      AI and machine learning in production.
+    </h1>
+    <p class="hero__lede">
+      You've reached my little corner of the internet. I'm a senior AI and ML Engineer with a focus on MLOps, natural language
+      processing and LLMs. This site has my blog and pet-projects.
+    </p>
+    <div class="hero__actions">
+      <a href="/blog" class="btn btn--solid">Read my blog</a>
+      <a href="/about" class="btn">About me</a>
+    </div>
+  </section>
+
+  <hr class="hr wrap" />
+
+  <!-- FOCUS -->
+  <section class="wrap">
+    <div class="section-head">
+      <h2>What I work on</h2>
+      <span class="label">04 areas</span>
+    </div>
+    <div class="focus">
+      {
+        focus.map((f) => (
+          <div class="focus__item">
+            <span class="label focus__num">{f.n}</span>
+            <h3 class="focus__title">{f.t}</h3>
+            <p class="focus__desc">{f.d}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <hr class="hr wrap" />
+
+  <!-- RECENT POSTS -->
+  <section class="wrap">
+    <div class="section-head">
+      <h2>From the blog</h2>
+      <a href="/blog" class="label section-head__link">All posts &rarr;</a>
+    </div>
+    <div class="post-grid">
+      {
+        recent.map((p, i) => (
+          <PostCard
+            id={p.id}
+            title={p.data.title}
+            description={p.data.description}
+            pubDate={p.data.pubDate}
+            category={p.data.category}
+            tags={p.data.tags}
+            body={p.body}
+            index={i}
+            heroImage={p.data.heroImage}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { padding-top: clamp(40px, 7vw, 80px); padding-bottom: clamp(24px, 4vw, 40px); }
+  .hero__kicker { color: var(--accent-ink); }
+  .hero__title { margin-top: 18px; max-width: 18ch; line-height: 1.25; }
+  /* The entity pill scales its padding in em, which is huge at hero size and
+     overlaps the line above. Shrink it just here so it sits inside the line. */
+  .hero__title :global(.ent) {
+    padding: 0 0.12em;
+    margin: 0;
+    line-height: inherit;
+  }
+  /* one-off PERSON entity with a visible displaCy-style type label */
+  .hero__title .ent--person {
+    display: inline;
+    padding: 0.02em 0.18em;
+    border-radius: 0;
+    background: #aa9cfc;
+    color: var(--ink);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .hero__title .ent__label {
+    font-family: var(--mono);
+    font-size: 0.32em;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    vertical-align: middle;
+    margin-left: 0.4em;
+    padding: 0.25em 0.4em;
+    border: 1px solid rgba(26, 26, 23, 0.5);
+    background: rgba(255, 255, 255, 0.5);
+    color: #1a1a17;
+    white-space: nowrap;
+  }
+  .hero__lede { margin-top: 24px; font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--ink-soft); }
+  .hero__actions { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--line);
+  }
+  .section-head__link { text-decoration: none; color: var(--accent-ink); }
+  .section-head__link:hover { background: var(--accent); color: var(--paper); }
+
+  .focus { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 2px solid var(--line); }
+  .focus__item { padding: clamp(18px, 3vw, 28px); border: 1px solid var(--line-soft); }
+  .focus__num { color: var(--accent-ink); }
+  .focus__title { margin-top: 8px; font-size: 1.25rem; }
+  .focus__desc { margin-top: 8px; color: var(--ink-soft); font-size: 0.98rem; }
+
+  .post-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+  @media (max-width: 680px) {
+    .focus { grid-template-columns: 1fr; }
+    .post-grid { grid-template-columns: 1fr; }
+  }
+</style>

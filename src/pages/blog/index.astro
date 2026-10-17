@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const categories = [...new Set(posts.map((p) => p.data.category))].sort();
+---
+
+<BaseLayout title="Blog" description="Posts on production ML, cloud infrastructure, NLP, and embeddings.">
+  <section class="wrap page-head">
+    <p class="label accent">// {posts.length} posts</p>
+    <h1>Blog</h1>
+    <p class="page-head__lede">
+      Notes on machine learning engineering, cloud, NLP, and the occasional
+      side project. Oldest archives go back to 2016.
+    </p>
+
+    <div class="cats">
+      <span class="label">Browse:</span>
+      {categories.map((c) => <a href={`/categories/${c.toLowerCase()}`} class="tag">{c}</a>)}
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="post-grid">
+      {
+        posts.map((p, i) => (
+          <PostCard
+            id={p.id}
+            title={p.data.title}
+            description={p.data.description}
+            pubDate={p.data.pubDate}
+            category={p.data.category}
+            tags={p.data.tags}
+            body={p.body}
+            index={i}
+            heroImage={p.data.heroImage}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head { padding-top: clamp(32px, 5vw, 56px); padding-bottom: 28px; }
+  .page-head h1 { margin-top: 12px; }
+  .page-head__lede { margin-top: 18px; color: var(--ink-soft); font-size: 1.1rem; }
+  .cats { margin-top: 24px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+
+  .post-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  @media (max-width: 680px) { .post-grid { grid-template-columns: 1fr; } }
+</style>

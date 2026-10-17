@@ -1,0 +1,66 @@
+---
+import { SITE, SOCIALS } from "../consts";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <div class="site-footer__col">
+      <p class="label">// {SITE.author} — {SITE.tagline}</p>
+      <p class="site-footer__note">
+        Built with Astro. Statically generated, served from GitHub Pages.
+      </p>
+    </div>
+
+    <nav class="site-footer__links" aria-label="Social and feeds">
+      {
+        SOCIALS.map((s) => (
+          <a href={s.href} class="site-footer__link">
+            {s.label} <span aria-hidden="true">&#8599;</span>
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+
+  <div class="wrap site-footer__base">
+    <span class="label">&copy; {year} {SITE.author}</span>
+    <span class="label">Netherlands &middot; 52.3676&deg;N, 4.9041&deg;E</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 2px solid var(--line);
+    margin-top: clamp(48px, 8vw, 96px);
+    background: var(--paper-2);
+  }
+  .site-footer__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 28px;
+    flex-wrap: wrap;
+    padding-block: 32px;
+  }
+  .site-footer__note { color: var(--ink-soft); font-size: 0.95rem; margin-top: 8px; max-width: 42ch; }
+  .site-footer__links { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; }
+  .site-footer__link {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    padding: 0.45em 0.7em;
+    border: 1px solid var(--line);
+  }
+  .site-footer__link:hover { background: var(--accent); color: var(--paper); }
+  .site-footer__base {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-block: 16px;
+    border-top: 1px solid var(--line-soft);
+  }
+</style>

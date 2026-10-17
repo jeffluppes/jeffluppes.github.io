@@ -1,0 +1,111 @@
+---
+import { formatDate, isoDate, readingTime } from "../utils";
+
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  category: string;
+  tags?: string[];
+  body?: string;
+  index?: number;
+  heroImage?: string;
+}
+
+const { id, title, description, pubDate, category, tags = [], body, index, heroImage } =
+  Astro.props;
+const href = `/blog/${id}`;
+const num = index != null ? String(index + 1).padStart(2, "0") : null;
+---
+
+<article class:list={["card", { "card--has-image": heroImage }]}>
+  {
+    heroImage && (
+      <a href={href} class="card__media" aria-hidden="true" tabindex="-1">
+        <img src={heroImage} alt="" loading="lazy" />
+      </a>
+    )
+  }
+  <div class="card__meta">
+    {num && <span class="label card__num">{num}</span>}
+    <span class="label">{category}</span>
+    <time class="label" datetime={isoDate(pubDate)}>{formatDate(pubDate)}</time>
+    <span class="label card__read">{readingTime(body)}</span>
+  </div>
+
+  <h3 class="card__title">
+    <a href={href}>{title}</a>
+  </h3>
+
+  <p class="card__desc">{description}</p>
+
+  <div class="card__foot">
+    <div class="card__tags">
+      {tags.slice(0, 3).map((t) => <span class="tag">{t}</span>)}
+    </div>
+    <a href={href} class="card__more">Read <span aria-hidden="true">&rarr;</span></a>
+  </div>
+</article>
+
+<style>
+  .card {
+    border: 2px solid var(--line);
+    background: var(--paper);
+    padding: clamp(18px, 3vw, 28px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 0 0 0 var(--line);
+  }
+  .card:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--line); }
+
+  .card__media {
+    display: block;
+    margin: calc(clamp(18px, 3vw, 28px) * -1) calc(clamp(18px, 3vw, 28px) * -1) 4px;
+    border-bottom: 2px solid var(--line);
+    overflow: hidden;
+    background: var(--paper-2);
+  }
+  .card__media img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.92) contrast(1.02);
+    transition: transform 0.25s ease;
+  }
+  .card:hover .card__media img { transform: scale(1.03); }
+
+  .card__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .card__num { color: var(--accent-ink); }
+  .card__read { margin-left: auto; }
+
+  .card__title { font-size: clamp(1.3rem, 2.3vw, 1.75rem); line-height: 1.1; }
+  .card__title a { color: var(--ink); text-decoration: none; }
+  .card__title a:hover { background: var(--accent); color: var(--paper); }
+
+  .card__desc { color: var(--ink-soft); font-size: 1rem; }
+
+  .card__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .card__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .card__more {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .card__more:hover { background: var(--accent); color: var(--paper); }
+</style>

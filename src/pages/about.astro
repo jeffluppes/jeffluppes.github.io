@@ -1,0 +1,178 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Ent from "../components/Ent.astro";
+import { SOCIALS } from "../consts";
+
+const facts = [
+  { k: "Based in", v: "Amsterdam, The Netherlands" },
+  { k: "Day job", v: "Senior AI/ML Engineer at Independer" },
+  { k: "Off the clock", v: "🚴‍♂️ Bicycling, 🌊 kayaking" },
+];
+---
+
+<BaseLayout title="About" description="About Jeffrey Luppes, Senior AI/ML Engineer, writer, and kayak instructor based in the Netherlands.">
+  <section class="wrap about">
+    <p class="label accent">// About</p>
+    <h1 class="about__title">Hi, I'm Jeffrey.</h1>
+
+    <div class="about__grid">
+      <div class="prose about__bio">
+        <p>
+          I'm a Senior AI / Machine Learning Engineer and occasional Data Scientist working in
+          <Ent label="GPE">Amsterdam</Ent>. Whats in a name right? You've reached my personal site. 
+        </p>
+        <p>
+          These days I mostly work on <Ent label="SKILL">production AI and machine learning</Ent>:
+          building applications that solve business problems. I've specialized working with text data, from product descriptions, chat messages, log entries, job postings and resumes, to reviews an news articles. The colourful highlights you see on this website are a nod to the style of entity tagging popularized by NLP tools like <a href="https://stanfordnlp.github.io/CoreNLP/">CoreNLP</a> and <a href="https://demos.explosion.ai/displacy-ent">displaCy</a>.
+        </p>
+        <p>
+          Over the years I've had the pleasure of working with a lot of talented
+          people at <a class="ent-link" href="https://www.tno.nl/en/"><Ent label="ORG">TNO</Ent></a>,
+          <a class="ent-link" href="https://atos.net/en/"><Ent label="ORG">Atos</Ent></a>,
+          <a class="ent-link" href="https://www.dpgmediagroup.com/en-NL/about-dpg-media"><Ent label="ORG">DPG Media</Ent></a>, and
+          <a class="ent-link" href="https://www.independer.nl/"><Ent label="ORG">Independer</Ent></a>. 
+          At TNO I worked on ETL processes and some web scraping, mostly in support of research project and open source software. At Atos I was a
+          consultant data scientist and MLE for clients across Europe, mostly on cloud
+          (GCP / Azure) projects. I already mainly worked with text categorization and NER.
+        </p>
+
+        <figure class="about__figure">
+          <img src="/images/dpg_pioneering.jpg" alt="At DPG, I was interviewed for our werkenbij website. I wish my office was like this!" loading="lazy" style="aspect-ratio: auto; object-fit: contain; height: auto;" />
+          <figcaption class="label">
+            With my head in the clouds. I was interviewed for <a href="https://www.dpgmediagroup.com/nl-NL/jeffrey-luppes-the-model-of-a-machine-learning-engineer">DPG Media's job website &#8599;</a> 
+          </figcaption>
+        </figure>
+
+        <p>
+          I then spent several years at DPG Media building in a pretty fun near-principal role, building the ML platform behind
+          DPG Media Online Services. I enjoyed building complex ML systems that combined "new" AI with classical machine learning (think LSTMs, xgboost) and was able to pick up AWS cloud engineering too!
+           More recently my career has brought me to Independer
+          in Hilversum, where I'm a senior AI / machine learning engineer on their data
+          science team, again in a mixed platform/model-building role. A team I worked relatively close with during my platform role at DPG! My main objective there: migrate away from a legacy on-prem
+          Windows Server setup toward a cloud-native, modern MLOps stack. What makes it cool is that Independer has a long history (legacy) of data-science driven recommendations to customers, most of the time without the goal of maximizing company profit (= customer does actually go first). If you're keen to read more about my career feel free to check out my <a href="/cv">CV</a>.
+        </p>
+
+        <h2>Side projects</h2>
+        <p>
+          I like to work on my own projects from time to time, whether that's
+          scraping some data and using it in a cool way, or building a bird
+          recognition model for my balcony. I also enjoy taking part in hackathons and going to meetups. Sometimes I do event photography for meetups too.
+        </p>
+
+        <h2>Why I write</h2>
+        <p>
+          I enjoy it as a way of relaxing. I'm active on certain social media where I discuss machine learning and mlops, and I used to blog on Towards Data Science about things in the ML
+          (engineering) space. This site will have most of my material that's not already hosted somewhere else. Things like the odd side project as well as the things putting ML systems into
+          production has taught me.
+        </p>
+
+        <h2 id="away">Away from the keyboard</h2>
+        <p>
+          Outside of data science I enjoy camping, birdwatching, bicycling, and
+          sea kayaking. I'm a <Ent label="WORK">certified kayak instructor</Ent>
+          and I log my trips, being a data person. A few years ago, I
+          received a silver touring award from the Watersportverbond after paddling
+          over <Ent label="CARDINAL">3,500 kilometres</Ent>. I'm pretty sure my distances are not spectacular at all, but not every one keeps track of them. I do enjoy long distance paddling. One day I'd like to
+          kayak around Iceland; other than that, no big plans.
+        </p>
+        <figure class="about__figure">
+          <img src="/images/jeffrey-kayaking.jpg" alt="Jeffrey Luppes in a sea kayak" loading="lazy" />
+          <figcaption class="label">
+            On the water. More (in Dutch, mostly) at{" "}
+            <a href="https://jeffreykajakt.com/">jeffreykajakt.com &#8599;</a>
+          </figcaption>
+        </figure>
+
+        <h2 id="say-hello">Say hello</h2>
+        <p>
+          I'm always happy to talk about production ML, cloud architecture, NLP, or
+          kayaking. You can reach me by email at{" "}
+          <a
+            class="email-link"
+            data-user="jeffreyluppes"
+            data-domain="gmail.com"
+            href="#"
+          >jeffreyluppes <span aria-hidden="true">[at]</span> gmail <span aria-hidden="true">[dot]</span> com</a>,
+          or find me here:
+        </p>
+        <ul class="about__links">
+          {SOCIALS.map((s) => <li><a href={s.href}>{s.label} &#8599;</a></li>)}
+        </ul>
+      </div>
+
+      <aside class="about__side">
+        <div class="panel">
+          <h3 class="panel__title label">At a glance</h3>
+          <dl class="facts">
+            {facts.map((f) => (
+              <div class="facts__row">
+                <dt class="label">{f.k}</dt>
+                <dd>{f.v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <a href="/cv" class="btn btn--solid about__cv">Read the full CV &rarr;</a>
+      </aside>
+    </div>
+  </section>
+
+  <script>
+    // Assemble the email at runtime so it isn't sitting in the HTML as a
+    // plain user@domain string for scrapers to grab.
+    document.querySelectorAll<HTMLAnchorElement>(".email-link").forEach((el) => {
+      const user = el.dataset.user;
+      const domain = el.dataset.domain;
+      if (!user || !domain) return;
+      const addr = `${user}@${domain}`;
+      el.href = `mailto:${addr}`;
+      el.textContent = addr;
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .about { padding-top: clamp(32px, 5vw, 56px); }
+  .about__title { margin-top: 12px; }
+  .about__grid {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: clamp(24px, 4vw, 48px);
+    align-items: start;
+  }
+  .about__bio { line-height: 1.8; }  /* a little room for inline entity pills */
+  /* links that wrap an entity pill: keep the pill look, no link background */
+  .about__bio .ent-link { color: inherit; text-decoration: none; }
+  .about__bio .ent-link:hover { background: transparent; text-decoration: underline; text-underline-offset: 3px; }
+  .about__bio p + p { margin-top: 1.1em; }
+  .about__bio h2 { margin-top: 1.8em; }
+  .about__links { list-style: none; padding: 0; margin-top: 12px; display: flex; flex-wrap: wrap; gap: 16px; }
+  .about__links a { font-family: var(--mono); font-size: 0.9rem; text-decoration: none; }
+
+  .about__side { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 92px; }
+  .panel { border: 2px solid var(--line); padding: 18px; background: var(--paper); }
+  .panel__title { margin-bottom: 14px; display: block; }
+  .facts { display: flex; flex-direction: column; }
+  .facts__row { padding: 10px 0; border-bottom: 1px solid var(--line-soft); }
+  .facts__row:last-child { border-bottom: none; }
+  .facts dt { margin-bottom: 2px; }
+  .facts dd { margin: 0; font-size: 0.98rem; }
+  .about__cv { justify-content: center; }
+
+  .email-link { white-space: nowrap; }
+
+  .about__figure { margin: 24px 0 0; border: 2px solid var(--line); padding: 8px; background: var(--paper); clear: both; }
+  .about__figure img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border: 1px solid var(--line-soft); }
+  .about__figure figcaption {
+    display: block; margin-top: 8px; color: var(--ink-faint);
+    text-transform: none; letter-spacing: 0.02em;
+  }
+  .about__figure a { color: var(--accent-ink); }
+
+  @media (max-width: 760px) {
+    .about__grid { grid-template-columns: 1fr; }
+    .about__side { position: static; }
+  }
+</style>
