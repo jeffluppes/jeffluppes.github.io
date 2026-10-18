@@ -1,5 +1,5 @@
 ---
-title: "AIdeas: DadBot, an AI assistant to slay the dad bod (not just for dads)"
+title: "Hackathon project: DadBot, an AI assistant to slay the dad bod (10000 AIdeas submission)"
 description: "DadBot is an agentic AI health coach built almost entirely serverless on AWS Bedrock, with personalized ML models, for about three dollars a month. Here's how I built it."
 pubDate: 2026-03-10
 updatedDate: 2026-03-23
@@ -8,7 +8,7 @@ tags: ["Agentic AI", "AWS", "Bedrock", "Serverless", "Kiro", "Terraform"]
 heroImage: "/images/dadbot-header.webp"
 ---
 
-> Written for the AWS 10,000 AIdeas hackathon. DadBot features personalized machine learning models and self-adjusting lifestyle coaching powered by AWS Bedrock, and it's almost completely serverless.
+> Note: this article was written for the AWS 10,000 AIdeas hackathon. My project DadBot ended up in the semi-finals, ending around position 100 (out of 10k!) but did not end up being selected by the AWS panel for the finals. Dadbot features personalized machine learning models and self-adjusting lifestyle agentic coaching powered by AWS Bedrock, and it's almost completely serverless.
 
 ![DadBot: personalized lifestyle coaching.](/images/dadbot-header.webp)
 
@@ -34,18 +34,18 @@ On a personal note: the inspiration comes from my own experience trying to lose 
 
 I had the idea in my head, but translating it to code was hard, even with AI. I spent a couple of hours whiteboarding the features I wanted and turned that into an architecture diagram. The key pieces:
 
-- **AWS Lambda** for serverless compute, since this app doesn't need to run permanently: one Lambda behind the API Gateway for auth, another for agent tools and chats, and one to cheaply host a small regression ML model. (Yes, we're combining AI with old-school ML. More on that later.)
-- **API Gateway** to provide an API I can talk to.
-- **Bedrock / Bedrock AgentCore** for the agentic AI calls.
-- **DynamoDB** for logging.
-- **SNS** for email and text, and to connect to third-party apps and Discord.
-- **EventBridge Scheduler** to send reminders and check in during the day.
-- **Secrets Manager** for API keys and tokens.
-- **Terraform** for infra as code, so the whole app is easy to redeploy and recover.
-- **CloudWatch** for logs, metrics, and dashboards.
-- **Python** for almost all the backend, with `uv` as the package manager.
+- **[AWS Lambda](https://aws.amazon.com/lambda/)** for serverless compute, since this app doesn't need to run permanently: one Lambda behind the API Gateway for auth, another for agent tools and chats, and one to cheaply host a small regression ML model. (Yes, we're combining AI with old-school ML. More on that later.)
+- **[API Gateway](https://aws.amazon.com/api-gateway/)** to provide an API I can talk to.
+- **[Bedrock](https://aws.amazon.com/bedrock/) / [Bedrock AgentCore](https://aws.amazon.com/bedrock/agentcore/)** for the agentic AI calls.
+- **[DynamoDB](https://aws.amazon.com/dynamodb/)** for logging.
+- **[SNS](https://aws.amazon.com/sns/)** for email and text, and to connect to third-party apps and Discord.
+- **[EventBridge Scheduler](https://aws.amazon.com/eventbridge/scheduler/)** to send reminders and check in during the day.
+- **[Secrets Manager](https://aws.amazon.com/secrets-manager/)** for API keys and tokens.
+- **[Terraform](https://www.terraform.io/)** for infra as code, so the whole app is easy to redeploy and recover.
+- **[CloudWatch](https://aws.amazon.com/cloudwatch/)** for logs, metrics, and dashboards.
+- **[Python](https://www.python.org/)** for almost all the backend, with **[uv](https://docs.astral.sh/uv/)** as the package manager.
 
-Since using **Kiro** was a required part of the competition, I converted my ideas into bite-size user stories and prompted away. I was surprised that when I presented Kiro with my idea and some context, it generated about 25 user requirements that already aligned pretty well. Throughout the project I used the "Deploy Infrastructure with Terraform" Kiro Power. It was nice having a pocket Product Owner, and some back-and-forth yielded almost exactly the features I had in mind. Kiro made it easy to move from Requirements to Design (architecture and data models) to Tasks (bite-sized coding units), and came up with an 1100-line design document.
+Since using **[Kiro](https://kiro.dev)** was a required part of the competition, I converted my ideas into bite-size user stories and prompted away. I was surprised that when I presented Kiro with my idea and some context, it generated about 25 user requirements that already aligned pretty well. Throughout the project I used the "Deploy Infrastructure with Terraform" Kiro Power. It was nice having a pocket Product Owner, and some back-and-forth yielded almost exactly the features I had in mind. Kiro made it easy to move from Requirements to Design (architecture and data models) to Tasks (bite-sized coding units), and came up with an 1100-line design document.
 
 I then used it to generate the code, starting with infra and tests so I could check the functionality. I was pretty skeptical throughout, and probably burned more credits than needed going back and forth on minor refactors. There were small errors to catch: circular dependencies in the infra code, minor hallucinations in Python (arguments not supported by a given framework version), and the occasional command that didn't match my operating system.
 
@@ -65,13 +65,13 @@ That's a lot of infra, and most of it stems from supporting multiple chat channe
 
 - **The agent has tools.** The coach can call tools for weather (to suggest activities), logging food, logging activities, logging progress, calorie estimation, managing preferences, activity history, calendar, profile, and a weight-loss prediction (an ML model, below).
 - **A more powerful model to drive the tools.** Some models I tried had trouble picking the right tool, so I switched to Claude Haiku 4.5. More expensive, but more capable.
-- **An ML model hosted inside a Lambda.** I host a simple regression model in a Lambda to estimate how calorie intake translates to gains or losses. I'd probably have preferred SageMaker for the lifecycle tooling, but a Lambda works and is significantly cheaper.
+- **An ML model hosted inside a Lambda.** I host a simple regression model in a Lambda to estimate how calorie intake translates to gains or losses. I'd probably have preferred [SageMaker](https://aws.amazon.com/sagemaker/) for the lifecycle tooling, but a Lambda works and is significantly cheaper.
 - **A fallback for the cold-start problem with new users.** I want a personalized model per user (which can be a few kilobytes), but those need a bit of data we don't have on day one. So the fallback simply assumes 7700 calories convert to 1 kg of body weight.
-- **Cache as much as possible.** For weather I use OpenWeatherMap, which limits daily calls, so I fetch once and serve from the DynamoDB cache for the rest of the day.
+- **Cache as much as possible.** For weather I use [OpenWeatherMap](https://openweathermap.org/api), which limits daily calls, so I fetch once and serve from the DynamoDB cache for the rest of the day.
 - **One-way via SNS, two-way via the API Gateway.** I settled on Discord as the main channel because it has few limits; other channels are one-way for now.
-- **Not going live to the public (yet).** I'm in the EU, so there are pervasive data-protection requirements (a register of processing, an end-user agreement, transparency on data use), and a health coach likely falls under the High-Risk category of the EU AI Act. I'd probably have to register a business too. So I've kept the app private for now.
+- **Not going live to the public (yet).** I'm in the EU, so there are pervasive data-protection requirements (a register of processing, an end-user agreement, transparency on data use), and a health coach likely falls under the High-Risk category of the [EU AI Act](https://artificialintelligenceact.eu/). I'd probably have to register a business too. So I've kept the app private for now.
 - **Ready for production anyway.** Even unreleased, it's set up with separate dev/stage/prod environments through IaC, so I can pack it up and deploy to another account.
-- **Not relying on LLMs for calorie accuracy.** You can send an LLM a picture of almost anything and it describes it in detail, but asking it to estimate calories from an image tends to be way off. In a controlled test of five food items, estimates were about 60% off even though the model correctly identified the food. My plan is to have the agent describe the food, then look it up in a database (possibly via RAG) for a more accurate estimate.
+- **Not relying on LLMs for calorie accuracy.** You can send an LLM a picture of almost anything and it describes it in detail, but asking it to estimate calories from an image tends to be way off. In a controlled test of five food items, estimates were about 60% off even though the model correctly identified the food. My plan is to have the agent describe the food, then look it up in a database (possibly via [RAG](https://aws.amazon.com/what-is/retrieval-augmented-generation/)) for a more accurate estimate.
 
 ## The stack
 
@@ -105,7 +105,7 @@ It picks up missing profile details on its own, without being explicitly coded t
 
 ![DadBot notices the user's location and preferences aren't set, and asks for them.](/images/dadbot-profile-prompt.webp)
 
-And it connects to Strava, spotting activities I logged there and cheering me on:
+And it connects to [Strava](https://www.strava.com/), spotting activities I logged there and cheering me on:
 
 ![DadBot finds a Strava activity and gives feedback.](/images/dadbot-strava.webp)
 
@@ -148,7 +148,7 @@ If I were to make this a proper product:
 - Figure out what I need in place to comply with local data-protection laws, since I'm storing highly personal health data.
 - Launch for more users than just me, without going bankrupt on LLM calls.
 - More personalized dashboards for data-savvy users.
-- Collaborate with food databases (the Dutch Levensmiddelendatabank, the UK's CoFID, the USDA FoodData) to greatly improve calorie prediction. Only the USDA set appears to permit commercial use.
+- Collaborate with food databases (the Dutch [Levensmiddelendatabank](https://www.rivm.nl/nederlands-voedingsstoffenbestand), the UK's [CoFID](https://www.gov.uk/government/publications/composition-of-foods-integrated-dataset-cofid), the [USDA FoodData](https://fdc.nal.usda.gov/)) to greatly improve calorie prediction. Only the USDA set appears to permit commercial use.
 - Fix cold starts: with Discord I have to acknowledge a message within 3 seconds, so I reply "Thinking..." immediately and edit the message once Bedrock responds. I also want to move away from slash commands toward a more natural conversation flow.
 
-Thanks for reading. Despite leaning on AI for much of the project, the text of this post and the drawings (aside from the header and the Kiro screenshots) were made by hand, not generative AI. The architecture diagram was drawn in Excalidraw.
+Thanks for reading. Despite leaning on AI for much of the project, the text of this post and the drawings (aside from the header and the Kiro screenshots) were made by hand, not generative AI. The architecture diagram was drawn in [Excalidraw](https://excalidraw.com/).

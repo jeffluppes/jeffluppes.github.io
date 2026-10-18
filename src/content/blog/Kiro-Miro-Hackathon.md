@@ -31,7 +31,7 @@ A few pieces made it work:
 
 Under the hood it's a React + Vite + TypeScript frontend, a Node.js + Express backend with Zod validation, SQLite for storage, and the Claude agent doing the discovery. It's all on [GitHub](https://github.com/jeffluppes/kiro-miro-hackathon-2026) if you want to poke around.
 
-I don't want to get overly poetic but a hackathon lives or dies with the energy of the people around you, and this one was full of sharp, friendly builders who were there for the same reason: to make something, learn a bit, and have fun doing it. There were folks walking around talking to their agents via whisper (or similar). 
+I don't want to get overly poetic but a hackathon lives or dies with the energy of the people around you, and this one was full of sharp, friendly builders who were there for the same reason: to make something, learn a bit, and have fun doing it.
 
 ![The whole group at the end of the day.](/images/miro-kiro-hackathon-group.jpg)
 
