@@ -1,9 +1,7 @@
 # jeffluppes.github.io
 
 Personal blog of **Jeffrey Luppes** — Senior AI/ML Engineer. Built with
-[Astro](https://astro.build), styled as "light brutalism" (warm paper, hard
-borders, monospace metadata, one warm accent), and deployed as a static site to
-GitHub Pages.
+[Astro](https://astro.build) 
 
 ## Stack
 
@@ -14,8 +12,19 @@ GitHub Pages.
 
 ## Local development
 
+**Use Node 22 LTS.** There's an `.nvmrc` pinning it, so with nvm:
+
 ```bash
-npm install      # install dependencies
+nvm use            # picks up Node 22 from .nvmrc (nvm install 22 first if needed)
+```
+
+Node 22 is required for two reasons: Astro 7 needs `>=22.12.0`, and Node 25+ trips
+an EPERM bug when Astro clears `dist/` on Windows
+([withastro/astro#18170](https://github.com/withastro/astro/issues/18170)). Node 22
+sits safely between the two, which is also what CI uses.
+
+```bash
+npm ci           # clean install matching package-lock.json
 npm run dev      # start dev server at http://localhost:4321
 npm run build    # build the static site to ./dist
 npm run preview  # preview the production build locally
@@ -56,11 +65,11 @@ every push to `main`. One-time setup in the repo:
 ### Deploying from a project repo instead
 
 If you host this in a repo that is *not* `<user>.github.io` (e.g.
-`jeffluppes/blog`), the site lives under a subpath. Set the base in
+`bla/blog`), the site lives under a subpath. Set the base in
 `astro.config.mjs`:
 
 ```js
-site: "https://jeffluppes.github.io",
+site: "https://bla.github.io",
 base: "/blog",   // the repo name
 ```
 
