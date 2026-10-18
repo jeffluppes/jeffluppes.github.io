@@ -4,7 +4,7 @@ description: "AI can write a working system in an afternoon. Keeping that system
 pubDate: 2026-01-18
 category: "Blog"
 tags: ["AI", "Software Engineering", "ML Engineering", "Agentic AI"]
-heroImage: "/images/architect-AI.jpg"
+heroImage: "/images/engineersvsai.png"
 ---
 
 A while back I built a side project with an AI coding agent and watched it produce around 45,000 lines of Python and Terraform in a couple of weeks. It worked. It deployed. It did roughly what I asked. And it became painfully obvious that I could generate this much faster than I could ever read it. I felt that trying to keep up, *at scale* is a fast track towards a burn out.
